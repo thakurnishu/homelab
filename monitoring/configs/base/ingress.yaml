@@ -21,6 +21,6 @@ spec:
             pathType: Exact
             backend:
               service:
-                name: kube-prometheus-stack-grafana
+                name: kube-prometheus-stack-prometheus
                 port:
                   number: 9090
