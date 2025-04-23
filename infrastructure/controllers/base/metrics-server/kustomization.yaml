@@ -1,6 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: metrics-server
 resources:
   - repositry.yaml
   - release.yaml
   - namespace.yaml
+
+
+configMapGenerator:
+  - name: metrics-server-values
+    files:
+      - values.yaml=values.yaml
