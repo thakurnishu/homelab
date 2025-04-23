@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kube-prometheus-stack-ingress
+spec:
+  rules:
+    - host: grafana.homelab.box
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: kube-prometheus-stack-grafana
+                port:
+                  number: 80
+    - host: prometheus.homelab.box
+      http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: kube-prometheus-stack-grafana
+                port:
+                  number: 9090
