@@ -2,8 +2,16 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: metrics-server
-  namespace: metrics-server
 spec:
   valuesFrom:
     - kind: ConfigMap
       name: metrics-server-values
+  chart:
+    spec:
+      sourceRef:
+        namespace: metrics-server
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: metrics-server
