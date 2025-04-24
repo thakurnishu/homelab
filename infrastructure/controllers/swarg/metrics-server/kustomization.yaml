@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
   - ../../base/metrics-server/
   - configmap.yaml
+  - namespace.yaml
+
 namespace: metrics-server
 
 patches:
