@@ -15,11 +15,11 @@ spec:
         namespace: metrics-server
       interval: 5m
   releaseName: metrics-server
-  values:
-    defaultArgs:
-      - --cert-dir=/tmp
-      - --secure-port=10250
-      - --kubelet-preferred-address-types=InternalIP
-      - --kubelet-use-node-status-port
-      - --metric-resolution=15s
-      - --kubelet-insecure-tls
+#  values:
+#    defaultArgs:
+#      - --cert-dir=/tmp
+#      - --secure-port=10250
+#      - --kubelet-preferred-address-types=InternalIP
+#      - --kubelet-use-node-status-port
+#      - --metric-resolution=15s
+#      - --kubelet-insecure-tls
