@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ../../base/metrics-server/
 
+namespace: metrics-server
 configMapGenerator:
   - name: metrics-server-values
     files:
