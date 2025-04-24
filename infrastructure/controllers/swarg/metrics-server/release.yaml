@@ -1,0 +1,24 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: metrics-server
+  namespace: metrics-server
+spec:
+  valuesFrom:
+    - kind: ConfigMap
+      name: metrics-server-values
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metrics-server-values
+  namespace: metrics-server
+data:
+  values.yaml: |
+    defaultArgs:
+      - --cert-dir=/tmp
+      - --secure-port=10250
+      - --kubelet-preferred-address-types=InternalIP
+      - --kubelet-use-node-status-port
+      - --metric-resolution=15s
+      - --kubelet-insecure-tls
