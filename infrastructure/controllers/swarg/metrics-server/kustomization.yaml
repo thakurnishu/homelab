@@ -6,4 +6,4 @@ resources:
 namespace: metrics-server
 
 patches:
-  - path: release.yaml
+  - path: patch.yaml
