@@ -1,2 +1,0 @@
-additionalArguments:
-  - "--providers.kubernetesingress=true"

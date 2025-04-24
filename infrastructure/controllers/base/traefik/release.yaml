@@ -15,6 +15,6 @@ spec:
         namespace: traefik
       interval: 5m
   releaseName: traefik
-  valuesFrom:
-    - kind: ConfigMap
-      name: traefik-values
+  values:
+    additionalArguments:
+      - "--providers.kubernetesingress=true"
