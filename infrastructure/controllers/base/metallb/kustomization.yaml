@@ -4,4 +4,3 @@ namespace: metallb-system
 resources:
   - repositry.yaml
   - release.yaml
-  - namespace.yaml

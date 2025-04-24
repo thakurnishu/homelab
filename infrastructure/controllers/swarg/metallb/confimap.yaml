@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: metallb-values
+data:
+  values.yaml: |
+    prometheus:
+      rbacPrometheus: false
+      serviceAccount: "kube-prometheus-stack-prometheus"
+      namespace: "monitoring"
+      podMonitor:
+        enabled: false
+      serviceMonitor:
+        enabled: true
