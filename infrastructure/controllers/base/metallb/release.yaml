@@ -4,6 +4,9 @@ metadata:
   name: metallb
   namespace: metallb-system
 spec:
+  valuesFrom:
+    - kind: ConfigMap
+      name: metallb-values
   interval: 30m
   chart:
     spec:
@@ -15,6 +18,3 @@ spec:
         namespace: metallb-system
       interval: 5m
   releaseName: metallb
-  valuesFrom:
-    - kind: ConfigMap
-      name: metallb-values
