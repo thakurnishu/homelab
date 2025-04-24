@@ -10,8 +10,3 @@ spec:
     spec:
       sourceRef:
         namespace: metrics-server
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: metrics-server
