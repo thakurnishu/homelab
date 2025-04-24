@@ -15,6 +15,6 @@ spec:
         namespace: metallb-system
       interval: 5m
   releaseName: metallb
-  valuesFrom:
-    - kind: ConfigMap
-      name: metallb-values
+#  valuesFrom:
+#    - kind: ConfigMap
+#      name: metallb-values
