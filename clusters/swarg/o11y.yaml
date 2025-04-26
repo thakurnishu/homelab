@@ -1,7 +1,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: monitoring-controllers
+  name: o11y-controllers
   namespace: flux-system
 spec:
   interval: 5m
@@ -10,13 +10,13 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./monitoring/controllers/swarg
+  path: ./o11y/controllers/swarg
   prune: true
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: monitoring-configs
+  name: o11y-configs
   namespace: flux-system
 spec:
   interval: 5m
@@ -25,6 +25,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./monitoring/configs/swarg
+  path: ./o11y/configs/swarg
   prune: true
 
