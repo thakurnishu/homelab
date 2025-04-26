@@ -4,5 +4,18 @@ metadata:
   name: traefik-values
 data:
   values.yaml: |
-    additionalArguments:
-      - "--providers.kubernetesingress=true"
+    ingressClass:
+      enabled: false
+    gateway:
+      enabled: true
+      listeners:
+        web:
+          port: 8000
+          hostname: ""
+          protocol: HTTP
+          namespacePolicy: All
+    providers:
+      kubernetesIngress:
+        enabled: false
+      kubernetesGateway:
+        enabled: true
