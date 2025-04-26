@@ -10,7 +10,3 @@ spec:
   valuesFrom:
     - kind: ConfigMap
       name: traefik-values
-  values:
-    additionalArguments:
-      - "--providers.kubernetesingress=true"
-
