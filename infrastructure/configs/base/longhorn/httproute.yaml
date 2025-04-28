@@ -7,7 +7,7 @@ spec:
   - name: traefik-gateway
     namespace: traefik
   hostnames:
-  - longhorn.homelab
+  - longhorn.n5t.in
   rules:
   - matches:
     - path:

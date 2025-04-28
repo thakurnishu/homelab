@@ -7,7 +7,7 @@ spec:
   - name: traefik-gateway
     namespace: traefik
   hostnames:
-  - grafana.homelab
+  - grafana.n5t.in
   rules:
   - matches:
     - path:
@@ -26,7 +26,7 @@ spec:
   - name: traefik-gateway
     namespace: traefik
   hostnames:
-  - prometheus.homelab
+  - prometheus.n5t.in
   rules:
   - matches:
     - path:
