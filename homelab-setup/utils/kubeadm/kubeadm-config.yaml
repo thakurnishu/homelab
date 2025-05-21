@@ -1,0 +1,28 @@
+kind: ClusterConfiguration
+apiVersion: kubeadm.k8s.io/v1beta4
+kubernetesVersion: v1.31.0
+networking:
+  podSubnet: 10.244.0.0/16
+controllerManager:
+  extraArgs:
+    - name: "bind-address"
+      value: "192.168.1.110"
+scheduler:
+  extraArgs:
+    - name: "bind-address"
+      value: "192.168.1.110"
+etcd:
+  local:
+    extraArgs:
+      - name: "listen-metrics-urls"
+        value: "http://127.0.0.1:2381,http://192.168.1.110:2381"
+---
+kind: KubeletConfiguration
+apiVersion: kubelet.config.k8s.io/v1beta1
+cgroupDriver: systemd
+failSwapOn: false
+---
+kind: KubeProxyConfiguration
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+metricsBindAddress: "192.168.1.110:10249"
+

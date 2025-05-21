@@ -1,0 +1,152 @@
+- name: Install neovim 
+  hosts: localhost
+  become: true  # Run tasks with elevated privileges (sudo)
+  tasks:
+    - name: Ensure apt cache is updated
+      apt:
+        update_cache: yes
+    - name: Installing neovim 
+      community.general.snap:
+        name: nvim
+        classic: true
+
+- name: Remove multipathd
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Stop multipathd services
+      systemd:
+        name: "{{ item }}"
+        state: stopped
+      loop:
+        - multipathd.service
+        - multipathd.socket
+    - name: Disable multipathd services
+      systemd:
+        name: "{{ item }}"
+        enabled: no
+      loop:
+        - multipathd.service
+        - multipathd.socket
+    - name: Remove multipath-tools package
+      apt:
+        name: multipath-tools
+        state: absent
+        purge: yes
+        update_cache: yes
+
+- name: Install Docker 
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Ensure apt cache is updated
+      apt:
+        update_cache: yes
+    - name: Install required packages
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - apt-transport-https
+          - gpg
+          - open-iscsi
+          - nfs-common
+        state: present
+    - name: Create /etc/apt/keyrings directory
+      file:
+        path: /etc/apt/keyrings
+        state: directory
+        mode: '0755'
+    - name: Download Docker GPG key
+      get_url:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        dest: /etc/apt/keyrings/docker.asc
+        mode: '0644'
+        force: yes
+    - name: Set Docker APT repository
+      copy:
+        dest: /etc/apt/sources.list.d/docker.list
+        content: |
+          deb [arch={{ ansible_architecture }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu {{ ansible_lsb.codename | lower }} stable
+        mode: '0644'
+    - name: Update apt cache after adding Docker repo
+      apt:
+        update_cache: yes
+    - name: Install Docker Packages
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+    - name: Add current user to docker group
+      user:
+        name: "{{ ansible_user_id }}"
+        groups: docker
+        append: yes
+
+- name: Update systemd resolved config
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Ensure /etc/systemd/resolved.conf contains custom DNS settings
+      blockinfile:
+        path: /etc/systemd/resolved.conf
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+        block: |
+          [Resolve]
+          DNSStubListener=no
+    - name: Ensure /etc/resolv.conf is removed if it exists (file or symlink)
+      file:
+        path: /etc/resolv.conf
+        state: absent
+      become: true
+    - name: Create symlink to /run/systemd/resolve/resolv.conf
+      file:
+        src: /run/systemd/resolve/resolv.conf
+        dest: /etc/resolv.conf
+        state: link
+      become: true
+    - name: Restart systemd-resolved to apply changes
+      systemd:
+        name: systemd-resolved
+        state: restarted
+        enabled: true
+
+- name: Start Pihole Service
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Create /var/lib/pihole dir
+      file:
+        path: /var/lib/pihole
+        state: directory
+        mode: '0755'
+        recurse: yes
+    - name: Copy Compose file in /var/lib/pihole dir
+      copy:
+        src: utils/pihole/compose.yaml
+        dest: /var/lib/pihole/compose.yaml
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Copy pihole.service file in /etc/systemd/system dir
+      copy:
+        src: utils/pihole/pihole.service
+        dest: /etc/systemd/system/pihole.service
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Reexec systemd (like sudo systemctl daemon-reexec)
+      command: systemctl daemon-reexec
+      become: true
+    - name: Reload systemd manager configuration (like sudo systemctl daemon-reload)
+      command: systemctl daemon-reload
+      become: true
+    - name: Enable and Start Pihole Service
+      systemd:
+        name: pihole
+        enabled: yes
+        state: started
