@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - ./longhorn/
   - ./metrics-server/
-  - ./metallb/
-  - ./traefik/
+  #- ./metallb/
+  #- ./traefik/
