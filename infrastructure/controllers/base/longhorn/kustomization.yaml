@@ -3,5 +3,4 @@ kind: Kustomization
 namespace: longhorn-system
 resources:
   - repositry.yaml
-  - namespace.yaml
   - release.yaml
