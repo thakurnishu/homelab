@@ -36,12 +36,12 @@
         mode: '0755'
     - name: Copy containerd service file
       copy:
-        src: utils/containerd/containerd.service
+        src: files/containerd/containerd.service
         dest: /usr/local/lib/systemd/system/containerd.service
         mode: '0644'
     - name: Copy containerd config file
       copy:
-        src: utils/containerd/config.toml
+        src: files/containerd/config.toml
         dest: /etc/containerd/config.toml
         mode: '0644'
     - name: Reload systemd manager configuration
@@ -155,7 +155,7 @@
   tasks:
     - name: Copy kubeadm config file
       copy:
-        src: utils/kubeadm/kubeadm-config.yaml
+        src: files/kubeadm/kubeadm-config.yaml
         dest: /tmp/kubeadm-config.yaml
         mode: '0644'
     - name: Initialize Kubernetes cluster with kubeadm

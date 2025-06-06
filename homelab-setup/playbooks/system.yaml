@@ -21,6 +21,7 @@
       loop:
         - multipathd.service
         - multipathd.socket
+      ignore_errors: true
     - name: Disable multipathd services
       systemd:
         name: "{{ item }}"
@@ -28,6 +29,7 @@
       loop:
         - multipathd.service
         - multipathd.socket
+      ignore_errors: true
     - name: Remove multipath-tools package
       apt:
         name: multipath-tools
@@ -127,14 +129,14 @@
         recurse: yes
     - name: Copy Compose file in /var/lib/pihole dir
       copy:
-        src: utils/pihole/compose.yaml
+        src: files/pihole/compose.yaml
         dest: /var/lib/pihole/compose.yaml
         owner: root
         group: root
         mode: '0644'
     - name: Copy pihole.service file in /etc/systemd/system dir
       copy:
-        src: utils/pihole/pihole.service
+        src: files/pihole/pihole.service
         dest: /etc/systemd/system/pihole.service
         owner: root
         group: root
