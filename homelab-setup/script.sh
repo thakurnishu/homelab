@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook master.yml --extra-vars "@vars.yml"
+ansible-playbook master.yaml --extra-vars "@vars.yaml"
