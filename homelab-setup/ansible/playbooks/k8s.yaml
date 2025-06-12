@@ -23,7 +23,6 @@
         src: /tmp/containerd-{{ containerd_version }}-linux-amd64.tar.gz
         dest: /usr/local/
         remote_src: yes
-        extra_opts: [--strip-components=1]   # optional: if you want to strip top folder
     - name: Create systemd system directory
       file:
         path: /usr/local/lib/systemd/system
@@ -160,6 +159,7 @@
         mode: '0644'
     - name: Initialize Kubernetes cluster with kubeadm
       command: kubeadm init --config=/tmp/kubeadm-config.yaml
+      ignore_errors: true
     - name: Ensure .kube directory exists
       file:
         path: /home/{{ ansible_user }}/.kube
@@ -176,15 +176,15 @@
         group: "{{ ansible_user }}"
         mode: '0644'
     - name: Install Calico Tigera operator
-      command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v{{ calico_version }}/manifests/tigera-operator.yaml
+      command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v{{ calico_version }}/manifests/tigera-operator.yaml --kubeconfig /etc/kubernetes/admin.conf
     - name: Install Calico Tigera Custom Resources
-      command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v{{ calico_version }}/manifests/custom-resources.yaml
+      command: kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v{{ calico_version }}/manifests/custom-resources.yaml --kubeconfig /etc/kubernetes/admin.conf
     - name: Get control plane node name
-      command: kubectl get nodes --selector='node-role.kubernetes.io/control-plane' -o jsonpath='{.items[0].metadata.name}'
+      command: kubectl get nodes --selector='node-role.kubernetes.io/control-plane' -o jsonpath='{.items[0].metadata.name}' --kubeconfig /etc/kubernetes/admin.conf
       register: control_plane_node
       changed_when: false
     - name: Untaint control plane node to allow scheduling pods
-      command: kubectl taint node {{ control_plane_node.stdout }} node-role.kubernetes.io/control-plane:NoSchedule-
+      command: kubectl taint node {{ control_plane_node.stdout }} node-role.kubernetes.io/control-plane:NoSchedule- --kubeconfig /etc/kubernetes/admin.conf
       args:
         warn: false
       register: untaint_result
