@@ -113,9 +113,6 @@ sudo kubectl wait --for=condition=Ready -n kube-system pod \
 echo "✅ Conrol Plane is ready."
 
 echo '  '
-read -p 'Github PAT Token: ' GH_PAT_TOKEN
-export GITHUB_TOKEN=${GH_PAT_TOKEN}
-
 sudo flux bootstrap github \
   --token-auth \
   --owner=${git_user} \
