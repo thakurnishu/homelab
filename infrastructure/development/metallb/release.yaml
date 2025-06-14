@@ -4,6 +4,8 @@ metadata:
   name: metallb
 spec:
   interval: 30m
+  releaseName: metallb
+
   chart:
     spec:
       chart: metallb
@@ -13,7 +15,7 @@ spec:
         name: metallb
         namespace: metallb-system
       interval: 5m
-  releaseName: metallb
+
   values:
     prometheus:
       rbacPrometheus: false
@@ -29,4 +31,3 @@ spec:
         controller:
           additionalLabels:
             release: kube-prometheus-stack
-

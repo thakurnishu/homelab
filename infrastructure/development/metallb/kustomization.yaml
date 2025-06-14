@@ -7,6 +7,3 @@ resources:
   - ./configs
 
 namespace: metallb-system
-
-# patches:
-#   - path: patch.yaml

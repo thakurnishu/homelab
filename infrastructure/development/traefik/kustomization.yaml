@@ -6,6 +6,3 @@ resources:
   - namespace.yaml
 
 namespace: traefik
-
-patches:
-  - path: patch.yaml

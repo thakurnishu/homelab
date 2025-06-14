@@ -7,6 +7,3 @@ resources:
   - ./configs
 
 namespace: monitoring
-
-patches:
-  - path: patch.yaml

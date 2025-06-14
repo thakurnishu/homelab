@@ -4,6 +4,8 @@ metadata:
   name: traefik
 spec:
   interval: 30m
+  releaseName: traefik
+
   chart:
     spec:
       chart: traefik
@@ -11,5 +13,22 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: traefik
+        namespace: traefik
       interval: 5m
-  releaseName: traefik
+
+  values:
+    ingressClass:
+      enabled: false
+    gateway:
+      enabled: true
+      listeners:
+        web:
+          port: 8000
+          hostname: ""
+          protocol: HTTP
+          namespacePolicy: All
+    providers:
+      kubernetesIngress:
+        enabled: false
+      kubernetesGateway:
+        enabled: true

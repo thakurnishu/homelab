@@ -4,9 +4,5 @@ resources:
   - namespace.yaml
   - repositry.yaml
   - release.yaml
-  - ./configs
 
 namespace: metrics-server
-
-patches:
-  - path: patch.yaml
