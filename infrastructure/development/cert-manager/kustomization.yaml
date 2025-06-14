@@ -6,7 +6,7 @@ resources:
   - release.yaml
   - ./configs
 
-namespace: metallb-system
+namespace: cert-manager
 
-# patches:
-#   - path: patch.yaml
+patches:
+  - path: patch.yaml

@@ -11,5 +11,22 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: metallb
+        namespace: metallb-system
       interval: 5m
   releaseName: metallb
+  values:
+    prometheus:
+      rbacPrometheus: false
+      serviceAccount: "kube-prometheus-stack-prometheus"
+      namespace: "monitoring"
+      podMonitor:
+        enabled: false
+      serviceMonitor:
+        enabled: true
+        speaker:
+          additionalLabels:
+            release: kube-prometheus-stack
+        controller:
+          additionalLabels:
+            release: kube-prometheus-stack
+
