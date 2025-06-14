@@ -1,0 +1,13 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+spec:
+  interval: 30m
+  chart:
+    spec:
+      sourceRef:
+        namespace: kube-prometheus-stack
+  valuesFrom:
+    - kind: ConfigMap
+      name: kube-prometheus-stack-values

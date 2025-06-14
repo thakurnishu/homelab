@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-prometheus-stack-values
+data:
+  values.yaml: |
+    prometheus:
+      service:
+        type: NodePort
+        nodePort: 32003
