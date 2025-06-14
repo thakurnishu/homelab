@@ -6,6 +6,3 @@ resources:
   - l2advertisement.yaml
 
 namespace: metallb-system
-
-patches:
-  - path: patch.yaml
