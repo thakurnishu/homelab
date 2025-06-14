@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
   - ./longhorn
   - ./traefik
-  #- ./metallb
+  - ./metallb
 
