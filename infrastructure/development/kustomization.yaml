@@ -5,3 +5,4 @@ resources:
   - ./traefik
   - ./metallb
   - ./metrics-server
+  - ./monitoring
