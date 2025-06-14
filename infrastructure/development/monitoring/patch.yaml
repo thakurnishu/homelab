@@ -8,3 +8,7 @@ spec:
     spec:
       sourceRef:
         namespace: monitoring
+  valuesFrom:
+    - kind: ConfigMap
+      name: monitoring-values
+
