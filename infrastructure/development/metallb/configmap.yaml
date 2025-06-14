@@ -3,18 +3,18 @@ kind: ConfigMap
 metadata:
   name: metallb-values
 data:
-   values.yaml: |
-#     prometheus:
-#       rbacPrometheus: false
-#       serviceAccount: "kube-prometheus-stack-prometheus"
-#       namespace: "monitoring"
-#       podMonitor:
-#         enabled: false
-#       serviceMonitor:
-#         enabled: true
-#         speaker:
-#           additionalLabels:
-#             release: kube-prometheus-stack
-#         controller:
-#           additionalLabels:
-#             release: kube-prometheus-stack
+  values.yaml: |
+    prometheus:
+      rbacPrometheus: false
+      serviceAccount: "kube-prometheus-stack-prometheus"
+      namespace: "monitoring"
+      podMonitor:
+        enabled: false
+      serviceMonitor:
+        enabled: true
+        speaker:
+          additionalLabels:
+            release: kube-prometheus-stack
+        controller:
+          additionalLabels:
+            release: kube-prometheus-stack
