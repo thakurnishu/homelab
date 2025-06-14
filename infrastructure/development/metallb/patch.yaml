@@ -8,6 +8,6 @@ spec:
     spec:
       sourceRef:
         namespace: metallb-system
-  valuesfrom:
-    - kind: configmap
+  valuesFrom:
+    - kind: ConfigMap
       name: metallb-values
