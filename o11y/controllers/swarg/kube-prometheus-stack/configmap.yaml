@@ -7,4 +7,8 @@ data:
     prometheus:
       service:
         type: NodePort
-        nodePort: 32003
+        nodePort: 32004
+    grafana:
+      service:
+        type: NodePort
+        nodePort: 32005

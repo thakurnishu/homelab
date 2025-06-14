@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       sourceRef:
-        namespace: kube-prometheus-stack
+        namespace: monitoring
   valuesFrom:
     - kind: ConfigMap
       name: kube-prometheus-stack-values

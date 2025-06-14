@@ -11,6 +11,5 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: kube-prometheus-stack
-        namespace: monitoring
       interval: 5m
   releaseName: kube-prometheus-stack
