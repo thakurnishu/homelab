@@ -4,5 +4,6 @@ resources:
   - repositry.yaml
   - release.yaml
   - namespace.yaml
+  - httproute.yaml
 
 namespace: longhorn-system
