@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: metallb-values
 data:
-#   values.yaml: |
+   values.yaml: |
 #     prometheus:
 #       rbacPrometheus: false
 #       serviceAccount: "kube-prometheus-stack-prometheus"
