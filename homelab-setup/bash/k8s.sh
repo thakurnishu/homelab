@@ -72,9 +72,13 @@ sudo apt-mark hold kubelet kubeadm kubectl
 # Kubeadm Init
 sudo kubeadm init --config ${home_dir}/files/kubeadm/kubeadm-config.yaml
 
-# Untaint ControlPlane
 controlplane_name=$(sudo kubectl get nodes --selector='node-role.kubernetes.io/control-plane' -o jsonpath='{.items[0].metadata.name}' --kubeconfig /etc/kubernetes/admin.conf)
+
+# Untaint ControlPlane
 sudo kubectl taint node $controlplane_name node-role.kubernetes.io/control-plane:NoSchedule- --kubeconfig=/etc/kubernetes/admin.conf || exit 0
+
+# Remove LoadBalancer label
+sudo kubectl label nodes $controlplane_name node.kubernetes.io/exclude-from-external-load-balancers- --kubeconfig=/etc/kubernetes/admin.conf || exit 0
 
 # Networking and network policy
 sudo kubectl create -f ${home_dir}/files/calico/tigera-operator-v${calico_version}.yaml \
@@ -118,7 +122,7 @@ sudo flux bootstrap github \
   --owner=${git_user} \
   --repository=${git_repo} \
   --branch=main \
-  --path=clusters/swarg \
+  --path=clusters/development \
   --personal --private=false \
   --kubeconfig=/etc/kubernetes/admin.conf
 

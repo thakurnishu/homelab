@@ -9,4 +9,3 @@ namespace: longhorn-system
 
 patches:
   - path: patch.yaml
-
