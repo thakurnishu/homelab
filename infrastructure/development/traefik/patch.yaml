@@ -1,0 +1,12 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: traefik
+spec:
+  chart:
+    spec:
+      sourceRef:
+        namespace: traefik
+  valuesFrom:
+    - kind: ConfigMap
+      name: traefik-values
