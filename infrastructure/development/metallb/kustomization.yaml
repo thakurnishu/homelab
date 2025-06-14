@@ -4,9 +4,6 @@ resources:
   - repositry.yaml
   - release.yaml
   - namespace.yaml
-  - configmap.yaml
+  - ./configs
 
 namespace: metallb-system
-
-patches:
-  - path: patch.yaml
