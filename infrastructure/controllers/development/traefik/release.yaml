@@ -27,6 +27,16 @@ spec:
           hostname: ""
           protocol: HTTP
           namespacePolicy: All
+        websecure:
+          port: 8443
+          hostname: ""
+          protocol: HTTPS
+          namespacePolicy: All
+          certificateRefs:
+            - name: local-nishantlabs-cloud
+              namespace: cert-manager
+            - name: public-nishantlabs-cloud
+              namespace: cert-manager
     providers:
       kubernetesIngress:
         enabled: false
