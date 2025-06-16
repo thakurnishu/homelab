@@ -51,7 +51,7 @@ setup_sops() {
   fi
 
   age-keygen -o age.agekey
-  cat age.agekey | grep "public key:" | awk '{print $4}' > ../cluster/development/age.pubkey
+  cat age.agekey | grep "public key:" | awk '{print $4}' > ../clusters/development/age.pubkey
 }
 
 
