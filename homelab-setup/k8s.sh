@@ -10,7 +10,6 @@ cni_version="1.6.2"
 k8s_version='1.31'
 calico_version='3.29.3'
 
-
 # Update
 sudo apt update
 
@@ -115,6 +114,15 @@ sudo kubectl wait --for=condition=Ready -n kube-system pod \
   --timeout=360s \
   --kubeconfig=/etc/kubernetes/admin.conf
 echo "✅ Conrol Plane is ready."
+
+sudo kubectl create ns flux-system --kubeconfig=/etc/kubernetes/admin.conf
+
+cat "$home_dir/sops.asc" |
+sudo kubectl create secret generic sops-gpg \
+  --namespace=flux-system \
+  --from-file=sops.asc=/dev/stdin \
+  --kubeconfig=/etc/kubernetes/admin.conf
+
 
 echo '  '
 sudo flux bootstrap github \

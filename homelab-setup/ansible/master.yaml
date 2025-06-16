@@ -1,5 +1,0 @@
-- name: Install System Application 
-  import_playbook: playbooks/system.yaml
-    
-- name: Install K8S Stuff 
-  import_playbook: playbooks/k8s.yaml
