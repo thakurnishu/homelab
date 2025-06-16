@@ -49,9 +49,15 @@ setup_sops() {
     sudo mv age/age-keygen /usr/local/bin/
     rm -rf age age-v1.2.1-linux-amd64.tar.gz 
   fi
+  if ! which yq >/dev/null 2>&1;
+  then
+    sudo wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq
+    sudo chmod +x /usr/local/bin/yq
+  fi
 
   age-keygen -o age.agekey
-  cat age.agekey | grep "public key:" | awk '{print $4}' > ../clusters/development/age.pubkey
+  age_public_key=$(cat age.agekey | grep "public key:" | awk '{print $4}')
+  yq -i ".creation_rules[0].key_groups[0].age[0] = \"$age_public_key\"" ../.sops.yaml
 }
 
 
