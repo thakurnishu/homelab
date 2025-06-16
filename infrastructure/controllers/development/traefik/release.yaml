@@ -33,9 +33,9 @@ spec:
           protocol: HTTPS
           namespacePolicy: All
           certificateRefs:
-            - name: local-nishantlabs-cloud
+            - name: public-nishantlabs-cloud-tls
               namespace: cert-manager
-            - name: public-nishantlabs-cloud
+            - name: local-nishantlabs-cloud-tls
               namespace: cert-manager
     providers:
       kubernetesIngress:
