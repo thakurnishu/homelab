@@ -39,25 +39,19 @@ setup_sops() {
     sudo chmod +x /usr/local/bin/sops
   fi
 
-  KEY_NAME="${SERVER}.nishantlabs.cloud"
-  KEY_COMMENT="flux secrets"
+  if ! which sops >/dev/null 2>&1;
+  then
+    wget https://github.com/FiloSottile/age/releases/download/v1.2.1/age-v1.2.1-linux-amd64.tar.gz
+    tar -xzvf age-v1.2.1-linux-amd64.tar.gz
+    chmod +x age/age 
+    chmod +x age/age-keygen
+    sudo mv age/age /usr/local/bin/
+    sudo mv age/age-keygen /usr/local/bin/
+    rm -rf age age-v1.2.1-linux-amd64.tar.gz 
+  fi
 
-  gpg --batch --full-generate-key <<EOF
-  %no-protection
-  Key-Type: 1
-  Key-Length: 4096
-  Subkey-Type: 1
-  Subkey-Length: 4096
-  Expire-Date: 0
-  Name-Comment: ${KEY_COMMENT}
-  Name-Real: ${KEY_NAME}
-EOF
-
-  keyId=$(gpg --list-keys --with-colons "${KEY_NAME}" | awk -F: '/^pub:/ {print $5}')
-  PRIVATE_KEY=$(gpg --export-secret-keys --armor "${keyId}")
-  PUBLIC_KEY=$(gpg --export --armor "${keyId}")
-  echo "$PUBLIC_KEY" > ../clusters/development/.sops.pub.asc
-  echo "$PRIVATE_KEY" > sops.asc
+  age-keygen -o age.agekey
+  cat age.agekey | grep "public key:" | awk '{print $4}' > ../cluster/development/age.pubkey
 }
 
 
@@ -80,4 +74,4 @@ if [[ "y" == $NGINX ]]; then
   install_tools "nginx-proxy"
 fi
 
-rm -rf sops.asc
+rm -rf age.agekey

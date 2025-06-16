@@ -117,12 +117,11 @@ echo "✅ Conrol Plane is ready."
 
 sudo kubectl create ns flux-system --kubeconfig=/etc/kubernetes/admin.conf
 
-cat "$home_dir/sops.asc" |
-sudo kubectl create secret generic sops-gpg \
+cat "$home_dir/age.agekey" |
+sudo kubectl create secret generic sops-age \
   --namespace=flux-system \
-  --from-file=sops.asc=/dev/stdin \
+  --from-file=age.agekey=/dev/stdin \
   --kubeconfig=/etc/kubernetes/admin.conf
-
 
 echo '  '
 sudo flux bootstrap github \
