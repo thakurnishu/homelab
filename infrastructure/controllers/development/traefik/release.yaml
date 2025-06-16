@@ -34,9 +34,7 @@ spec:
           namespacePolicy: All
           certificateRefs:
             - name: public-nishantlabs-cloud-tls
-              namespace: cert-manager
             - name: local-nishantlabs-cloud-tls
-              namespace: cert-manager
     providers:
       kubernetesIngress:
         enabled: false

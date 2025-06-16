@@ -2,6 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: public-nishantlabs-cloud
+  namespace: traefik
 spec:
   secretName: public-nishantlabs-cloud-tls
   dnsNames:
