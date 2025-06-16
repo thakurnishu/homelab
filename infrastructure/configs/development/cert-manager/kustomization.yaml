@@ -2,6 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - cloudflare-api-token.secret.sops.yaml
-  - clusterissuer.yaml
+  - issuers/letsencrypt-cloudflare.yaml
+  - certificates/local.yaml
+  - certificates/public.yaml
 
 namespace: cert-manager
