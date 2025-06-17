@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   labels:
     grafana_dashboard: "1"
-  name: cert-manager-dashbords
+  name: cert-manager-dashbord
 data:
   cert-manager.json: |
     {

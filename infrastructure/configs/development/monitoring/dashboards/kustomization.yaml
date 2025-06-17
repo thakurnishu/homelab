@@ -4,5 +4,6 @@ resources:
   - metallb-dashboard.yaml
   - longhorn-dashboard.yaml
   - cert-manager-dashboard.yaml
+  - traefik-dashboard.yaml
 
 namespace: monitoring

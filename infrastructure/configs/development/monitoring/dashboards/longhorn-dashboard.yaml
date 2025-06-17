@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   labels:
     grafana_dashboard: "1"
-  name: longhorn-dashbords
+  name: longhorn-dashbord
 data:
   longhorn.json: |
     {
