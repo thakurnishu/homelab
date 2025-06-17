@@ -4,6 +4,8 @@ metadata:
   name: longhorn
 spec:
   interval: 30m
+  releaseName: longhorn
+
   chart:
     spec:
       chart: longhorn
@@ -13,4 +15,10 @@ spec:
         name: longhorn
         namespace: longhorn-system
       interval: 5m
-  releaseName: longhorn
+
+  values:
+    metrics:
+      serviceMonitor:
+        enabled: true
+        additionalLabels:
+          release: kube-prometheus-stack
