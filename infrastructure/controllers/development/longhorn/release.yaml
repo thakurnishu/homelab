@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: longhorn
-      version: '1.*'
+      version: '1.9.*'
       sourceRef:
         kind: HelmRepository
         name: longhorn
@@ -22,3 +22,12 @@ spec:
         enabled: true
         additionalLabels:
           release: kube-prometheus-stack
+    longhornUI:
+      replicas: 1
+    csi:
+      attacherReplicaCount: 1
+      provisionerReplicaCount: 1
+      resizerReplicaCount: 1
+      snapshotterReplicaCount: 1
+    defaultSettings:
+      defaultReplicaCount: 1
