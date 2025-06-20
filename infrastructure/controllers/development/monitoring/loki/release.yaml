@@ -34,4 +34,3 @@ spec:
         replication_factor: 1
       filesystem:
         chunks_directory: /var/loki/chunks
-        rules_directory: /var/loki/rules
