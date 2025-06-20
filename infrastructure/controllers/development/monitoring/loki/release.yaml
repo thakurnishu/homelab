@@ -37,3 +37,28 @@ spec:
         filesystem:
           chunks_directory: /var/loki/chunks
           rules_directory: /var/loki/rules
+      schemaConfig: 
+        configs:
+        - from: "2025-06-20" # Current Date
+          object_store: filesystem
+          schema: v13
+          store: tsdb
+          index:
+            period: 24h
+            prefix: loki_index_
+      limits_config:
+        retention_period: 48h
+      compactor:
+        working_directory: /var/loki/compactor
+        compaction_interval: 5m
+        retention_enabled: true
+        retention_delete_delay: 2h
+        retention_delete_worker_count: 150
+        delete_request_store: filesystem
+
+
+#    compactor:
+#      persistence:
+#        enabled: false
+#        size: 5Gi
+#        storageClass: longhorn
