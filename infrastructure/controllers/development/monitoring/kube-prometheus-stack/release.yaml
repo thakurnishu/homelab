@@ -4,13 +4,23 @@ metadata:
   name: kube-prometheus-stack
 spec:
   interval: 30m
+  releaseName: kube-prometheus-stack
+
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: '70.10.*'
+      version: '75.3.*'
       sourceRef:
         kind: HelmRepository
         name: kube-prometheus-stack
         namespace: monitoring
       interval: 5m
-  releaseName: kube-prometheus-stack
+
+  values:
+    grafana:
+      additionalDataSources:
+        - name: loki
+          type: loki
+          url: http://loki-gateway.monitoring.svc.cluster.local
+          access: proxy
+
