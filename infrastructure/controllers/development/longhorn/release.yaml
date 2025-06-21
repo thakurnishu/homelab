@@ -31,5 +31,6 @@ spec:
       snapshotterReplicaCount: 1
     defaultSettings:
       defaultReplicaCount: 1
+    # Replication on default StorageClass
     persistence:
       defaultClassReplicaCount: 0
