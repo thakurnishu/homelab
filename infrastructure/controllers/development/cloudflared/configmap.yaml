@@ -11,5 +11,5 @@ data:
 
     ingress:
     - hostname: "grafana.nishantlabs.cloud"
-      service: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
+      service: http://traefik.traefik.svc.cluster.local:80
     - service: http_status:404
