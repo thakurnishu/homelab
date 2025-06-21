@@ -7,3 +7,4 @@ resources:
   - ./metrics-server
   - ./monitoring
   - ./cert-manager
+  - ./cloudflared
