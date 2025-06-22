@@ -18,7 +18,7 @@ spec:
 
   values:
     ingressClass:
-      enabled: true
+      enabled: false
     gateway:
       enabled: true
       listeners:
@@ -32,7 +32,7 @@ spec:
             - name: local-nishantlabs-cloud-tls
     providers:
       kubernetesIngress:
-        enabled: true
+        enabled: false
       kubernetesGateway:
         enabled: true
     metrics:
