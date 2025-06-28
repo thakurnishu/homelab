@@ -1,0 +1,7 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: minimaldo-runner-scale-set
+spec:
+  values:
+    githubConfigUrl: "https://github.com/thakurnishu/MinimalDo"
