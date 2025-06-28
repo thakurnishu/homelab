@@ -19,7 +19,7 @@ spec:
     githubConfigUrl: "https://github.com/thakurnishu/MinimalDo"
     githubConfigSecret: arc-github-app-secrets
     maxRunners: 3
-    minRunners: 0
+    minRunners: 1
     runnerScaleSetName: "ubuntu-homelab"
     containerMode:
       type: "dind"
