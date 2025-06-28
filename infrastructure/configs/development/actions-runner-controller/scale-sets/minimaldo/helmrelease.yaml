@@ -19,7 +19,20 @@ spec:
     githubConfigUrl: "https://github.com/thakurnishu/MinimalDo"
     githubConfigSecret: arc-github-app-secrets
     maxRunners: 3
-    minRunners: 1
+    minRunners: 0
     runnerScaleSetName: "ubuntu-homelab"
     containerMode:
       type: "dind"
+    template:
+      spec:
+        containers:
+          - name: runner
+            image: ghcr.io/actions/actions-runner:2.320.0
+            command: ["/home/runner/run.sh"]
+            resources:
+              limits:
+                memory: "512Mi"
+                cpu: "500m"
+              requests:
+                memory: "128Mi"
+                cpu: "100m"
