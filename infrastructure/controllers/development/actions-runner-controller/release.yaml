@@ -33,7 +33,7 @@ spec:
         namespace: arc-runners
 
   values:
-    githubConfigUrl: "https://github.com/thakurnishu"
+    githubConfigUrl: "https://github.com/thakurnishu/MinimalDo"
     githubConfigSecret: arc-github-app-secrets
     maxRunners: 3
     minRunners: 0
