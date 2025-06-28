@@ -1,7 +1,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: runner-scale-set
+  name: minimaldo-runner-scale-set
 spec:
   interval: 5m
   releaseName: arc-runner
@@ -16,7 +16,7 @@ spec:
         namespace: arc-runners
 
   values:
-    githubConfigUrl: "https://github.com/example/repo"
+    githubConfigUrl: "https://github.com/thakurnishu/MinimalDo"
     githubConfigSecret: arc-github-app-secrets
     maxRunners: 3
     minRunners: 0
