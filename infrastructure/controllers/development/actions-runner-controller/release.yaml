@@ -37,7 +37,7 @@ spec:
     githubConfigSecret: arc-github-app-secrets
     maxRunners: 3
     minRunners: 0
-    runnerScaleSetName: "ubuntu-homelab"
+    #runnerScaleSetName: "ubuntu-homelab"
     containerMode:
       type: "dind"
     template:
