@@ -8,3 +8,4 @@ resources:
 #  - ./monitoring
   - ./cert-manager
 #  - ./cloudflared
+  - ./actions-runner-controller
