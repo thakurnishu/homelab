@@ -4,6 +4,7 @@ resources:
   - namespace.yaml
   - ../../../base/sonarqube
   - monitoring-passcode.secret.sops.yaml
+  - sonarqube-password.secret.sops.yaml
 
 namespace: sonarqube
 
