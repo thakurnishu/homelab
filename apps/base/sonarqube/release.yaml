@@ -4,6 +4,7 @@ metadata:
   name: sonarqube
 spec:
   interval: 5m
+  timeout: 20m
   releaseName: sonarqube
   chart:
     spec:
