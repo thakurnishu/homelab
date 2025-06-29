@@ -7,3 +7,14 @@ spec:
     spec:
       sourceRef:
         namespace: sonarqube
+  values:
+    httproute:
+      enabled: true
+      gateway: traefik-gateway
+      gatewayNamespace: traefik
+      hostnames:
+      - sonarqube.nishantlabs.cloud
+    monitoringPasscodeSecretName: monitoring-passcode
+    monitoringPasscodeSecretKey: passcode
+    edition: developer
+

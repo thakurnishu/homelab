@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - namespace.yaml
   - ../../../base/sonarqube
+  - monitoring-passcode.secret.sops.yaml
 
 namespace: sonarqube
 
