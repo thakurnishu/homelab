@@ -19,4 +19,3 @@ spec:
     edition: developer
     setAdminPassword:
       passwordSecretName: sonarqube-password
-
