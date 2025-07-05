@@ -21,3 +21,13 @@ spec:
       buildNumber: "25.6.0.109173"
     setAdminPassword:
       passwordSecretName: sonarqube-password
+
+    # Database Setting
+    postgresql:
+      enabled: false
+    jdbcOverwrite:
+      enabled: true
+      jdbcUrl: "jdbc:postgresql://sonarqube-pg-cluster-rw.sonarqube:5432/app"
+      jdbcUsername: app
+      jdbcSecretName: sonarqube-pg-cluster-app
+      jdbcSecretPasswordKey: password
