@@ -12,10 +12,10 @@ spec:
       resources:
         requests:
           cpu: "100m"
-          memory: 128Mi
+          memory: 5Gi
         limits:
           cpu: "500m"
-          memory: 4Gi
+          memory: 5Gi
     frontend:
       resources:
         requests:
