@@ -143,4 +143,5 @@ curl -LO https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd6
 tar -xvf k9s_Linux_amd64.tar.gz
 rm -rf k9s_Linux_amd64.tar.gz LICENSE README.md
 sudo mv k9s /usr/local/bin/
+curl -sSfL   https://github.com/cloudnative-pg/cloudnative-pg/raw/main/hack/install-cnpg-plugin.sh |   sudo sh -s -- -b /usr/local/bin
 
