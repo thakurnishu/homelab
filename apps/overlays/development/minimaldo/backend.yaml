@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minimaldo-backend
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+      - name: thakurnishu-packages-read-secret
+      containers:
+      - name: backend
+        image: ghcr.io/thakurnishu/minimaldo-backend:6a38a5c
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretMapKeyRef:
+              name: minimaldo-pg-cluster-app
+              key: host
+        - name: DB_PORT
+          valueFrom:
+            secretMapKeyRef:
+              name: minimaldo-pg-cluster-app
+              key: port
+        - name: DB_USER
+          valueFrom:
+            secretMapKeyRef:
+              name: minimaldo-pg-cluster-app
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretMapKeyRef:
+              name: minimaldo-pg-cluster-app
+              key: password
+        - name: DB_NAME
+          valueFrom:
+            secretMapKeyRef:
+              name: minimaldo-pg-cluster-app
+              key: dbname

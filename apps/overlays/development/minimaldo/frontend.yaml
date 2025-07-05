@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minimaldo-frontend
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+      - name: thakurnishu-packages-read-secret
+      containers:
+      - name: frontend
+        image: ghcr.io/thakurnishu/minimaldo-frontend:c332e45
+
