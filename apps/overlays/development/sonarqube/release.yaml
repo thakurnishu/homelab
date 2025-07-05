@@ -16,7 +16,6 @@ spec:
       - sonarqube.nishantlabs.cloud
     monitoringPasscodeSecretName: monitoring-passcode
     monitoringPasscodeSecretKey: passcode
-    #edition: developer
     community:
       enabled: true
       buildNumber: "25.6.0.109173"
