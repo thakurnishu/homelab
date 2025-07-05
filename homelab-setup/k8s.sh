@@ -136,3 +136,11 @@ sudo flux bootstrap github \
 mkdir -p .kube
 sudo cp /etc/kubernetes/admin.conf .kube/config
 sudo chown $USER:$USER .kube/config
+
+
+# Install K9S
+curl -LO https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd64.tar.gz
+tar -xvf k9s_Linux_amd64.tar.gz
+rm -rf k9s_Linux_amd64.tar.gz LICENSE README.md
+sudo mv k9s /usr/local/bin/
+
