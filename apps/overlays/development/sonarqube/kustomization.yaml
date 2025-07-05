@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ../../../base/sonarqube
   - namespace.yaml
+  - pg-cluster.yaml
   - ./secrets
 
 namespace: sonarqube
