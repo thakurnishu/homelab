@@ -15,7 +15,7 @@ spec:
           memory: 128Mi
         limits:
           cpu: "500m"
-          memory: 1Gi
+          memory: 4Gi
     frontend:
       resources:
         requests:
