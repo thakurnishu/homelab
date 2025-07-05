@@ -11,15 +11,15 @@ spec:
     apiServer:
       resources:
         requests:
-          cpu: "100m"
+          cpu: "2"
           memory: 5Gi
         limits:
-          cpu: "500m"
+          cpu: "4"
           memory: 5Gi
     frontend:
       resources:
         requests:
-          cpu: "100m"
+          cpu: "150m"
           memory: 64Mi
         limits:
           cpu: "500m"

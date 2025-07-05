@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ../../../base/owasp-dependency-track
   - namespace.yaml
+  - httproute.yaml
 
 namespace: dependency-track
 
