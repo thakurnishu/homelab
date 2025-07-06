@@ -10,4 +10,4 @@ spec:
     name: postgresql
     major: 17
   storage:
-    size: 512Mi
+    size: 1Gi
