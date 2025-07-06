@@ -17,26 +17,26 @@ spec:
         env:
         - name: DB_HOST
           valueFrom:
-            secretMapKeyRef:
+            secretKeyRef:
               name: minimaldo-pg-cluster-app
               key: host
         - name: DB_PORT
           valueFrom:
-            secretMapKeyRef:
+            secretKeyRef:
               name: minimaldo-pg-cluster-app
               key: port
         - name: DB_USER
           valueFrom:
-            secretMapKeyRef:
+            secretKeyRef:
               name: minimaldo-pg-cluster-app
               key: username
         - name: DB_PASSWORD
           valueFrom:
-            secretMapKeyRef:
+            secretKeyRef:
               name: minimaldo-pg-cluster-app
               key: password
         - name: DB_NAME
           valueFrom:
-            secretMapKeyRef:
+            secretKeyRef:
               name: minimaldo-pg-cluster-app
               key: dbname
