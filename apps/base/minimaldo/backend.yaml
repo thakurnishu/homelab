@@ -1,4 +1,3 @@
-# Backend Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -37,7 +36,6 @@ spec:
           timeoutSeconds: 3
           failureThreshold: 3
 ---
-# Backend Service
 apiVersion: v1
 kind: Service
 metadata:
