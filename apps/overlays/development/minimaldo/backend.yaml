@@ -7,6 +7,10 @@ spec:
     spec:
       imagePullSecrets:
       - name: thakurnishu-packages-read-secret
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox
+        command: ['sh', '-c', 'until nc -z minimaldo-pg-cluster-rw 5432; do echo "Waiting for PostgreSQL..."; sleep 2; done']
       containers:
       - name: backend
         image: ghcr.io/thakurnishu/minimaldo-backend:6a38a5c
