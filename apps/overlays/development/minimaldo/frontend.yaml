@@ -7,7 +7,20 @@ spec:
     spec:
       imagePullSecrets:
       - name: thakurnishu-packages-read-secret
+      initContainers:
+      - name: wait-for-backend
+        image: busybox
+        command: ['sh', '-c', 'until nc -z minimaldo-backend-svc 80; do echo "Waiting for Minimal Backend..."; sleep 2; done']
+        resources:
+          requests:
+            cpu: "10m"
+            memory: 16Mi
+          limits:
+            cpu: "10m"
+            memory: 16Mi
       containers:
       - name: frontend
-        image: ghcr.io/thakurnishu/minimaldo-frontend:c332e45
-
+        image: ghcr.io/thakurnishu/minimaldo-frontend:0e21c91
+        env:
+        - name: REACT_APP_API_URL
+          value: "http://minimaldo-backend-svc/api"

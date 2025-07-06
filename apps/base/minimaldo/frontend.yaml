@@ -16,6 +16,13 @@ spec:
       - name: frontend
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            cpu: "10m"
+            memory: 16Mi
+          limits:
+            cpu: "10m"
+            memory: 16Mi
         livenessProbe:
           httpGet:
             path: /
