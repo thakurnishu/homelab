@@ -4,6 +4,6 @@ resources:
   - ./longhorn
   - ./metallb
 #  - ./monitoring
-  - ./cert-manager
+#  - ./cert-manager
   - ./actions-runner-controller
   - ./cloudnativepg
