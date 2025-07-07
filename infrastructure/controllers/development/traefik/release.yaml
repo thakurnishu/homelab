@@ -28,8 +28,8 @@ spec:
           protocol: HTTPS
           namespacePolicy: All
           certificateRefs:
-            - name: public-nishantlabs-cloud-tls
             - name: local-nishantlabs-cloud-tls
+            #- name: public-nishantlabs-cloud-tls
     providers:
       kubernetesIngress:
         enabled: false
