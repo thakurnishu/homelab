@@ -10,6 +10,6 @@ data:
     no-autoupdate: true
 
     ingress:
-    - hostname: "grafana.nishantlabs.cloud"
+    - hostname: "grafana.local.nishantlabs.cloud"
       service: http://traefik.traefik.svc.cluster.local:80
     - service: http_status:404

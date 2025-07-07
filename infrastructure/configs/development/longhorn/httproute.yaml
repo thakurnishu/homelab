@@ -7,7 +7,7 @@ spec:
   - name: traefik-gateway
     namespace: traefik
   hostnames:
-  - longhorn.nishantlabs.cloud
+  - longhorn.local.nishantlabs.cloud
   rules:
   - matches:
     - path:

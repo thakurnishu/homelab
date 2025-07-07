@@ -23,4 +23,4 @@ spec:
         image: ghcr.io/thakurnishu/minimaldo-frontend:2b72222
         env:
         - name: REACT_APP_API_URL
-          value: "https://minimaldo.nishantlabs.cloud/api"
+          value: "https://minimaldo.local.nishantlabs.cloud/api"

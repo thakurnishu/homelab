@@ -7,7 +7,7 @@ spec:
   - name: traefik-gateway
     namespace: traefik
   hostnames:
-  - minimaldo.nishantlabs.cloud
+  - minimaldo.local.nishantlabs.cloud
   rules:
   - matches:
     - path:

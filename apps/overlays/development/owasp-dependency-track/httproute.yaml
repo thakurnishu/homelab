@@ -7,7 +7,7 @@ spec:
   - name: traefik-gateway
     namespace: traefik
   hostnames:
-  - dependency-track.nishantlabs.cloud
+  - dependency-track.local.nishantlabs.cloud
   rules:
   - matches:
     - path:
