@@ -5,5 +5,5 @@ resources:
   - ./metallb
 #  - ./monitoring
   - ./cert-manager
-#  - ./actions-runner-controller
+  - ./actions-runner-controller
   - ./cloudnativepg

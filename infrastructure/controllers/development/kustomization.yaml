@@ -8,5 +8,5 @@ resources:
 #  - ./monitoring
   - ./cert-manager
 #  - ./cloudflared
-#  - ./actions-runner-controller
+  - ./actions-runner-controller
   - ./cloudnativepg
