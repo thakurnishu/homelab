@@ -23,4 +23,3 @@ spec:
           type: loki
           url: http://loki-gateway.monitoring.svc.cluster.local
           access: proxy
-

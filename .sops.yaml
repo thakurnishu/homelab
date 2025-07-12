@@ -5,3 +5,10 @@ creation_rules:
     encrypted_regex: "^(data|stringData)$"
     key_groups:
       - age: ["age1csm4q7qm27z74t9e42ha30pvujcm3a3gzhnvmpr04wwwsqjxp9jqhsnreg"]
+
+
+# For Implementing regex path on below:
+# test1:
+#   data: this need to be encrypted.
+#
+# encrypted_regex: "^test1\.data$"
