@@ -17,7 +17,7 @@ spec:
             value: info
         volumeMounts:
           - name: linkstack
-            mouthPath: /htdocs
+            mountPath: /htdocs
       volumes:
       - name: linkstack
         emptyDir:
