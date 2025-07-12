@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ./sonarqube
   - ./minimaldo
+  - ./linkstack
 #  - ./owasp-dependency-track # High Mem and CPU usage
 
 
