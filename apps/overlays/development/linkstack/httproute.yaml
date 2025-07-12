@@ -12,7 +12,7 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /@nishantsingh
+        value: /
     backendRefs:
     - name: linkstack-svc
       port: 80
