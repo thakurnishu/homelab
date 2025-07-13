@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ../../../base/signoz
   - namespace.yaml
+  - httproute.yaml
 
 namespace: signoz
 
