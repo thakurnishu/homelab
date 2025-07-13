@@ -8,6 +8,8 @@ spec:
       sourceRef:
         namespace: signoz
   values:
+    global:
+      storageClass: longhorn
     clickhouse:
       installCustomStorageClass: true
 
