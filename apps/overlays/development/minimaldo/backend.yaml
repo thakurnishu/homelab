@@ -13,7 +13,7 @@ spec:
         command: ['sh', '-c', 'until nc -z minimaldo-pg-cluster-rw 5432; do echo "Waiting for PostgreSQL..."; sleep 2; done']
       containers:
       - name: backend
-        image: ghcr.io/thakurnishu/minimaldo-backend:0e21c91
+        image: ghcr.io/thakurnishu/minimaldo-backend:880a216
         env:
         - name: DB_HOST
           valueFrom:
@@ -40,3 +40,13 @@ spec:
             secretKeyRef:
               name: minimaldo-pg-cluster-app
               key: dbname
+        - name: PORT
+          value: "8080"
+        - name: FRONTEND_URL
+          value: "https://minimaldo.local.nishantlabs.cloud/"
+        - name: SERVICE_NAME
+          value: "MinimalDo"
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: "http://signoz-otel-collector.signoz.svc.cluster.local:4318"
+        - name: INSECURE_MODE
+          value: "true"
