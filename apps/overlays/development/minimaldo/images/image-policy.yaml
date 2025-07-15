@@ -5,12 +5,11 @@ metadata:
 spec:
   imageRepositoryRef:
     name: minimaldo-frontend
-    namespace: minimaldo
 #  filterTags:
 #    pattern: '"^main-[a-f0-9]{7,}$"'
 #    extract: '$'
   policy:
-    numerical:
+    alphabetical:
       order: asc
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta2
@@ -20,10 +19,9 @@ metadata:
 spec:
   imageRepositoryRef:
     name: minimaldo-backend
-    namespace: minimaldo
 #  filterTags:
 #    pattern: '"^main-[a-f0-9]{7,}$"'
 #    extract: '$'
   policy:
-    numerical:
+    alphabetical:
       order: asc
