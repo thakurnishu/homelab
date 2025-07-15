@@ -1,0 +1,15 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: minimaldo-frontend
+spec:
+  image: ghcr.io/thakurnishu/minimaldo-frontend
+  interval: 1m
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: minimaldo-backend
+spec:
+  image: ghcr.io/thakurnishu/minimaldo-backend
+  interval: 1m
