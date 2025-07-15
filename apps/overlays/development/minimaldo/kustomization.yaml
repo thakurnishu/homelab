@@ -6,6 +6,7 @@ resources:
   - namespace.yaml
   - image-pull.secret.sops.yaml
   - httproute.yaml
+  - ./images
 
 namespace: minimaldo
 
