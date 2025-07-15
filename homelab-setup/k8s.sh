@@ -131,6 +131,7 @@ sudo flux bootstrap github \
   --branch=main \
   --path=clusters/development \
   --personal --private=false \
+  --components-extra=image-reflector-controller,image-automation-controller \
   --kubeconfig=/etc/kubernetes/admin.conf
 
 mkdir -p .kube
