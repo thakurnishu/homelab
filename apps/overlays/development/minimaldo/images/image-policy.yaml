@@ -5,9 +5,9 @@ metadata:
 spec:
   imageRepositoryRef:
     name: minimaldo-frontend
-  filterTags:
-    pattern: '"^main-[a-f0-9]{7,}$"'
-    extract: '$'
+#  filterTags:
+#    pattern: '"^main-[a-f0-9]{7,}$"'
+#    extract: '$'
   policy:
     numerical:
       order: asc
@@ -19,9 +19,9 @@ metadata:
 spec:
   imageRepositoryRef:
     name: minimaldo-backend
-  filterTags:
-    pattern: '"^main-[a-f0-9]{7,}$"'
-    extract: '$'
+#  filterTags:
+#    pattern: '"^main-[a-f0-9]{7,}$"'
+#    extract: '$'
   policy:
     numerical:
       order: asc
