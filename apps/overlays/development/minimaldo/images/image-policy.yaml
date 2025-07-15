@@ -5,6 +5,7 @@ metadata:
 spec:
   imageRepositoryRef:
     name: minimaldo-frontend
+    namespace: minimaldo
 #  filterTags:
 #    pattern: '"^main-[a-f0-9]{7,}$"'
 #    extract: '$'
@@ -19,6 +20,7 @@ metadata:
 spec:
   imageRepositoryRef:
     name: minimaldo-backend
+    namespace: minimaldo
 #  filterTags:
 #    pattern: '"^main-[a-f0-9]{7,}$"'
 #    extract: '$'
