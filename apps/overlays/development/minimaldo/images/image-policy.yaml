@@ -6,8 +6,8 @@ spec:
   imageRepositoryRef:
     name: minimaldo-frontend
   filterTags:
-    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
-    extract: '$ts'
+    pattern: '"^main-[a-f0-9]{7,}$"'
+    extract: '$'
   policy:
     numerical:
       order: asc
@@ -20,8 +20,8 @@ spec:
   imageRepositoryRef:
     name: minimaldo-backend
   filterTags:
-    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
-    extract: '$ts'
+    pattern: '"^main-[a-f0-9]{7,}$"'
+    extract: '$'
   policy:
     numerical:
       order: asc
