@@ -3,6 +3,8 @@ kind: ImageRepository
 metadata:
   name: minimaldo-frontend
 spec:
+  secretRef:
+    name: thakurnishu-packages-read-secret
   image: ghcr.io/thakurnishu/minimaldo-frontend
   interval: 1m
 ---
@@ -11,5 +13,7 @@ kind: ImageRepository
 metadata:
   name: minimaldo-backend
 spec:
+  secretRef:
+    name: thakurnishu-packages-read-secret
   image: ghcr.io/thakurnishu/minimaldo-backend
   interval: 1m

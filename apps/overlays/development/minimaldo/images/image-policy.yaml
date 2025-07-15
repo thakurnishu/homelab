@@ -3,27 +3,25 @@ kind: ImagePolicy
 metadata:
   name: minimaldo-frontend-image-policy
 spec:
-  secretRef:
-    name: thakurnishu-packages-read-secret
   imageRepositoryRef:
     name: minimaldo-frontend
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
   policy:
-    alphabetical:
+    numerical:
       order: asc
-      match:
-        pattern: "^main-[a-f0-9]{7,}$"
 ---
 apiVersion: image.toolkit.fluxcd.io/v1beta2
 kind: ImagePolicy
 metadata:
   name: minimaldo-backend-image-policy
 spec:
-  secretRef:
-    name: thakurnishu-packages-read-secret
   imageRepositoryRef:
     name: minimaldo-backend
+  filterTags:
+    pattern: '^main-[a-fA-F0-9]+-(?P<ts>.*)'
+    extract: '$ts'
   policy:
-    alphabetical:
+    numerical:
       order: asc
-      match:
-        pattern: "^main-[a-f0-9]{7,}$"
