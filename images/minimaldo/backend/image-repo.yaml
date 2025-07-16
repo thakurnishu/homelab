@@ -1,0 +1,9 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: minimaldo-backend
+spec:
+  secretRef:
+    name: thakurnishu-packages-read-secret
+  image: ghcr.io/thakurnishu/minimaldo-backend
+  interval: 1m
