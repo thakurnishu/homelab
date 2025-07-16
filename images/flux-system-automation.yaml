@@ -16,7 +16,6 @@ spec:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
       messageTemplate: |
-
         Automated image update
 
         Automation name: {{ .AutomationObject }}
