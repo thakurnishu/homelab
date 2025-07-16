@@ -25,10 +25,12 @@ spec:
         - {{ $filename }}
         {{ end -}}
 
+
         Objects:
         {{ range $resource, $_ := .Updated.Objects -}}
         - {{ $resource.Kind }} {{ $resource.Name }}
         {{ end -}}
+
 
         Images:
         {{ range .Updated.Images -}}
