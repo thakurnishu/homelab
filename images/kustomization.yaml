@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - ./minimaldo
   - flux-system-automation.yaml
+  - image-pull.secret.sops.yaml
 
 namespace: flux-system
