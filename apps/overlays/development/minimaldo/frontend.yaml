@@ -20,7 +20,7 @@ spec:
             memory: 16Mi
       containers:
       - name: frontend
-        image: ghcr.io/thakurnishu/minimaldo-frontend:main-08b1fa5-1752662054 # {"$imagepolicy": "flux-system:minimaldo-frontend-image-policy"}
+        image: ghcr.io/thakurnishu/minimaldo-frontend:main-46e7e57-1752663367 # {"$imagepolicy": "flux-system:minimaldo-frontend-image-policy"}
         env:
         - name: REACT_APP_API_URL
           value: "https://minimaldo.local.nishantlabs.cloud/api"
