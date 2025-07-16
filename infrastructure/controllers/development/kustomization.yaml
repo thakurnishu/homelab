@@ -9,4 +9,4 @@ resources:
   - ./cert-manager
 #  - ./cloudflared
   - ./actions-runner-controller
-  - ./cloudnativepg
+#  - ./cloudnativepg
