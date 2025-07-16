@@ -6,4 +6,4 @@ resources:
 #  - ./monitoring
   - ./cert-manager
   - ./actions-runner-controller
-#  - ./cloudnativepg
+  - ./cloudnativepg
