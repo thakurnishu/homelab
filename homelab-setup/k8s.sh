@@ -125,12 +125,13 @@ sudo kubectl create secret generic sops-age \
 
 echo '  '
 sudo flux bootstrap github \
-  --token-auth \
+  --token-auth=false \
   --owner=${git_user} \
   --repository=${git_repo} \
   --branch=main \
   --path=clusters/development \
   --personal --private=false \
+  --read-write-key=true \
   --components-extra=image-reflector-controller,image-automation-controller \
   --kubeconfig=/etc/kubernetes/admin.conf
 
