@@ -44,11 +44,14 @@ spec:
           value: "8080"
         - name: FRONTEND_URL
           value: "https://minimaldo.local.nishantlabs.cloud/"
-        - name: SERVICE_NAME
+        - name: APP_NAME
           value: "MinimalDo"
-        - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: "http://signoz-otel-collector.signoz.svc.cluster.local:4317"
-        - name: INSECURE_MODE
-          value: "true"
+        - name: SIGNOZ_GPRC_ENDPOINT
+          value: "signoz-otel-collector.signoz.svc.cluster.local:4317"
         - name: GIN_MODE
           value: release
+        - name: ENABLE_CONSOLE_LOG
+          value: "true"
+        - name: LOG_LEVEL
+          value: "debug" # debug, info, warn, error
+
