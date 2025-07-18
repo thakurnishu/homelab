@@ -9,7 +9,7 @@ spec:
       - name: thakurnishu-packages-read-secret
       initContainers:
       - name: wait-for-backend
-        image: busybox
+        image: busybox:1.36
         command: ['sh', '-c', 'until nc -z minimaldo-backend-svc 80; do echo "Waiting for Minimal Backend..."; sleep 2; done']
         resources:
           requests:
