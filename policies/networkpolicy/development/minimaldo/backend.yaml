@@ -29,3 +29,10 @@ spec:
     ports:
     - protocol: TCP
       port: 5432
+  - to:
+      - namespaceSelector:
+          matchLabels:
+            kubernetes.io/metadata.name: signoz
+    ports:
+    - protocol: TCP
+      port: 4317
