@@ -12,4 +12,3 @@ spec:
       storageClass: longhorn
     clickhouse:
       installCustomStorageClass: true
-
