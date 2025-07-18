@@ -50,3 +50,5 @@ spec:
           value: "http://signoz-otel-collector.signoz.svc.cluster.local:4317"
         - name: INSECURE_MODE
           value: "true"
+        - name: GIN_MODE
+          value: release
