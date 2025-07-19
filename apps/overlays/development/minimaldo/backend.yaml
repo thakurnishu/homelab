@@ -13,7 +13,7 @@ spec:
         command: ['sh', '-c', 'until nc -z minimaldo-pg-cluster-rw 5432; do echo "Waiting for PostgreSQL..."; sleep 2; done']
       containers:
       - name: backend
-        image: ghcr.io/thakurnishu/minimaldo-backend:main-aa116c8-1752906878 # {"$imagepolicy": "flux-system:minimaldo-backend-image-policy"}
+        image: ghcr.io/thakurnishu/minimaldo-backend:main-bb9ec8c-1752908169 # {"$imagepolicy": "flux-system:minimaldo-backend-image-policy"}
         env:
         - name: DB_HOST
           valueFrom:
