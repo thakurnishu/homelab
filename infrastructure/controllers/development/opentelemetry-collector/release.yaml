@@ -4,6 +4,7 @@ metadata:
   name: otel-collector
 spec:
   interval: 5m
+  timeout: 30m
   releaseName: otel-collector
 
   chart:
