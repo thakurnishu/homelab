@@ -46,8 +46,8 @@ spec:
           value: "https://minimaldo.local.nishantlabs.cloud/"
         - name: APP_NAME
           value: "MinimalDo"
-        - name: SIGNOZ_GPRC_ENDPOINT
-          value: "signoz-otel-collector.signoz.svc.cluster.local:4317"
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT_GRPC
+          value: ".svc.cluster.local:4317"
         - name: GIN_MODE
           value: release
         - name: ENABLE_CONSOLE_LOG

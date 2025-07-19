@@ -32,7 +32,7 @@ spec:
   - to:
       - namespaceSelector:
           matchLabels:
-            kubernetes.io/metadata.name: signoz
+            kubernetes.io/metadata.name: open-telemetry
     ports:
     - protocol: TCP
       port: 4317
