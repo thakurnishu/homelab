@@ -47,7 +47,7 @@ spec:
         - name: APP_NAME
           value: "MinimalDo"
         - name: OTEL_EXPORTER_OTLP_ENDPOINT_GRPC
-          value: ".svc.cluster.local:4317"
+          value: "otel-collector-opentelemetry-collector.open-telemetry.svc.cluster.local:4317"
         - name: GIN_MODE
           value: release
         - name: ENABLE_CONSOLE_LOG
