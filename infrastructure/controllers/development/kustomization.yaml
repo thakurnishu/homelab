@@ -11,3 +11,4 @@ resources:
   - ./actions-runner-controller
   - ./cloudnativepg
   - ./kyverno
+  - ./opentelemetry-collector
