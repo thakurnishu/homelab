@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: n8n
+spec:
+  type: "oci"
+  url: oci://8gears.container-registry.com/library
+  interval: 1m
