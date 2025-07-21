@@ -7,4 +7,4 @@ spec:
   schedule: "0 0 3 * * *"
   backupOwnerReference: cluster
   cluster:
-    name: minimaldo-pg-cluster
+    name: minimaldo-pg-cluster-v0
