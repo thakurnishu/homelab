@@ -11,3 +11,15 @@ spec:
     major: 17
   storage:
     size: 10Gi
+  backup:
+    barmanObjectStore:
+      destinationPath: "gs://homelab-database-backup-nishantlabs/sonarqube"
+      googleCredentials:
+        applicationCredentials:
+          name: backup-creds
+          key: gcsCredentials
+      wal:
+        compression: gzip
+      data:
+        compression: gzip
+    retentionPolicy: 14d
