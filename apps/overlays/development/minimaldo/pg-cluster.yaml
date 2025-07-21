@@ -21,6 +21,7 @@ spec:
     - name: clusterBackup
       barmanObjectStore:
         destinationPath: "gs://homelab-database-backup-nishantlabs/minimaldo"
+        serverName: minimaldo-pg-cluster
         googleCredentials:
           applicationCredentials:
             name: backup-creds
