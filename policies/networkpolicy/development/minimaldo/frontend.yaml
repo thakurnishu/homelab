@@ -8,17 +8,8 @@ spec:
       app: frontend
   policyTypes:
   - Ingress
-  - Egress
   ingress:
     - from:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: traefik
-  egress:
-  - to:
-    - podSelector:
-        matchLabels:
-          app: backend
-    ports:
-    - protocol: TCP
-      port: 8080
