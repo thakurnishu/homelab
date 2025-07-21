@@ -7,4 +7,4 @@ spec:
   schedule: "0 0 3 * * *"
   backupOwnerReference: cluster
   cluster:
-    name: sonarqube-pg-cluster
+    name: sonarqube-pg-cluster-v0
