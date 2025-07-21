@@ -5,7 +5,7 @@ resources:
   - ../../../base/secrets/database-backup-to-gcs.secret.sops.yaml
   - namespace.yaml
   - pg-cluster.yaml
-  - pg-cluster-backup.yaml
+#  - pg-cluster-backup.yaml
   - ./secrets
 
 namespace: sonarqube
