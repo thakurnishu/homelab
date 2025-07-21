@@ -1,2 +1,3 @@
 *.secret.yaml
 age.agekey
+*.secret.json
