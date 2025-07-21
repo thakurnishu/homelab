@@ -13,29 +13,29 @@ spec:
   storage:
     size: 10Gi
 
-  bootstrap:
-    recovery:
-      source: clusterBackup
+#  bootstrap:
+#    recovery:
+#      source: clusterBackup
 
-  externalClusters:
-    - name: clusterBackup
-      barmanObjectStore:
-        destinationPath: "gs://homelab-database-backup-nishantlabs/sonarqube"
-        serverName: sonarqube-pg-cluster
-        googleCredentials:
-          applicationCredentials:
-            name: backup-creds
-            key: gcsCredentials
-
-  backup:
-    barmanObjectStore:
-      destinationPath: "gs://homelab-database-backup-nishantlabs/sonarqube"
-      googleCredentials:
-        applicationCredentials:
-          name: backup-creds
-          key: gcsCredentials
-      wal:
-        compression: gzip
-      data:
-        compression: gzip
-    retentionPolicy: 14d
+#  externalClusters:
+#    - name: clusterBackup
+#      barmanObjectStore:
+#        destinationPath: "gs://homelab-database-backup-nishantlabs/sonarqube"
+#        serverName: sonarqube-pg-cluster
+#        googleCredentials:
+#          applicationCredentials:
+#            name: backup-creds
+#            key: gcsCredentials
+#
+#  backup:
+#    barmanObjectStore:
+#      destinationPath: "gs://homelab-database-backup-nishantlabs/sonarqube"
+#      googleCredentials:
+#        applicationCredentials:
+#          name: backup-creds
+#          key: gcsCredentials
+#      wal:
+#        compression: gzip
+#      data:
+#        compression: gzip
+#    retentionPolicy: 14d

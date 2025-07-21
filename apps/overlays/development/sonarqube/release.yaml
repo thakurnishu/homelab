@@ -34,8 +34,8 @@ spec:
       enabled: false
     jdbcOverwrite:
       enabled: true
-      jdbcUrl: "jdbc:postgresql://sonarqube-pg-cluster-v0-rw.sonarqube.svc.cluster.local:5432/app"
+      jdbcUrl: "jdbc:postgresql://sonarqube-pg-cluster-rw.sonarqube:5432/app"
       jdbcUsername: app
-      jdbcSecretName: sonarqube-pg-cluster-v0-app
+      jdbcSecretName: sonarqube-pg-cluster-app
       jdbcSecretPasswordKey: password
 
