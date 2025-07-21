@@ -5,7 +5,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      cnpg.io/cluster: minimaldo-pg-cluster
+      cnpg.io/cluster: minimaldo-pg-cluster-v0
   policyTypes:
   - Ingress
   ingress:

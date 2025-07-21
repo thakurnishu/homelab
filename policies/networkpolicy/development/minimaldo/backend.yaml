@@ -25,7 +25,7 @@ spec:
   - to:
     - podSelector:
         matchLabels:
-          cnpg.io/cluster: minimaldo-pg-cluster
+          cnpg.io/cluster: minimaldo-pg-cluster-v0
     ports:
     - protocol: TCP
       port: 5432
