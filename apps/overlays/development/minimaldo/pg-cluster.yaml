@@ -11,6 +11,20 @@ spec:
     major: 17
   storage:
     size: 5Gi
+
+  bootstrap:
+    recovery:
+      source: clusterBackup
+
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: "gs://homelab-database-backup-nishantlabs/minimaldo"
+        googleCredentials:
+          applicationCredentials:
+            name: backup-creds
+            key: gcsCredentials
+
   backup:
     barmanObjectStore:
       destinationPath: "gs://homelab-database-backup-nishantlabs/minimaldo"
