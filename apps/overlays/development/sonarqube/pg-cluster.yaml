@@ -10,8 +10,8 @@ spec:
 #    kind: ClusterImageCatalog
 #    name: postgresql
 #    major: 17
-#  storage:
-#    size: 10Gi
+  storage:
+    size: 10Gi
 
   bootstrap:
     recovery:
