@@ -5,8 +5,8 @@ resources:
   - ./traefik
   - ./metallb
   - ./metrics-server
-  - ./monitoring
   - ./cert-manager
+#  - ./monitoring
 #  - ./cloudflared
 #  - ./actions-runner-controller
 #  - ./cloudnativepg
