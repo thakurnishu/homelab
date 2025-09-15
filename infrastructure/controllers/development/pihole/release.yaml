@@ -20,6 +20,7 @@ spec:
   values:
     replicaCount: 1
     serviceDns:
+      mixedService: true
       type: LoadBalancer
     admin:
       enabled: true
