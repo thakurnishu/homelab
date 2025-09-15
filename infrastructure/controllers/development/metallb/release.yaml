@@ -5,6 +5,7 @@ metadata:
 spec:
   interval: 30m
   releaseName: metallb
+  timeout: 30m
 
   chart:
     spec:
