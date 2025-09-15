@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ./longhorn
 #  - ./traefik
-#  - ./metallb
+  - ./metallb
 #  - ./metrics-server
 #  - ./cert-manager
 #  - ./monitoring
