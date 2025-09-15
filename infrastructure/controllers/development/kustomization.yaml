@@ -5,7 +5,7 @@ resources:
 #  - ./traefik
 #  - ./metallb
   - ./metrics-server
-#  - ./monitoring
+  - ./monitoring
 #  - ./cert-manager
 #  - ./cloudflared
 #  - ./actions-runner-controller
