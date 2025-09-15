@@ -17,11 +17,11 @@ spec:
       interval: 5m
 
   values:
-    metrics:
-      serviceMonitor:
-        enabled: true
-        additionalLabels:
-          release: kube-prometheus-stack
+#    metrics:
+#      serviceMonitor:
+#        enabled: true
+#        additionalLabels:
+#          release: kube-prometheus-stack
     longhornUI:
       replicas: 1
     csi:
