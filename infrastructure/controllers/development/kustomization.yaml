@@ -12,4 +12,4 @@ resources:
 #  - ./cloudnativepg
 #  - ./kyverno
 #  - ./opentelemetry-collector
-#  - ./pihole
+  - ./pihole
