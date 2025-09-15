@@ -19,6 +19,8 @@ spec:
 
   values:
     replicaCount: 1
+    serviceDhcp:
+      enabled: false
     serviceWeb:
       type: ClusterIP
     serviceDns:
