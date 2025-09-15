@@ -1,7 +1,23 @@
 #!/bin/bash
 
+read -p "Setup K8S Cluster(y/n): " K8S
+
 PRIVATE_KEY="empty"
 PUBLIC_KEY="empty"
+
+
+install_tools() {
+  local tool=$1
+
+  DIRECTORY="homelab-setup"
+  ssh "$SERVER" "if [ ! -d '$DIRECTORY' ]; then mkdir $DIRECTORY; fi"
+  scp -r . "$SERVER:~/homelab-setup/." >/dev/null
+
+  figlet "Installing $tool"
+  ssh "$SERVER" "chmod +x ~/homelab-setup/${tool}.sh"
+  ssh -t "$SERVER" "bash ~/homelab-setup/${tool}.sh"
+}
+
 
 setup_sops() {
   if ! which sops >/dev/null 2>&1;
@@ -11,7 +27,7 @@ setup_sops() {
     sudo chmod +x /usr/local/bin/sops
   fi
 
-  if ! which sops >/dev/null 2>&1;
+  if ! which age >/dev/null 2>&1;
   then
     wget https://github.com/FiloSottile/age/releases/download/v1.2.1/age-v1.2.1-linux-amd64.tar.gz
     tar -xzvf age-v1.2.1-linux-amd64.tar.gz
@@ -33,11 +49,22 @@ setup_sops() {
 }
 
 
-echo "  "
-read -p "Create Public and Private Key for SOPS (y/n): " SOPS
+if [[ "y" == $K8S ]]; then
+  echo "  "
+  read -p "Create Public and Private Key for SOPS (y/n): " SOPS
 
-if [[ "y" == $SOPS ]]; then
-  setup_sops
+  if [[ "y" == $SOPS ]]; then
+    setup_sops
+    # Create Namespace for fluxcd
+    kubectl create ns flux-system
+
+    cat age.agekey |
+    kubectl create secret generic sops-age \
+      --namespace=flux-system \
+      --from-file=age.agekey=/dev/stdin 
+  fi
+
+  bash ./k8s.sh
 fi
 
 rm -rf age.agekey
