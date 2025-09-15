@@ -6,7 +6,7 @@ resources:
   - ./metallb
   - ./metrics-server
   - ./monitoring
-#  - ./cert-manager
+  - ./cert-manager
 #  - ./cloudflared
 #  - ./actions-runner-controller
 #  - ./cloudnativepg
