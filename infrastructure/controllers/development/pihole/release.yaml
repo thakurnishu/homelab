@@ -20,8 +20,7 @@ spec:
   values:
     replicaCount: 1
     serviceWeb:
-      type: LoadBalancer
-      loadBalancerIP: "192.168.1.246"
+      type: ClusterIP
     serviceDns:
       mixedService: true
       type: LoadBalancer
