@@ -3,9 +3,9 @@ kind: Kustomization
 resources:
 #  - ./longhorn
 #  - ./traefik
-  - ./metallb
+#  - ./metallb
   - ./metrics-server
-  - ./monitoring
+#  - ./monitoring
 #  - ./cert-manager
 #  - ./cloudflared
 #  - ./actions-runner-controller
