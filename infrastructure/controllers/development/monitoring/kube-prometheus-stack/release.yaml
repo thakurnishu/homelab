@@ -17,9 +17,9 @@ spec:
       interval: 5m
 
   values:
-    grafana:
-      additionalDataSources:
-        - name: loki
-          type: loki
-          url: http://loki-gateway.monitoring.svc.cluster.local
-          access: proxy
+#    grafana:
+#      additionalDataSources:
+#        - name: loki
+#          type: loki
+#          url: http://loki-gateway.monitoring.svc.cluster.local
+#          access: proxy
