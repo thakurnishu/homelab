@@ -25,6 +25,10 @@ spec:
       enabled: false
     gateway:
       enabled: true
+      service:
+        spec:
+          type: LoadBalancer
+          loadBalancerIP: 192.168.1.241   # <-- Set your static IP here
       listeners:
         websecure:
           port: 8443
