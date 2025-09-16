@@ -1,14 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./longhorn
-  - ./traefik
-  - ./metallb
-  - ./metrics-server
-  - ./cert-manager
-  - ./cloudnativepg
-  - ./pihole
-  - ./actions-runner-controller
+#  - ./longhorn
+#  - ./traefik
+#  - ./metallb
+#  - ./metrics-server
+#  - ./cert-manager
+#  - ./cloudnativepg
+#  - ./pihole
+#  - ./actions-runner-controller
+
 #  - ./monitoring
 #  - ./cloudflared
 #  - ./kyverno
