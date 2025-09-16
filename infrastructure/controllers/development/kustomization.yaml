@@ -6,10 +6,10 @@ resources:
   - ./metallb
   - ./metrics-server
   - ./cert-manager
+  - ./cloudnativepg
 #  - ./monitoring
 #  - ./cloudflared
 #  - ./actions-runner-controller
-#  - ./cloudnativepg
 #  - ./kyverno
 #  - ./opentelemetry-collector
   - ./pihole
