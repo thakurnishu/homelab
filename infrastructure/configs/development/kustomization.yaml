@@ -8,5 +8,5 @@ resources:
 #  - ./actions-runner-controller
 
 
-#  - ./monitoring
+  - ./monitoring
 #  - ./cloudnativepg

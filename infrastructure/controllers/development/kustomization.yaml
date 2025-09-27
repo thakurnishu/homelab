@@ -10,7 +10,7 @@ resources:
 #  - ./cloudnativepg
 #  - ./actions-runner-controller
 
-#  - ./monitoring
+  - ./monitoring
 #  - ./cloudflared
 #  - ./kyverno
 #  - ./opentelemetry-collector
