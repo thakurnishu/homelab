@@ -7,10 +7,10 @@ resources:
   - ./metrics-server
   - ./cert-manager
   - ./pihole
+  - ./monitoring
 #  - ./cloudnativepg
 #  - ./actions-runner-controller
 
-  - ./monitoring
 #  - ./cloudflared
 #  - ./kyverno
 #  - ./opentelemetry-collector

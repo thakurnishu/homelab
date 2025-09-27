@@ -5,8 +5,8 @@ resources:
   - ./metallb
   - ./cert-manager
   - ./pihole
+  - ./monitoring
 #  - ./actions-runner-controller
 
 
-  - ./monitoring
 #  - ./cloudnativepg
