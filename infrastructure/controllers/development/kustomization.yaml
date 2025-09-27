@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./longhorn
-#  - ./traefik
-#  - ./metallb
+  - ./traefik
+  - ./metallb
   - ./metrics-server
   - ./cert-manager
 #  - ./cloudnativepg
