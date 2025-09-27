@@ -8,8 +8,8 @@ resources:
   - ./cert-manager
   - ./pihole
   - ./monitoring
-#  - ./cloudnativepg
-#  - ./actions-runner-controller
+  - ./cloudnativepg
+  - ./actions-runner-controller
 
 #  - ./cloudflared
 #  - ./kyverno
