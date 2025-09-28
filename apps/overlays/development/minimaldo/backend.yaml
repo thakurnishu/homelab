@@ -18,27 +18,27 @@ spec:
         - name: DB_HOST
           valueFrom:
             secretKeyRef:
-              name: minimaldo-pg-cluster-v0-app
+              name: minimaldo-pg-cluster-app
               key: host
         - name: DB_PORT
           valueFrom:
             secretKeyRef:
-              name: minimaldo-pg-cluster-v0-app
+              name: minimaldo-pg-cluster-app
               key: port
         - name: DB_USER
           valueFrom:
             secretKeyRef:
-              name: minimaldo-pg-cluster-v0-app
+              name: minimaldo-pg-cluster-app
               key: username
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: minimaldo-pg-cluster-v0-app
+              name: minimaldo-pg-cluster-app
               key: password
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-              name: minimaldo-pg-cluster-v0-app
+              name: minimaldo-pg-cluster-app
               key: dbname
         - name: PORT
           value: "8080"
