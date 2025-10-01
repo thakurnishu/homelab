@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: '36.0.*'
+      version: '37.1.*'
       sourceRef:
         kind: HelmRepository
         name: traefik
@@ -35,6 +35,7 @@ spec:
           enabled: true
           certificateRefs:
             - name: local-nishantlabs-cloud-tls
+            - name: public-nishantlabs-cloud-tls
 
     ## Gateway
     gateway:
