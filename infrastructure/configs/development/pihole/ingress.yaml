@@ -4,7 +4,7 @@ metadata:
   name: pihole-ingress
 spec:
   rules:
-    - host: nginx.nishantlabs.cloud
+    - host: nginx.local.nishantlabs.cloud
       http:
         paths:
           - path: /
