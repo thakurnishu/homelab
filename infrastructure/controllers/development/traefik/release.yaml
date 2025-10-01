@@ -34,8 +34,8 @@ spec:
         tls:
           enabled: true
           certificateRefs:
-            - name: local-nishantlabs-cloud-tls
             - name: public-nishantlabs-cloud-tls
+            - name: local-nishantlabs-cloud-tls
 
     ## Gateway
     gateway:
@@ -47,8 +47,8 @@ spec:
           protocol: HTTPS
           namespacePolicy: All
           certificateRefs:
+            - name: public-nishantlabs-cloud-tls
             - name: local-nishantlabs-cloud-tls
-            #- name: public-nishantlabs-cloud-tls
 
     metrics:
       prometheus:
