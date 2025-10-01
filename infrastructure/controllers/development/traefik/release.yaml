@@ -17,8 +17,25 @@ spec:
       interval: 5m
 
   values:
+    providers:
+      kubernetesIngress:
+        enabled: true
+      kubernetesGateway:
+        enabled: true
+
+    ## Ingress
     ingressClass:
-      enabled: false
+      enabled: true
+      isDefaultClass: true
+    ports:
+      websecure: 8443
+      protocol: TCP
+      tls:
+        enabled: true
+        certificateRefs:
+          - name: local-nishantlabs-cloud-tls
+
+    ## Gateway
     gateway:
       enabled: true
       listeners:
@@ -30,11 +47,7 @@ spec:
           certificateRefs:
             - name: local-nishantlabs-cloud-tls
             #- name: public-nishantlabs-cloud-tls
-    providers:
-      kubernetesIngress:
-        enabled: false
-      kubernetesGateway:
-        enabled: true
+
     metrics:
       prometheus:
         service:
