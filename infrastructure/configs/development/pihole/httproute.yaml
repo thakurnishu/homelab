@@ -7,7 +7,8 @@ spec:
     - name: traefik-gateway
       namespace: traefik
   hostnames:
-    - pihole.local.nishantlabs.cloud
+    - pihole.nishantlabs.cloud
+    #- pihole.local.nishantlabs.cloud
   rules:
   - matches:
     - path:
