@@ -28,12 +28,13 @@ spec:
       enabled: true
       isDefaultClass: true
     ports:
-      websecure: 8443
-      protocol: TCP
-      tls:
-        enabled: true
-        certificateRefs:
-          - name: local-nishantlabs-cloud-tls
+      websecure: 
+        port: 8443
+        protocol: TCP
+        tls:
+          enabled: true
+          certificateRefs:
+            - name: local-nishantlabs-cloud-tls
 
     ## Gateway
     gateway:
