@@ -19,13 +19,13 @@ spec:
   values:
     providers:
       kubernetesIngress:
-        enabled: true
-      kubernetesGateway:
         enabled: false
+      kubernetesGateway:
+        enabled: true
 
     ## Ingress
     ingressClass:
-      enabled: true
+      enabled: false
       isDefaultClass: true
     ports:
       websecure: 
@@ -39,7 +39,7 @@ spec:
 
     ## Gateway
     gateway:
-      enabled: false
+      enabled: true
       listeners:
         websecure:
           port: 8443
