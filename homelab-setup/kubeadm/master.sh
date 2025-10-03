@@ -401,7 +401,7 @@ mkdir -p ~/.kube
 sudo cp -i /etc/kubernetes/admin.conf ~/.kube/config
 
 ### CNI
-cp weave.yaml weave.yaml.bkp
+curl -s https://raw.githubusercontent.com/thakurnishu/homelab/refs/heads/proxmox/homelab-setup/kubeadm/weave.yaml > weave.yaml
 yq -i ".items[5].spec.template.spec.containers[0].env[2].value = \"${POD_NETWORK_CIDR}\"" weave.yaml
 
 kubectl apply -f weave.yaml
@@ -412,8 +412,7 @@ sleep 5
 kubectl -n kube-system delete pods -l k8s-app=kube-dns --force --grace-period 0
 echo "Waiting for weave-net to be ready... done"
 
-cp weave.yaml.bkp weave.yaml
-rm -rf weave.yaml.bkp
+rm -rf weave.yaml
 
 ### finished
 echo
