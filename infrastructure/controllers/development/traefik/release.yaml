@@ -19,13 +19,13 @@ spec:
   values:
     providers:
       kubernetesIngress:
-        enabled: false
+        enabled: true
       kubernetesGateway:
         enabled: true
 
     ## Ingress
     ingressClass:
-      enabled: false
+      enabled: true
       isDefaultClass: true
     ports:
       websecure: 
@@ -35,7 +35,7 @@ spec:
           enabled: true
           certificateRefs:
             - name: public-nishantlabs-cloud-tls
-            - name: local-nishantlabs-cloud-tls
+#            - name: local-nishantlabs-cloud-tls
 
     ## Gateway
     gateway:
