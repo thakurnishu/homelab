@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: longhorn-httproute
+  name: longhorn-ingress
 spec:
   rules:
     - host: longhorn.nishantlabs.cloud
