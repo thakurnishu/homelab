@@ -4,7 +4,7 @@ creation_rules:
   - path_regex: .*\.secret(\.sops)?\.yaml
     encrypted_regex: "^(data|stringData)$"
     key_groups:
-      - age: ["age1khzu05szp0um38uvn50knwv8w2puy64a9f6f3f0mjtc2lzpmzgqs7m23pm"]
+      - age: ["age1qn66rws9pydcwqwn5d49fc9z7uemdrlj73tk2sgu9vmq5efqj50sdn93ch"]
 # For Implementing regex path on below:
 # test1:
 #   data: this need to be encrypted.
