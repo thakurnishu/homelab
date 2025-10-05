@@ -48,7 +48,7 @@ spec:
           namespacePolicy: All
           certificateRefs:
             - name: public-nishantlabs-cloud-tls
-            - name: local-nishantlabs-cloud-tls
+#            - name: local-nishantlabs-cloud-tls
 
     metrics:
       prometheus:
