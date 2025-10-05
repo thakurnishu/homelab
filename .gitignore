@@ -1,3 +1,5 @@
 *.secret.yaml
 age.agekey
 *.secret.json
+.terraform
+.terraform*
