@@ -28,7 +28,7 @@ flux bootstrap github \
   --token-auth=false \
   --owner=${git_user} \
   --repository=${git_repo} \
-  --branch=talos \
+  --branch=proxmox \
   --path=clusters/development \
   --personal --private=false \
   --read-write-key=true \
