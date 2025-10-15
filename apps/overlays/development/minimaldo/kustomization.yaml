@@ -5,7 +5,8 @@ resources:
   - ../../../base/secrets/image-pull.secret.sops.yaml
   - ../../../base/secrets/database-backup-to-gcs.secret.sops.yaml
   - namespace.yaml
-  - httproute.yaml
+#  - httproute.yaml
+  - ingress.yaml
   - pg-cluster.yaml
   - pg-cluster-backup.yaml
 
