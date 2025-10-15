@@ -103,6 +103,7 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-1-32-apt-keyring.gpg] https://
 echo "deb [signed-by=/etc/apt/keyrings/kubernetes-1-31-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 apt-get --allow-unauthenticated update
 apt-get --allow-unauthenticated install -y containerd kubelet=${KUBE_VERSION}-1.1 kubeadm=${KUBE_VERSION}-1.1 kubectl=${KUBE_VERSION}-1.1 kubernetes-cni
+apt-mark hold kubelet kubeadm kubectl kubernetes-cni
 
 
 
@@ -413,6 +414,15 @@ kubectl -n kube-system delete pods -l k8s-app=kube-dns --force --grace-period 0
 echo "Waiting for weave-net to be ready... done"
 
 rm -rf weave.yaml
+
+### Single Node Cluster
+read -p "Is this Single node cluster (y/n): " SINGLE_NODE
+if [[ $SINGLE_NODE == "y" ]]; then
+  controlplane_name=$(sudo kubectl get nodes --selector='node-role.kubernetes.io/control-plane' -o jsonpath='{.items[0].metadata.name}')
+  kubectl taint node $controlplane_name node-role.kubernetes.io/control-plane:NoSchedule- || exit 0
+  kubectl label nodes $controlplane_name node.kubernetes.io/exclude-from-external-load-balancers- ||  exit 0
+  echo "Removed NoSchedule taint"
+fi
 
 ### finished
 echo
