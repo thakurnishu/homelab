@@ -6,7 +6,7 @@ resources:
   - ../../../base/secrets/database-backup-to-gcs.secret.sops.yaml
   - namespace.yaml
 #  - httproute.yaml
-  - ingress.yaml
+#  - ingress.yaml
   - pg-cluster.yaml
   - pg-cluster-backup.yaml
 
