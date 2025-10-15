@@ -7,9 +7,9 @@ resources:
   - ./metrics-server
   - ./cert-manager
   - ./monitoring
+  - ./cloudnativepg
 
 #  - ./pihole
-#  - ./cloudnativepg
 #  - ./actions-runner-controller
 
 #  - ./cloudflared
