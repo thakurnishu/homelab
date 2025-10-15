@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: minimaldo-pg-cluster
+  name: minimaldo-pg-cluster-v1
 spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgresql:17.5-10-bookworm@sha256:cc84048839a1013247f3acf5e93c328a649c74fdf8ffaecee9d1785543fd7009
@@ -13,20 +13,20 @@ spec:
   storage:
     size: 5Gi
 
-#  bootstrap:
-#    recovery:
-#      source: clusterBackup
-#
-#  externalClusters:
-#    - name: clusterBackup
-#      barmanObjectStore:
-#        destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
-#        serverName: minimaldo-pg-cluster
-#        googleCredentials:
-#          applicationCredentials:
-#            name: backup-creds
-#            key: gcsCredentials
-#
+  bootstrap:
+    recovery:
+      source: clusterBackup
+
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
+        serverName: minimaldo-pg-cluster
+        googleCredentials:
+          applicationCredentials:
+            name: backup-creds
+            key: gcsCredentials
+
   backup:
     barmanObjectStore:
       destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
