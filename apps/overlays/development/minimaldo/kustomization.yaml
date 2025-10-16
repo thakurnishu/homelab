@@ -7,8 +7,8 @@ resources:
   - namespace.yaml
 #  - httproute.yaml
 #  - ingress.yaml
-  - pg-cluster.yaml
-  - pg-cluster-backup.yaml
+#  - pg-cluster.yaml
+#  - pg-cluster-backup.yaml
 
 namespace: minimaldo
 
