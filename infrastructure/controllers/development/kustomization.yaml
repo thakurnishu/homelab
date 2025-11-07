@@ -6,7 +6,7 @@ resources:
   - ./metallb
   - ./metrics-server
   - ./cert-manager
-  - ./monitoring
+#  - ./monitoring
   - ./cloudnativepg
 
 #  - ./pihole
