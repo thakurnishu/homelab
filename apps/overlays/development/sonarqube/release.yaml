@@ -20,7 +20,7 @@ spec:
       gateway: traefik-gateway
       gatewayNamespace: traefik
       hostnames:
-      - sonarqube.local.nishantlabs.cloud
+      - sonarqube.nishantlabs.cloud
     monitoringPasscodeSecretName: monitoring-passcode
     monitoringPasscodeSecretKey: passcode
     community:
