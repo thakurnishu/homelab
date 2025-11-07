@@ -10,7 +10,7 @@ resources:
   - ./cloudnativepg
 
 #  - ./pihole
-#  - ./actions-runner-controller
+  - ./actions-runner-controller
 
 #  - ./cloudflared
 #  - ./kyverno
