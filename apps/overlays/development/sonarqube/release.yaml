@@ -15,12 +15,22 @@ spec:
         image: busybox:1.36
         command: ['sh', '-c', 'until nc -z sonarqube-pg-cluster-v0-rw 5432; do echo "Waiting for PostgreSQL..."; sleep 2; done']
 
-    httproute:
+    # Ingress
+    ingress:
       enabled: true
+      ingressClassName: traefik
+      hosts:
+        - name: sonarqube.nishantlabs.cloud
+
+    # HTTPRoute
+    httproute:
+      enabled: false
       gateway: traefik-gateway
       gatewayNamespace: traefik
       hostnames:
       - sonarqube.nishantlabs.cloud
+
+
     monitoringPasscodeSecretName: monitoring-passcode
     monitoringPasscodeSecretKey: passcode
     community:
