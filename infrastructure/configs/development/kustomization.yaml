@@ -7,5 +7,5 @@ resources:
 #  - ./monitoring
   - ./cloudnativepg
 
-  - ./actions-runner-controller
+#  - ./actions-runner-controller
 #  - ./pihole
