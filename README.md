@@ -1,85 +1,95 @@
-# 🏠 Homelab
+# 🏠 Kubernetes Homelab
 
 [![Kubernetes](https://img.shields.io/badge/kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
-[![Docker](https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://www.linux.org/)
+[![Flux](https://img.shields.io/badge/flux-2962FF?style=for-the-badge&logo=flux&logoColor=white)](https://fluxcd.io/)
 
-Welcome to my homelab repository! This documents my personal homelab infrastructure, configurations, and services.
+This repository contains the **Infrastructure as Code (IaC)** and **GitOps configurations** for my personal homelab. It is built around a single-node Kubernetes cluster and uses **FluxCD** to automatically reconcile the cluster state with this repository.
 
-## 📋 Introduction
+## 🏗️ Architecture
 
-This homelab serves as my personal learning environment and self-hosted services. Built around a single-node Kubernetes cluster, it provides a flexible and scalable environment for running various applications while maintaining simplicity and efficiency.
+The cluster is managed declaratively using GitOps principles.
 
-## 🖥️ Hardware
+- **GitOps Engine**: [FluxCD](https://fluxcd.io/)
+- **Secret Management**: [SOPS](https://github.com/mozilla/sops) with Age encryption
+- **Ingress Controller**: [Traefik](https://traefik.io/)
+- **Policy Enforcement**: [Kyverno](https://kyverno.io/)
 
-### Single-Node Cluster
+## 📂 Repository Structure
 
-| Component      | Specification |
-|---------------|---------------|
-| **Machine**   | Dell Optiplex 7th Gen Mini PC |
-| **CPU**       | i5-7500T (4 Cores) |
-| **RAM**       | 16 GB |
-| **Storage**   | 256 GB SSD |
-| **OS**        | Ubuntu 24.04 |
+The repository follows a standard FluxCD structure, separating infrastructure from applications.
 
-## 🚀 Stack
+### 1. `clusters/`
+The entry point for FluxCD.
+- **`development/`**: The main cluster configuration.
+    - Defines the `GitRepository` source.
+    - Bootstraps the `Kustomization` resources for `apps` and `infrastructure`.
+    - Configures SOPS decryption.
 
-### Core Infrastructure
+### 2. `infrastructure/`
+Core platform services and controllers that keep the cluster running.
+- **`controllers/`**: Helm releases for system components.
+    - **Networking**: `traefik` (Ingress), `metallb` (Load Balancer), `cloudflared` (Tunnels), `pihole` (DNS/Ad-blocking).
+    - **Storage**: `longhorn` (Distributed Block Storage), `cloudnativepg` (Postgres Operator).
+    - **Observability**: `monitoring` (Prometheus/Grafana), `signoz` (APM), `loki` (Logs), `opentelemetry-collector`.
+    - **Security**: `cert-manager` (TLS), `kyverno` (Policies), `actions-runner-controller` (GitHub Actions).
+- **`configs/`**: Configuration resources for the controllers (e.g., `ClusterIssuer`, `IPAddressPool`).
 
-| Component | Technology |
-|-----------|------------|
-| **Kubernetes** | v1.31.0 |
-| **Container Runtime** | containerd |
-| **CNI** | Calico |
-| **Gateway** | Traefik |
-| **Storage** | Longhorn |
+### 3. `apps/`
+User-facing applications and workloads, organized using **Kustomize** (`base` and `overlays`).
+- **`minimaldo`**: Custom todo/task application.
+- **`n8n`**: Workflow automation platform.
+- **`sonarqube`**: Code quality and security inspection.
+- **`owasp-dependency-track`**: Software Bill of Materials (SBOM) analysis.
+- **`signoz`**: Application performance monitoring frontend.
+- **`secrets`**: Encrypted secrets managed via SOPS.
 
-### Monitoring & Observability
+### 4. `homelab-setup/`
+Scripts and configurations for bootstrapping the physical nodes or VMs.
+- **`kubeadm`** / **`talos`**: Bootstrapping configurations.
+- **`k8s.sh`**: Initial node setup script.
+- **`proxmox`**: Virtualization helper scripts.
 
-- [Prometheus](https://prometheus.io/) - Monitoring & alerting
-- [Grafana](https://grafana.com/) - Metrics visualization
-- [Loki](https://grafana.com/oss/loki/) - Log aggregation
+### 5. `scripts/`
+Maintenance and utility scripts.
+- **`sops-encrypt-all.sh`**: Automates the encryption of secrets matching `.sops.yaml` rules.
+- **`ns-delete.sh`**: Helper to force delete stuck namespaces.
 
-### CI/CD & GitOps
+## 🔄 Workflow
 
-- [FluxCD](https://fluxcd.io/) - GitOps tool for Kubernetes
+1.  **Develop**: Make changes to Kubernetes manifests in `apps/` or `infrastructure/`.
+2.  **Encrypt**: If adding secrets, create a `.secret.yaml` file and run `./scripts/sops-encrypt-all.sh`.
+3.  **Commit**: Push changes to the `main` branch.
+4.  **Deploy**: FluxCD detects the commit, decrypts secrets in-cluster, and applies the changes automatically.
 
-## 🛠️ Services
+## 🔐 Secret Management
 
-### Networking
+Secrets are encrypted using **SOPS** with **Age**.
+- **Public Key**: `.sops.yaml` contains the public key for encryption.
+- **Private Key**: Stored securely in the cluster as a Kubernetes Secret (`sops-age`), allowing Flux to decrypt manifests at apply time.
 
-- [Cloudflare Tunnels](https://www.cloudflare.com/products/tunnel/) - Secure access to services
-- [Pi-hole](https://pi-hole.net/) - Network-wide ad-blocking
-- [Traefik](https://traefik.io/) - Reverse proxy and ingress controller
-
-## 🏗️ Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
+- `kubectl`
+- `flux` CLI
+- `sops`
+- `age`
 
-- [kubectl](https://kubernetes.io/docs/tasks/tools/) - Kubernetes command-line tool
-- [Helm](https://helm.sh/) - Kubernetes package manager
-- [flux](https://fluxcd.io/) - GitOps tool
-- [sops](https://github.com/mozilla/sops) - Secrets management
+### Bootstrap
+To bootstrap the cluster (assuming a fresh node):
 
-### Installation
+```bash
+# 1. Clone the repo
+git clone https://github.com/personal/homelab.git
+cd homelab
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/homelab.git
-   cd homelab
-   ```
+# 2. Run setup scripts (if on bare metal)
+./homelab-setup/k8s.sh
 
-2. Install Flux:
-   ```bash
-   flux install
-   ```
-
-3. Apply your configurations:
-   ```bash
-   kubectl apply -f ./clusters/production
-   ```
-
-## 📚 Resources
-
-- [Kubernetes Documentation](https://kubernetes.io/docs/)
-- [Flux Documentation](https://fluxcd.io/docs/)
+# 3. Bootstrap Flux
+flux bootstrap github \
+  --owner=personal \
+  --repository=homelab \
+  --path=clusters/development \
+  --personal
+```
