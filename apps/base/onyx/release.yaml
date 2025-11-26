@@ -8,8 +8,8 @@ spec:
   releaseName: onyx
   chart:
     spec:
-      chart: onyx
-      version: '0.1.*'
+      chart: onyx-stack
+      version: '0.3.*'
       sourceRef:
         kind: HelmRepository
         name: onyx
