@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - ../../../base/onyx
   - namespace.yaml
-#patches:
-#  - path: values.yaml
+patches:
+  - path: values.yaml
 namespace: onyx
