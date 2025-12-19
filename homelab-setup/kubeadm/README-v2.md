@@ -3,6 +3,7 @@
 ## Setup Master Node
 Setup environment Variable in master node:
 ```bash
+sudo -i
 cat <<EOF > k8s-env
 POD_NETWORK_CIDR="10.244.0.0/16"
 SERVICE_NETWORK_CIDR="10.96.0.0/12"
@@ -19,13 +20,13 @@ EOF
 ```
 Then run:
 ```bash
-sudo -i
 bash <(curl -s https://raw.githubusercontent.com/thakurnishu/homelab/refs/heads/proxmox/homelab-setup/kubeadm/master-v2.sh)
 ```
 
 ## Setup Worker Node
 Setup environment Variable in master node:
 ```bash
+sudo -i
 cat <<EOF > k8s-env
 POD_NETWORK_CIDR="10.244.0.0/16"
 SERVICE_NETWORK_CIDR="10.96.0.0/12"
@@ -42,6 +43,5 @@ EOF
 ```
 Then run:
 ```bash
-sudo -i
 bash <(curl -s https://raw.githubusercontent.com/thakurnishu/homelab/refs/heads/proxmox/homelab-setup/kubeadm/worker-v2.sh)
 ```
