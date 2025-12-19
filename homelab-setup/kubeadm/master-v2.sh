@@ -357,6 +357,7 @@ header_banner "Waiting for Control Plane Components"
 
 yellow_alert "  ⏳ This may take a few minutes..."
 echo ""
+sleep 20
 
 blue_alert "  → Waiting for etcd..."
 kubectl wait --for=condition=Ready -n kube-system pod --selector component=etcd --timeout=360s
