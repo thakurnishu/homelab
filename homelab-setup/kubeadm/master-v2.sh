@@ -106,6 +106,18 @@ done
 blue_alert "  ℹ️  Architecture: ${ARCH}"
 echo ""
 
+if ! which yq >/dev/null 2>&1; then
+  blue_alert "  → Installing yq..."
+  wget -qO /usr/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${ARCH}
+  chmod +x /usr/bin/yq
+  success_message "  ✓ yq installed: $(yq --version)"
+else
+  success_message "  ✓ yq already installed: $(yq --version)"
+fi
+
+echo ""
+
+
 # ==============================================================================
 # HOSTNAME CONFIGURATION
 # ==============================================================================
