@@ -396,7 +396,7 @@ header_banner "Waiting for Control Plane Components"
 
 yellow_alert "  ⏳ This may take a few minutes..."
 echo ""
-sleep 20
+sleep 60
 
 blue_alert "  → Waiting for etcd..."
 kubectl wait --for=condition=Ready -n kube-system pod --selector component=etcd --timeout=360s
@@ -418,11 +418,11 @@ echo ""
 
 # TODO:
 # echo "  1. Deploy CNI network plugin (Flannel / Calico)"
-blue_alert "  → Installing Calico operator CRDs"
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/operator-crds.yaml >/dev/null 2>&1
-
-blue_alert "  → Installing Tigera operator"
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/tigera-operator.yaml >/dev/null 2>&1
+#blue_alert "  → Installing Calico operator CRDs"
+#kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/operator-crds.yaml >/dev/null 2>&1
+#
+#blue_alert "  → Installing Tigera operator"
+#kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/tigera-operator.yaml >/dev/null 2>&1
 
 blue_alert "  → Configuring custom resources"
 blue_alert "     • Pod CIDR: ${POD_NETWORK_CIDR}"
