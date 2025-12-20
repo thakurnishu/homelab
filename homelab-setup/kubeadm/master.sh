@@ -82,6 +82,7 @@ REQUIRED_VARS=(
   SERVICE_NETWORK_CIDR
   CALICO_VERSION
   MASTER_NODE_NAME
+  CALICO_ENCAPSULATION_TYPE
 )
 ARCH=$(dpkg --print-architecture)
 
@@ -402,7 +403,13 @@ blue_alert "     • Pod CIDR: ${POD_NETWORK_CIDR}"
 
 wget -q --show-progress -O calico-custom-resources-${CALICO_VERSION}.yaml \
   https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/custom-resources.yaml
+
+# Pod Cidr
 yq -i "(. | select(.kind == \"Installation\") | .spec.calicoNetwork.ipPools[0].cidr) = \"${POD_NETWORK_CIDR}\"" \
+  calico-custom-resources-${CALICO_VERSION}.yaml
+
+# EncapsulationType
+yq -i "(. | select(.kind == \"Installation\") | .spec.calicoNetwork.ipPools[0].encapsulation) = \"${CALICO_ENCAPSULATION_TYPE}\"" \
   calico-custom-resources-${CALICO_VERSION}.yaml
 
 blue_alert "  → Applying custom resources"
