@@ -107,6 +107,32 @@ done
 blue_alert "  ℹ️  Architecture: ${ARCH}"
 echo ""
 
+if ! which helm >/dev/null 2>&1; then
+  blue_alert "  → Installing Helm..."
+
+  wait_for_apt
+  sudo apt-get install curl gpg apt-transport-https -y >/dev/null 2>&1
+
+  blue_alert "  → Adding Helm GPG key"
+  curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey \
+    | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg >/dev/null
+
+  blue_alert "  → Adding Helm repository"
+  echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" \
+    | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list >/dev/null
+
+  wait_for_apt
+  sudo apt-get update >/dev/null 2>&1
+
+  wait_for_apt
+  sudo apt-get install helm -y >/dev/null 2>&1
+
+  success_message "  ✓ Helm installed: $(helm version --short)"
+else
+  success_message "  ✓ Helm already installed: $(helm version --short)"
+fi
+
+
 if ! which yq >/dev/null 2>&1; then
   blue_alert "  → Installing yq..."
   wget -qO /usr/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${ARCH}
@@ -401,22 +427,38 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v${CALI
 blue_alert "  → Configuring custom resources"
 blue_alert "     • Pod CIDR: ${POD_NETWORK_CIDR}"
 
-wget -q --show-progress -O calico-custom-resources-${CALICO_VERSION}.yaml \
-  https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/custom-resources.yaml
+#wget -q --show-progress -O calico-custom-resources-${CALICO_VERSION}.yaml \
+#  https://raw.githubusercontent.com/projectcalico/calico/v${CALICO_VERSION}/manifests/custom-resources.yaml
+#
+## Pod Cidr
+#yq -i "(. | select(.kind == \"Installation\") | .spec.calicoNetwork.ipPools[0].cidr) = \"${POD_NETWORK_CIDR}\"" \
+#  calico-custom-resources-${CALICO_VERSION}.yaml
+#
+## EncapsulationType
+#yq -i "(. | select(.kind == \"Installation\") | .spec.calicoNetwork.ipPools[0].encapsulation) = \"${CALICO_ENCAPSULATION_TYPE}\"" \
+#  calico-custom-resources-${CALICO_VERSION}.yaml
+#
+#blue_alert "  → Applying custom resources"
+#until kubectl create -f calico-custom-resources-${CALICO_VERSION}.yaml >/dev/null 2>&1; do
+#  yellow_alert "     ⌛ Calico apply failed, retrying in 10 seconds..."
+#  sleep 10
+#done
 
+sudo wget -q --show-progress -O calico-helm-values.yaml \
+  https://raw.githubusercontent.com/thakurnishu/homelab/refs/heads/proxmox/homelab-setup/kubeadm/calico/helm-values.yaml
 # Pod Cidr
-yq -i "(. | select(.kind == \"Installation\") | .spec.calicoNetwork.ipPools[0].cidr) = \"${POD_NETWORK_CIDR}\"" \
-  calico-custom-resources-${CALICO_VERSION}.yaml
-
+yq -i "(. | select(.kind == \"Installation\") | .installation.calicoNetwork.ipPools[0].cidr) = \"${POD_NETWORK_CIDR}\"" \
+  calico-helm-values.yaml
 # EncapsulationType
-yq -i "(. | select(.kind == \"Installation\") | .spec.calicoNetwork.ipPools[0].encapsulation) = \"${CALICO_ENCAPSULATION_TYPE}\"" \
-  calico-custom-resources-${CALICO_VERSION}.yaml
+yq -i "(. | select(.kind == \"Installation\") | .installation.calicoNetwork.ipPools[0].encapsulation) = \"${CALICO_ENCAPSULATION_TYPE}\"" \
+  calico-helm-values.yaml
 
-blue_alert "  → Applying custom resources"
-until kubectl create -f calico-custom-resources-${CALICO_VERSION}.yaml >/dev/null 2>&1; do
-  yellow_alert "     ⌛ Calico apply failed, retrying in 10 seconds..."
-  sleep 10
-done
+# Install Calico Through helm
+helm repo add projectcalico https://docs.tigera.io/calico/charts
+helm repo update
+helm install calico projectcalico/tigera-operator --version v${CALICO_VERSION} \
+  --namespace tigera-operator --create-namespace \
+  -f calico-helm-values.yaml
 
 header_banner "Waiting for DNS Services"
 yellow_alert "  ⏳ Waiting for KubeDNS to be ready..."
