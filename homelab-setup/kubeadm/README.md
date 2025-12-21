@@ -21,7 +21,7 @@ EOF
 ```
 Then run:
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/thakurnishu/homelab/refs/heads/proxmox/homelab-setup/kubeadm/master-v2.sh)
+bash <(curl -s https://raw.githubusercontent.com/thakurnishu/homelab/refs/heads/proxmox/homelab-setup/kubeadm/master.sh)
 ```
 
 ## Setup Worker Node
@@ -41,5 +41,5 @@ EOF
 ```
 Then run:
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/thakurnishu/homelab/refs/heads/proxmox/homelab-setup/kubeadm/worker-v2.sh)
+bash <(curl -s https://raw.githubusercontent.com/thakurnishu/homelab/refs/heads/proxmox/homelab-setup/kubeadm/worker.sh)
 ```
