@@ -4,8 +4,8 @@ metadata:
   name: signoz-httproute
 spec:
   parentRefs:
-  - name: traefik-gateway
-    namespace: traefik
+  - name: istio-gateway
+    namespace: istio-system
   hostnames:
   - signoz.local.nishantlabs.cloud
   rules:

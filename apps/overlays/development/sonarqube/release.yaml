@@ -17,16 +17,16 @@ spec:
 
     # Ingress
     ingress:
-      enabled: true
+      enabled: false
       ingressClassName: traefik
       hosts:
         - name: sonarqube.nishantlabs.cloud
 
     # HTTPRoute
     httproute:
-      enabled: false
-      gateway: traefik-gateway
-      gatewayNamespace: traefik
+      enabled: true
+      gateway: istio-gateway
+      gatewayNamespace: istio-system
       hostnames:
       - sonarqube.nishantlabs.cloud
 

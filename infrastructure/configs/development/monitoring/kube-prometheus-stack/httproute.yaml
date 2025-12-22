@@ -4,8 +4,8 @@ metadata:
   name: monitoring-grafana-httproute
 spec:
   parentRefs:
-  - name: traefik-gateway
-    namespace: traefik
+  - name: istio-gateway
+    namespace: istio-system
   hostnames:
   - grafana.nishantlabs.cloud
   rules:
@@ -23,8 +23,8 @@ metadata:
   name: monitoring-prometheus-httproute
 spec:
   parentRefs:
-  - name: traefik-gateway
-    namespace: traefik
+  - name: istio-gateway
+    namespace: istio-system
   hostnames:
   - prometheus.nishantlabs.cloud
   rules:

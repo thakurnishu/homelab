@@ -4,8 +4,8 @@ metadata:
   name: dependency-track-frontend-httproute
 spec:
   parentRefs:
-  - name: traefik-gateway
-    namespace: traefik
+  - name: istio-gateway
+    namespace: istio-system
   hostnames:
   - dependency-track.local.nishantlabs.cloud
   rules:

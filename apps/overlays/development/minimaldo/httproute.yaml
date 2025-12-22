@@ -4,8 +4,8 @@ metadata:
   name: minimaldo-frontend-httproute
 spec:
   parentRefs:
-  - name: traefik-gateway
-    namespace: traefik
+  - name: istio-gateway
+    namespace: istio-gateway 
   hostnames:
   - minimaldo.nishantlabs.cloud
   rules:
