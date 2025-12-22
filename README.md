@@ -11,7 +11,7 @@ The cluster is managed declaratively using GitOps principles.
 
 - **GitOps Engine**: [FluxCD](https://fluxcd.io/)
 - **Secret Management**: [SOPS](https://github.com/mozilla/sops) with Age encryption
-- **Ingress Controller**: [Traefik](https://traefik.io/)
+- **Ingress Controller**: [Traefik](https://traefik.io/) and [Istio](https://istio.io/)
 - **Policy Enforcement**: [Kyverno](https://kyverno.io/)
 
 ## 📂 Repository Structure
