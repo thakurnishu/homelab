@@ -5,7 +5,7 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-    email: thakurnishant5102003@gmail.com
+    email: nishantsingh.work.503@gmail.com
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
       name: cloudflare-clusterissuer-account-key
