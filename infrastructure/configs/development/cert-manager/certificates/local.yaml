@@ -2,7 +2,8 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: local-nishantlabs-cloud
-  namespace: traefik
+#  namespace: traefik
+  namespace: istio-system
 spec:
   secretName: local-nishantlabs-cloud-tls
   dnsNames:

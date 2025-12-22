@@ -6,6 +6,7 @@ resources:
   - ./cert-manager
 #  - ./monitoring
   - ./cloudnativepg
+#  - ./istio
 
 #  - ./actions-runner-controller
 #  - ./pihole
