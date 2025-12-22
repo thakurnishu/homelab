@@ -4,8 +4,8 @@ metadata:
   name: longhorn-httproute
 spec:
   parentRefs:
-  - name: traefik-gateway
-    namespace: traefik
+  - name: istio-gateway
+    namespace: istio-system
   hostnames:
   - longhorn.nishantlabs.cloud
   rules:
