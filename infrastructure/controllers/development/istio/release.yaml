@@ -20,6 +20,8 @@ metadata:
   name: istiod
 spec:
   interval: 5m
+  dependsOn:
+    - name: istio-base
   releaseName: istiod
   chart:
     spec:
@@ -38,6 +40,8 @@ metadata:
   name: istio-cni
 spec:
   interval: 5m
+  dependsOn:
+    - name: istiod
   releaseName: istio-cni
   chart:
     spec:
@@ -56,6 +60,8 @@ metadata:
   name: istio-ztunnel
 spec:
   interval: 5m
+  dependsOn:
+    - name: istio-cni
   releaseName: ztunnel
   chart:
     spec:
