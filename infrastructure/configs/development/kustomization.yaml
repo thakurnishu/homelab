@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ./longhorn
   - ./metallb
-  - ./cert-manager
+#  - ./cert-manager
 #  - ./monitoring
   - ./cloudnativepg
 #  - ./istio
