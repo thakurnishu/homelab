@@ -9,7 +9,7 @@ resources:
 #  - ./monitoring
   - ./cloudnativepg
   - ./istio
-#  - ./external-dns
+  - ./external-dns
 
 #  - ./pihole
 #  - ./actions-runner-controller
