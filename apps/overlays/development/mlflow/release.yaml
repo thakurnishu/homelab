@@ -10,6 +10,7 @@ spec:
   values:
     extraArgs:
       allowedHosts: "mlflow.nishantlabs.cloud"
+      gunicornOpts: null
 #      corsAllowedOrigins: "https://mlflow.nishantlabs.cloud"
 #    global:
 #      storageClass: longhorn
