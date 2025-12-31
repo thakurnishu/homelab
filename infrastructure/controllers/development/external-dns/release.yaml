@@ -37,8 +37,8 @@ spec:
       - name: pihole-info
         secret:
           secretName: pihole-info
-    extraArgs:
-      - --pihole-tls-skip-verify
+#    extraArgs:
+#      - --pihole-tls-skip-verify
     extraVolumeMounts:
       - name: pihole-info
         mountPath: /etc/pihole/info
