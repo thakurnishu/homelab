@@ -26,9 +26,23 @@ spec:
       - gateway-httproute # enabled when gateway api crds are installed in cluster
     domainFilters:
       - nishantlabs.cloud
-    envFrom:
-      - secretRef:
-        name: pihole-info
+    env: 
+      - name: EXTERNAL_DNS_PIHOLE_PASSWORD
+        value: /etc/pihole/info/pihole-password
+      - name: EXTERNAL_DNS_PIHOLE_SERVER
+        value: /etc/pihole/info/pihole-server
+      - name: EXTERNAL_DNS_PIHOLE_TLS_SKIP_VERIFY
+        value: /etc/pihole/info/skip-tls
+      - name: EXTERNAL_DNS_PIHOLE_API_VERSION
+        value: /etc/pihole/info/pihole-api-version
+    extraVolumes:
+      - name: pihole-info
+        secret:
+          secretName: pihole-info
+    extraVolumeMounts:
+      - name: pihole-info
+        mountPath: /etc/pihole/info
+        readOnly: true
     resources:
       limits:
         cpu: 100m
