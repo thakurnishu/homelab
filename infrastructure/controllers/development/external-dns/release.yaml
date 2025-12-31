@@ -31,14 +31,14 @@ spec:
         value: /etc/pihole/info/pihole-password
       - name: EXTERNAL_DNS_PIHOLE_SERVER
         value: /etc/pihole/info/pihole-server
-      - name: EXTERNAL_DNS_PIHOLE_TLS_SKIP_VERIFY
-        value: /etc/pihole/info/skip-tls
       - name: EXTERNAL_DNS_PIHOLE_API_VERSION
         value: /etc/pihole/info/pihole-api-version
     extraVolumes:
       - name: pihole-info
         secret:
           secretName: pihole-info
+    extraArgs:
+      - --pihole-tls-skip-verify=true
     extraVolumeMounts:
       - name: pihole-info
         mountPath: /etc/pihole/info
