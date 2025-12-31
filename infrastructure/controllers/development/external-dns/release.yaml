@@ -28,21 +28,22 @@ spec:
       - nishantlabs.cloud
     env: 
       - name: EXTERNAL_DNS_PIHOLE_PASSWORD
-        value: /etc/pihole/info/pihole-password
+        valueFrom:
+          secretKeyRef:
+            name: pihole-info
+            key: pihole-password
       - name: EXTERNAL_DNS_PIHOLE_SERVER
-        value: /etc/pihole/info/pihole-server
+        valueFrom:
+          secretKeyRef:
+            name: pihole-info
+            key: pihole-server
       - name: EXTERNAL_DNS_PIHOLE_API_VERSION
-        value: /etc/pihole/info/pihole-api-version
-    extraVolumes:
-      - name: pihole-info
-        secret:
-          secretName: pihole-info
+        valueFrom:
+          secretKeyRef:
+            name: pihole-info
+            key: pihole-api-version
 #    extraArgs:
 #      - --pihole-tls-skip-verify
-    extraVolumeMounts:
-      - name: pihole-info
-        mountPath: /etc/pihole/info
-        readOnly: true
     resources:
       limits:
         cpu: 100m
