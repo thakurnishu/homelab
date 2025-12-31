@@ -9,8 +9,8 @@ spec:
         namespace: mlflow
   values:
     extraArgs:
-      - --allowed-hosts="mlflow.nishantlabs.cloud"
-#      - --cors-allowed-origins="https://mlflow.nishantlabs.cloud"
+      allowedHosts: "mlflow.nishantlabs.cloud"
+#      corsAllowedOrigins: "https://mlflow.nishantlabs.cloud"
 #    global:
 #      storageClass: longhorn
 #    clickhouse:
