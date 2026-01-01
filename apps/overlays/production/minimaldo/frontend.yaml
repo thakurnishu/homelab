@@ -23,4 +23,4 @@ spec:
         image: ghcr.io/thakurnishu/minimaldo-frontend:main-3e1431e-1753116302 # {"$imagepolicy": "flux-system:minimaldo-frontend-image-policy"}
         env:
         - name: REACT_APP_API_URL
-          value: "https://minimaldo.local.nishantlabs.cloud/api"
+          value: "https://minimaldo.nishantlabs.cloud/api"
