@@ -8,12 +8,31 @@ spec:
       sourceRef:
         namespace: mlflow
   values:
+
+    initContainers: 
+    - name: wait-for-postgres
+      image: busybox:1.36
+      command: ['sh', '-c', 'until nc -z mlflow-pg-cluster-v0-rw 5432; do echo "Waiting for PostgreSQL..."; sleep 5; done']
+
     log:
       enabled: false
       level: info
     extraArgs:
       allowedHosts: "mlflow.nishantlabs.cloud"
       uvicornOpts: "--log-level=info"
+
+    backendStore:
+      postgres:
+        enabled: true
+        host: mlflow-pg-cluster-v0-rw
+        port: 5432
+        database: "app"
+
+      existingDatabaseSecret:
+        name: mlflow-pg-cluster-v0-app
+        usernameKey: username
+        passwordKey: password
+
 #      corsAllowedOrigins: "https://mlflow.nishantlabs.cloud"
 #    global:
 #      storageClass: longhorn

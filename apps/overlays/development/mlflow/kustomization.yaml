@@ -4,6 +4,8 @@ resources:
   - ../../../base/mlflow
   - namespace.yaml
   - httproute.yaml
+  - pg-cluster.yaml
+  - pg-cluster-backup.yaml
 
 namespace: mlflow
 
