@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - frontend.yaml
   - backend.yaml
+  - httproute.yaml
+  - pg-cluster-backup.yaml

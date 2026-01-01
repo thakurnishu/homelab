@@ -3,10 +3,11 @@ kind: Kustomization
 namespace: prod
 resources:
   - ../../base/secrets/database-backup-to-gcs.secret.sops.yaml
+  - ../../base/secrets/image-pull.secret.sops.yaml
   - namespace.yaml
   - ./mlflow
+  - ./minimaldo
 #  - ./sonarqube
 #  - ./onyx
-#  - ./minimaldo
 #  - ./signoz
 #  - ./owasp-dependency-track # High Mem and CPU usage

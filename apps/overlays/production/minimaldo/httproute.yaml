@@ -3,23 +3,5 @@ kind: HTTPRoute
 metadata:
   name: minimaldo-frontend-httproute
 spec:
-  parentRefs:
-  - name: istio-gateway
-    namespace: istio-gateway 
   hostnames:
   - minimaldo.nishantlabs.cloud
-  rules:
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /api
-    backendRefs:
-    - name: minimaldo-backend-svc
-      port: 80
-  - matches:
-    - path:
-        type: PathPrefix
-        value: /
-    backendRefs:
-    - name: minimaldo-frontend-svc
-      port: 80
