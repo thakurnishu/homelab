@@ -1,0 +1,51 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: sonarqube
+spec:
+  chart:
+    spec:
+      sourceRef:
+        namespace: sonarqube
+  values:
+    # InitContainer for database
+    initContainers:
+      extraInitContainers:
+      - name: wait-for-postgres
+        image: busybox:1.36
+        command: ['sh', '-c', 'until nc -z sonarqube-pg-cluster-v0-rw 5432; do echo "Waiting for PostgreSQL..."; sleep 2; done']
+
+    # Ingress
+    ingress:
+      enabled: false
+      ingressClassName: traefik
+      hosts:
+        - name: sonarqube.nishantlabs.cloud
+
+    # HTTPRoute
+    httproute:
+      enabled: true
+      gateway: istio-gateway
+      gatewayNamespace: istio-system
+      hostnames:
+      - sonarqube.nishantlabs.cloud
+
+
+    monitoringPasscodeSecretName: monitoring-passcode
+    monitoringPasscodeSecretKey: passcode
+    community:
+      enabled: true
+      buildNumber: "25.6.0.109173"
+    setAdminPassword:
+      passwordSecretName: sonarqube-password
+
+    # Database Setting
+    postgresql:
+      enabled: false
+    jdbcOverwrite:
+      enabled: true
+      jdbcUrl: "jdbc:postgresql://sonarqube-pg-cluster-rw.sonarqube:5432/app"
+      jdbcUsername: app
+      jdbcSecretName: sonarqube-pg-cluster-app
+      jdbcSecretPasswordKey: password
+

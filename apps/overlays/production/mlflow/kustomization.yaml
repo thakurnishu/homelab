@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../../base/mlflow
+  - ../../../base/secrets/database-backup-to-gcs.secret.sops.yaml
+  - namespace.yaml
+  - httproute.yaml
+  - pg-cluster.yaml
+  - pg-cluster-backup.yaml
+
+namespace: mlflow
+
+patches:
+  - path: release.yaml

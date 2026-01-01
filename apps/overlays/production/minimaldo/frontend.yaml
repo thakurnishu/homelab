@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minimaldo-frontend
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+      - name: thakurnishu-packages-read-secret
+      initContainers:
+      - name: wait-for-backend
+        image: busybox:1.36
+        command: ['sh', '-c', 'until nc -z minimaldo-backend-svc 80; do echo "Waiting for Minimal Backend..."; sleep 2; done']
+        resources:
+          requests:
+            cpu: "10m"
+            memory: 16Mi
+          limits:
+            cpu: "10m"
+            memory: 16Mi
+      containers:
+      - name: frontend
+        image: ghcr.io/thakurnishu/minimaldo-frontend:main-3e1431e-1753116302 # {"$imagepolicy": "flux-system:minimaldo-frontend-image-policy"}
+        env:
+        - name: REACT_APP_API_URL
+          value: "https://minimaldo.local.nishantlabs.cloud/api"

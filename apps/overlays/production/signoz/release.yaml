@@ -1,0 +1,14 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: signoz
+spec:
+  chart:
+    spec:
+      sourceRef:
+        namespace: signoz
+  values:
+    global:
+      storageClass: longhorn
+    clickhouse:
+      installCustomStorageClass: true
