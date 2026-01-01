@@ -13,19 +13,19 @@ spec:
   storage:
     size: 5Gi
 
-  bootstrap:
-    recovery:
-      source: clusterBackup
-
-  externalClusters:
-    - name: clusterBackup
-      barmanObjectStore:
-        destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
-        serverName: minimaldo-pg-cluster-v0
-        googleCredentials:
-          applicationCredentials:
-            name: backup-creds
-            key: gcsCredentials
+#  bootstrap:
+#    recovery:
+#      source: clusterBackup
+#
+#  externalClusters:
+#    - name: clusterBackup
+#      barmanObjectStore:
+#        destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
+#        serverName: minimaldo-pg-cluster-v0
+#        googleCredentials:
+#          applicationCredentials:
+#            name: backup-creds
+#            key: gcsCredentials
 
   backup:
     barmanObjectStore:
