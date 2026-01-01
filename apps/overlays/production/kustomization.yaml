@@ -6,7 +6,7 @@ resources:
   - ../../base/secrets/image-pull.secret.sops.yaml
   - namespace.yaml
   - ./mlflow
-  - ./minimaldo
+#  - ./minimaldo
 #  - ./sonarqube
 #  - ./onyx
 #  - ./signoz
