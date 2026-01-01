@@ -4,7 +4,7 @@ namespace: prod
 resources:
   - ../../base/secrets/database-backup-to-gcs.secret.sops.yaml
   - namespace.yaml
-  - ./mlflow
+#  - ./mlflow
 #  - ./sonarqube
 #  - ./onyx
 #  - ./minimaldo
