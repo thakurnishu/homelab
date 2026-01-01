@@ -2,13 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ../../../base/sonarqube
-  - ../../../base/secrets/database-backup-to-gcs.secret.sops.yaml
   - namespace.yaml
   - pg-cluster.yaml
 #  - pg-cluster-backup.yaml
   - ./secrets
 
-namespace: sonarqube
+namespace: prod
 
 patches:
   - path: release.yaml

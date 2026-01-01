@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - repositry.yaml
   - release.yaml
+  - httproute.yaml
+  - pg-cluster-backup.yaml

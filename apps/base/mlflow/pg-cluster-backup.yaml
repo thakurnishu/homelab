@@ -3,5 +3,6 @@ kind: ScheduledBackup
 metadata:
   name: mlflow-backup
 spec:
-  cluster:
-    name: mlflow-pg-cluster-v0
+  immediate: true
+  schedule: "0 0 3 * * *"
+  backupOwnerReference: cluster
