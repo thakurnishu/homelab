@@ -28,8 +28,8 @@ flux bootstrap github \
   --token-auth=false \
   --owner=${git_user} \
   --repository=${git_repo} \
-  --branch=proxmox \
-  --path=clusters/development \
+  --branch=main \
+  --path=clusters \
   --personal --private=false \
   --read-write-key=true \
   --components-extra=image-reflector-controller,image-automation-controller
