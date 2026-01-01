@@ -6,7 +6,7 @@ spec:
   chart:
     spec:
       sourceRef:
-        namespace: mlflow
+        namespace: prod
   values:
 
     initContainers: 
