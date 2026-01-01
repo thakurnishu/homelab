@@ -83,13 +83,9 @@ To bootstrap the cluster (assuming a fresh node):
 git clone https://github.com/personal/homelab.git
 cd homelab
 
-# 2. Run setup scripts (if on bare metal)
-./homelab-setup/k8s.sh
+# 2. Setup SOPS encryption for Cluster
+bash homelab-setup/sops-setup.sh
 
 # 3. Bootstrap Flux
-flux bootstrap github \
-  --owner=personal \
-  --repository=homelab \
-  --path=clusters/development \
-  --personal
+bash homelab-setup/fluxcd-bootstrap.sh
 ```

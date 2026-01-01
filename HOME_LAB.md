@@ -150,14 +150,14 @@ This section provides a deep-dive into all applications and infrastructure tools
    cd homelab
    ```
 
-2. Install FluxCD:
+2. Setup SOPS encryption for Cluster:
    ```bash
-   flux install
+   bash homelab-setup/sops-setup.sh
    ```
 
-3. Apply the cluster configuration:
+3. Bootstrap Flux:
    ```bash
-   kubectl apply -f ./clusters/development
+   bash homelab-setup/fluxcd-bootstrap.sh
    ```
 
 ## 🔒 Security
