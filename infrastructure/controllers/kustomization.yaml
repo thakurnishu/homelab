@@ -7,8 +7,8 @@ resources:
   - ./cert-manager
   - ./monitoring
   - ./istio
-#  - ./cloudnativepg
-#  - ./external-dns
+  - ./cloudnativepg
+  - ./external-dns
 
 #  - ./traefik
 
