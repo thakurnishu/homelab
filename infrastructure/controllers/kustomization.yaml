@@ -10,7 +10,7 @@ resources:
   - ./cloudnativepg
   - ./external-dns
 
-#  - ./kserve
+  - ./kserve
 
 #  - ./traefik
 
