@@ -10,6 +10,8 @@ resources:
   - ./cloudnativepg
   - ./external-dns
 
+  - ./kserve
+
 #  - ./traefik
 
 #  - ./pihole

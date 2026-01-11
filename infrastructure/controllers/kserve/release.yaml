@@ -1,0 +1,39 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kserve-crd
+spec:
+  interval: 5m
+  releaseName: kserve-crd
+  chart:
+    spec:
+      chart: kserve-crd
+      version: '0.15.0'
+      sourceRef:
+        kind: HelmRepository
+        name: kserve
+        namespace: kserve
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kserve
+spec:
+  interval: 5m
+  releaseName: kserve
+  chart:
+    spec:
+      chart: kserve
+      version: '0.15.0'
+      sourceRef:
+        kind: HelmRepository
+        name: kserve
+        namespace: kserve
+  values:
+    kserve:
+      controller:
+        deploymentMode: "Standard"
+        gateway:
+          ingressGateway:
+            enableGatewayApi: "true"
+            kserveGateway: "kserve/kserve-ingress-gateway"
