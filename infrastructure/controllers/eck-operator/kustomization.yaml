@@ -5,4 +5,4 @@ resources:
   - release.yaml
   - namespace.yaml
 
-namespace: traefik
+namespace: elastic-system
