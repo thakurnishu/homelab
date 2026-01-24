@@ -1,0 +1,46 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: eck-operator
+spec:
+  interval: 30m
+  releaseName: eck-operator
+
+  chart:
+    spec:
+      chart: eck-operator
+      version: '3.2.*'
+      sourceRef:
+        kind: HelmRepository
+        name: elastic
+        namespace: elastic-system
+      interval: 5m
+
+  values:
+    installCRDs: true
+    eck-elasticsearch:
+      enabled: true
+      fullnameOverride: elasticsearch
+      # DeleteOnScaledownOnly and DeleteOnScaledownAndClusterDeletion
+      volumeClaimDeletePolicy: "DeleteOnScaledownAndClusterDeletion"
+    eck-kibana:
+      enabled: true
+      elasticsearchRef:
+        name: elasticsearch
+
+    eck-logstash:
+      enabled: true
+    eck-apm-server:
+      enabled: true
+
+    eck-agent:
+      enabled: false
+    eck-fleet-server:
+      enabled: false
+    eck-beats:
+      enabled: false
+    eck-enterprise-search:
+      enabled: false
+    eck-autoops-agent-policy:
+      enabled: false
+

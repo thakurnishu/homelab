@@ -8,6 +8,7 @@ resources:
   - ./monitoring
   - ./istio
   - ./cloudnativepg
+  - ./eck-operator
   - ./external-dns
 
   - ./kserve
