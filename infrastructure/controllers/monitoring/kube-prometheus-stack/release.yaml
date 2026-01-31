@@ -36,6 +36,13 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeControllerManager:
+      enabled: true
+
 #    thanosRuler:
 #      thanosRulerSpec:
 #        storage:
