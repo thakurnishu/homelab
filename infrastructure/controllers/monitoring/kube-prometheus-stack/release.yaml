@@ -36,15 +36,15 @@ spec:
               resources:
                 requests:
                   storage: 10Gi
-    thanosRuler:
-      thanosRulerSpec:
-        storage:
-          volumeClaimTemplate:
-            spec:
-              accessModes: ["ReadWriteOnce"]
-              resources:
-                requests:
-                  storage: 10Gi
+#    thanosRuler:
+#      thanosRulerSpec:
+#        storage:
+#          volumeClaimTemplate:
+#            spec:
+#              accessModes: ["ReadWriteOnce"]
+#              resources:
+#                requests:
+#                  storage: 10Gi
 #    grafana:
 #      additionalDataSources:
 #        - name: loki
