@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-app
+    spec:
+      containers:
+      - name: load-generator
+        image: n5ts3h/fastapi-prometheus-load-generator:latest
+        env:
+        - name: BASE_URL
+          value: "http://fastapi-app:8000"
+        resources:
+          requests:
+            cpu: "50m"
+            memory: 128Mi
+          limits:
+            cpu: "50m"
+            memory: 128Mi
+
+      - name: fastapi-app
+        image: n5ts3h/fastapi-prometheus:latest
+        ports:
+        - containerPort: 8000
+          name: web
+        resources:
+          requests:
+            cpu: "50m"
+            memory: 128Mi
+          limits:
+            cpu: "50m"
+            memory: 128Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-app
+  labels:
+    app: fastapi-app
+spec:
+  selector:
+    app: fastapi-app
+  ports:
+  - port: 8000
+    targetPort: 8000
+    name: web
+  type: ClusterIP

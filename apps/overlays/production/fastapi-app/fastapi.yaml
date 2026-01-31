@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: load-generator
+        image: n5ts3h/fastapi-prometheus-load-generator:latest
+      - name: fastapi-app
+        image: n5ts3h/fastapi-prometheus:latest

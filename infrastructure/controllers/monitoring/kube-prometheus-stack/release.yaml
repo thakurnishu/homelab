@@ -41,7 +41,7 @@ spec:
     kubeProxy:
       enabled: false
     kubeControllerManager:
-      enabled: true
+      enabled: false
 
 #    thanosRuler:
 #      thanosRulerSpec:
