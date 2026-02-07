@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - ../../../base/fastapi-app
   - ./configmap.yaml
+  - ./servicemonitor.yaml
 namespace: prod
 patches:
   - path: httproute.yaml
