@@ -13,6 +13,8 @@ resources:
 
   - ./kserve
 
+  - ./hashicorp-vault
+
 #  - ./traefik
 
 #  - ./pihole
