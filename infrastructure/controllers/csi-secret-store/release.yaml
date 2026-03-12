@@ -3,7 +3,8 @@ kind: HelmRelease
 metadata:
   name: csi-secret-store
 spec:
-  interval: 60m
+  interval: 5m
+  timeout: 60m
   releaseName: csi-secret-store
 
   chart:
