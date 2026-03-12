@@ -14,7 +14,7 @@ resources:
   - ./kserve
 
   - ./hashicorp-vault
-  - ./csi-secret-store
+#  - ./csi-secret-store
 
 #  - ./traefik
 
