@@ -16,9 +16,14 @@ spec:
         namespace: hashicorp-vault
 
   values:
+    csi:
+      enabled: true
     server:
-      dev:
+      dataStorage:
         enabled: true
-        devRootToken: "root"
+        size: 1Gi
+      auditStorage:
+        enabled: true
+        size: 1Gi
       ui:
         enabled: true
