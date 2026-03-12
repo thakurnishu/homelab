@@ -9,5 +9,8 @@ resources:
   - ./cloudnativepg
   - ./external-dns
 
+  - ./hashicorp-vault
+
+
 #  - ./actions-runner-controller
 #  - ./pihole

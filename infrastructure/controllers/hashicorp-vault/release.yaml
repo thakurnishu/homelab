@@ -20,8 +20,5 @@ spec:
       dev:
         enabled: true
         devRootToken: "root"
-
-
       ui:
         enabled: true
-
