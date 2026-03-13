@@ -2,6 +2,7 @@ apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: cloudflare-api-token-vault
+  namespace: cert-manager
 spec:
   refreshInterval: "15s"
   secretStoreRef:
