@@ -3,13 +3,18 @@ kind: Kustomization
 resources:
   - ./longhorn
   - ./metallb
+
+  - ./hashicorp-vault
+  - ./external-secrets
+
   - ./cert-manager
   - ./monitoring
   - ./istio
   - ./cloudnativepg
   - ./external-dns
 
-  - ./hashicorp-vault
+
+
 
 
 #  - ./actions-runner-controller
