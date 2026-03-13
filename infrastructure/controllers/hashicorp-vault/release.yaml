@@ -18,7 +18,7 @@ spec:
 
   values:
     csi:
-      enabled: true
+      enabled: false
     server:
       dataStorage:
         enabled: true
