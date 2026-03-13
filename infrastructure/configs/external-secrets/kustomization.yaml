@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-#  - pg-cluster-backup.yaml
-#  - pg-cluster.yaml
+  - vault-token.secret.sops.yaml
 
-namespace: cnpg-system
+namespace: external-secrets
+

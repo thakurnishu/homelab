@@ -1,0 +1,53 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: minimaldo-pg-cluster-v0
+spec:
+  instances: 2
+  minSyncReplicas: 1
+  maxSyncReplicas: 2
+  # 10-03-2026
+  imageName: ghcr.io/cloudnative-pg/postgresql:sha256-441d14eec30e415e6a0e110dc14434d7872c9e7b4676414d4aa9feff0d8e248d.sig
+
+  bootstrap: 
+    initdb: 
+      database: "default"
+      owner: "admin"
+      secret: 
+    recovery: 
+
+
+  storage:
+    size: 5Gi
+
+
+  monitoring:
+
+
+
+  bootstrap:
+    recovery:
+      source: clusterBackup
+
+  externalClusters:
+    - name: clusterBackup
+      barmanObjectStore:
+        destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
+        serverName: minimaldo-pg-cluster-v0
+        googleCredentials:
+          applicationCredentials:
+            name: backup-creds
+            key: gcsCredentials
+
+  backup:
+    barmanObjectStore:
+      destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
+      googleCredentials:
+        applicationCredentials:
+          name: backup-creds
+          key: gcsCredentials
+      wal:
+        compression: gzip
+      data:
+        compression: gzip
+    retentionPolicy: 14d

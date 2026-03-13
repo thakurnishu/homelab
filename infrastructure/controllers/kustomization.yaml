@@ -4,6 +4,10 @@ resources:
   - ./longhorn
   - ./metallb
   - ./metrics-server
+
+  - ./hashicorp-vault
+  - ./external-secrets
+
   - ./cert-manager
   - ./monitoring
   - ./istio
@@ -13,8 +17,6 @@ resources:
 
   - ./kserve
 
-  - ./hashicorp-vault
-  - ./external-secrets
 #  - ./csi-secret-store
 
 #  - ./traefik
