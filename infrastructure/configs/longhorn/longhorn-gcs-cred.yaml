@@ -1,0 +1,26 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: longhorn-gcs-cred-vault
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-kv-secrets
+    kind: ClusterSecretStore
+  target:
+    name: longhorn-gcs-cred-vault
+  data:
+  - secretKey: AWS_ACCESS_KEY_ID
+    remoteRef:
+      key: infra/gcp/serviceaccount/homelab-backupz/hmac
+      property: ACCESS_KEY_ID
+
+  - secretKey: AWS_ENDPOINTS
+    remoteRef:
+      key: infra/gcp/serviceaccount/homelab-backupz/hmac
+      property: ENDPOINTS
+
+  - secretKey: AWS_SECRET_ACCESS_KEY
+    remoteRef:
+      key: infra/gcp/serviceaccount/homelab-backupz/hmac
+      property: SECRET_ACCESS_KEY

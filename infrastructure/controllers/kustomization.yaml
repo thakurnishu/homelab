@@ -9,7 +9,7 @@ resources:
   - ./external-secrets
 
   - ./cert-manager
-  - ./monitoring
+#  - ./monitoring
   - ./istio
   - ./cloudnativepg
   - ./eck-operator

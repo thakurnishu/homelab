@@ -20,10 +20,10 @@ spec:
   values:
     grafana:
       enabled: true
-#      admin:
-#        existingSecret: "grafana-user-secret"
-#        userKey: user
-#        passwordKey: password
+      admin:
+        existingSecret: "grafana-user-secret"
+        userKey: user
+        passwordKey: password
 #      envValueFrom: 
 #        GF_DATABASE_TYPE:
 #          secretKeyRef:
@@ -58,8 +58,8 @@ spec:
 #        smtp:
 #          enabled: true
 #          host: email-smtp.ap-south-1.amazonaws.com:587
-#          from_address: "devops.github@solytics-partners.com"
-#          from_name: "Grafana E2E Cluster"
+#          from_address: "nishantsingh.work.503@gmail.com"
+#          from_name: "Homelab Grafana"
 #      smtp:
 #        existingSecret: "grafana-smtp-secret"
 #        userKey: "user"

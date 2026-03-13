@@ -4,6 +4,6 @@ resources:
   - httproute.yaml
 #  - ingress.yaml
   - backuptarget.yaml
-  - longhorn-backup.secret.sops.yaml
+  - longhorn-gcs-cred.yaml
 
 namespace: longhorn-system

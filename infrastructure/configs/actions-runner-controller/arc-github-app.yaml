@@ -1,0 +1,24 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: arc-github-app-vault
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-kv-secrets
+    kind: ClusterSecretStore
+  target:
+    name: arc-github-app-vault
+  data:
+  - secretKey: github_app_id
+    remoteRef:
+      key: infra/github/app/homelab-k8s-self-runner
+      property: app-id
+  - secretKey: github_app_installation_id
+    remoteRef:
+      key: infra/github/app/homelab-k8s-self-runner
+      property: app-installation-id
+  - secretKey: github_app_private_key
+    remoteRef:
+      key: infra/github/app/homelab-k8s-self-runner
+      property: app-private-key

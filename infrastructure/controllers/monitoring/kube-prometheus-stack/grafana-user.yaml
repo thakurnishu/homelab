@@ -1,0 +1,20 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: grafana-user-vault
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-kv-secrets
+    kind: ClusterSecretStore
+  target:
+    name: grafana-user-secret
+  data:
+  - secretKey: user
+    remoteRef:
+      key: infra/monitoring/grafana
+      property: user
+  - secretKey: password
+    remoteRef:
+      key: infra/monitoring/grafana
+      property: password

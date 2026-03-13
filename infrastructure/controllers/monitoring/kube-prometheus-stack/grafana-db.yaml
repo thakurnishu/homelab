@@ -1,0 +1,26 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: grafana-db-vault
+spec:
+  refreshInterval: "15s"
+  secretStoreRef:
+    name: vault-kv-secrets
+    kind: ClusterSecretStore
+  target:
+    name: grafana-db-secret
+    template:
+      data:
+        dbHost: "postgres.monitoring.svc.cluster.local"
+        sslMode: "require" # disable or require
+        dbName: "grafana"
+        type: "postgres"
+  data:
+  - secretKey: dbPassword
+    remoteRef:
+      key: infra/database/postgres
+      property: password
+  - secretKey: dbUser
+    remoteRef:
+      key: infra/database/postgres
+      property: username
