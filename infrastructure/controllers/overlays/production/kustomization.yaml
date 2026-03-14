@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # Required Infra 'Storage and networking'
-  - ../../base/longhorn
+#  - ../../base/longhorn
 #  - ../../base/metallb
 
 #  - ../../base/metrics-server
