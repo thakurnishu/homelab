@@ -21,6 +21,6 @@ resources:
   - ./external-dns
 
   # Requires vault secrets and database configuration
-  - ./monitoring
+  #- ./monitoring
 
   # Add other production-specific controllers here as needed
