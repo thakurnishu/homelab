@@ -7,6 +7,8 @@ spec:
   dependsOn:
     - name: longhorn
       namespace: longhorn-system
+    - name: cert-manager
+      namespace: cert-manager
 
   releaseName: cloudnative-pg
   chart:

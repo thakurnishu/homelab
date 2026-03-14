@@ -11,7 +11,7 @@ spec:
     name: grafana-db-secret
     template:
       data:
-        dbHost: ""
+        dbHost: "homelab-pg-cluster-v0-rw.cnpg-system.svc.cluster.local"
         sslMode: "require" # disable or require
         dbName: "grafana"
         type: "postgres"
