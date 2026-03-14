@@ -22,7 +22,7 @@ spec:
       enabled: true
       persistence:
         enabled: true
-        size: 10Gi
+        size: 1Gi
         annotations:
           "helm.sh/resource-policy": keep
     alertmanager:
@@ -35,7 +35,7 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: 10Gi
+                  storage: 1Gi
     prometheus:
       prometheusSpec:
         persistentVolumeClaimRetentionPolicy:
@@ -46,7 +46,7 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: 10Gi
+                  storage: 5Gi
     kubeScheduler:
       enabled: false
     kubeProxy:
