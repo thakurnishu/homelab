@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - repository.yaml
   - release.yaml
+  - barman-cloud-plugin-v0.11.0.yaml
 
 namespace: cnpg-system
