@@ -10,11 +10,11 @@ spec:
   target:
     name: grafana-db-secret
     template:
+      mergePolicy: Merge
       data:
         host: "homelab-pg-cluster-v0-rw.cnpg-system.svc.cluster.local"
         sslMode: "require" # disable or require
         type: "postgres"
-
         dbName: "grafana"
   data:
   - secretKey: dbPassword
