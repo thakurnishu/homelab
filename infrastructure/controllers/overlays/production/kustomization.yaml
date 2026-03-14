@@ -9,14 +9,16 @@ resources:
 
   - ../../base/metrics-server
   - ../../base/external-secrets
-
-  - ../../base/nginx-fabric-gateway
-  - ../../base/cloudnativepg
-  - ../../base/hashicorp-vault
   - ../../base/cert-manager
 
+  - ../../base/nginx-fabric-gateway
+  - ../../base/hashicorp-vault
+
   # Requires vault secrets.
+  - ../../base/cloudnativepg
   - ./external-dns
-  #- ./monitoring
+
+  # Requires vault secrets and database configuration
+  - ./monitoring
 
   # Add other production-specific controllers here as needed

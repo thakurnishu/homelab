@@ -28,17 +28,3 @@ spec:
 #      parameters:
 #        barmanObjectName: homelab-backupz-store
 #        serverName: homelab-pg-cluster-v0
-
-
-#  backup:
-#    barmanObjectStore:
-#      destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
-#      googleCredentials:
-#        applicationCredentials:
-#          name: backup-creds
-#          key: gcsCredentials
-#      wal:
-#        compression: gzip
-#      data:
-#        compression: gzip
-#    retentionPolicy: 14d
