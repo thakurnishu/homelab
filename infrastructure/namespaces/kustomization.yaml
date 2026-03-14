@@ -12,13 +12,14 @@ resources:
   - hashicorp-vault.yaml
   - cert-manager.yaml
 
+  - external-dns.yaml
+
 #  - prod.yaml
 
 #  - arc-runners.yaml
 #  - csi-secret-store.yaml
 #  - dev.yaml
 #  - eck-operator.yaml
-#  - external-dns.yaml
 #  - istio.yaml
 #  - kserve.yaml
 #  - kyverno.yaml
