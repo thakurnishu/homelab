@@ -6,3 +6,5 @@ resources:
 
 patches:
   - path: clustersecretstore.yaml
+
+namespace: external-secrets
