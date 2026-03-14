@@ -5,8 +5,8 @@ resources:
   - ./metallb
   - ./metrics-server
 
-  - ./hashicorp-vault
-  - ./external-secrets
+#  - ./hashicorp-vault
+#  - ./external-secrets
 
 
 #  - ./istio

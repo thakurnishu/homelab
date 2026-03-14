@@ -4,8 +4,8 @@ resources:
   - ./longhorn
   - ./metallb
 
-  - ./hashicorp-vault
-  - ./external-secrets
+#  - ./hashicorp-vault
+#  - ./external-secrets
 
 #  - ./cert-manager
 #  - ./monitoring
