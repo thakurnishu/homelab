@@ -25,7 +25,7 @@ spec:
       podMonitor:
         enabled: false
       serviceMonitor:
-        enabled: false
+        enabled: true
         speaker:
           additionalLabels:
             release: kube-prometheus-stack
