@@ -8,4 +8,4 @@ resources:
 patches:
   - path: kube-prometheus-stack-release.yaml
 
-namespace: external-dns
+namespace: monitoring
