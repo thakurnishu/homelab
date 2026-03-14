@@ -5,6 +5,7 @@ resources:
   - ./pg-secret.yaml
   - ./pg-cluster-backup.yaml
   - ./gcpObjectStore.yaml
+  - ./databases
 
 patches:
   - path: pg-cluster.yaml

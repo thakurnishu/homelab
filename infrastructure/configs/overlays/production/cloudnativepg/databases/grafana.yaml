@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: homelab-pg-cluster-v0-grafana
+spec:
+  databaseReclaimPolicy: retain
+  name: grafana
+  owner: homelab-postgres-admin
+  cluster:
+    name: homelab-pg-cluster-v0
+
+  # when enabled will delete database
+  #ensure: absent
