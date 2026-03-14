@@ -15,6 +15,6 @@ resources:
   - ../../base/hashicorp-vault
   - ../../base/cert-manager
 
-
+  - ./external-dns
 
   # Add other production-specific controllers here as needed
