@@ -8,4 +8,6 @@ resources:
   - ../../base/cert-manager
   - ../../base/nginx-fabric-gateway
 
+  # HTTProute
   - ./longhorn
+  - ./monitoring
