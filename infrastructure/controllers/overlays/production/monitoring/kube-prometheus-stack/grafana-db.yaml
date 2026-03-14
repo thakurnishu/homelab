@@ -11,7 +11,7 @@ spec:
     name: grafana-db-secret
     template:
       data:
-        dbHost: "postgres.monitoring.svc.cluster.local"
+        dbHost: ""
         sslMode: "require" # disable or require
         dbName: "grafana"
         type: "postgres"

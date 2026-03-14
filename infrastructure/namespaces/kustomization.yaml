@@ -1,6 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  # Required Infra 'Storage and networking'
+  - longhorn.yaml
+  - metallb.yaml
+  - nginx-fabric-gateway.yaml
+
+  - metrics-server.yaml
+
+  - prod.yaml
+
 #  - arc-runners.yaml
 #  - cert-manager.yaml
 #  - cloudflared.yaml
@@ -14,12 +23,7 @@ resources:
 #  - istio.yaml
 #  - kserve.yaml
 #  - kyverno.yaml
-#  - longhorn.yaml
-#  - metallb.yaml
-#  - metrics-server.yaml
 #  - monitoring.yaml
-#  - nginx-fabric-gateway.yaml
 #  - opentelemetry.yaml
 #  - pihole.yaml
-  - prod.yaml
 #  - traefik.yaml

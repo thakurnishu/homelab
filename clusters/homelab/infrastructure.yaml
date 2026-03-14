@@ -54,4 +54,4 @@ spec:
   prune: true
   wait: true
   dependsOn:
-    - name: infra-controllers
+    - name: infra-namespaces
