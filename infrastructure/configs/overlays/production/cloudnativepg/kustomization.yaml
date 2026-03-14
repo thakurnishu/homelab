@@ -4,6 +4,7 @@ resources:
   - ../../../base/cloudnativepg
   - ./pg-secret.yaml
   - ./pg-cluster-backup.yaml
+  - ./gcpObjectStore.yaml
 
 patches:
   - path: pg-cluster.yaml
