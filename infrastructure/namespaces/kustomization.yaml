@@ -8,7 +8,7 @@ resources:
 #
 #  - metrics-server.yaml
 #  - cloudnativepg.yaml
-#  - hashicorp-vault.yaml
+  - hashicorp-vault.yaml
 #  - cert-manager.yaml
 #
 #  - prod.yaml
