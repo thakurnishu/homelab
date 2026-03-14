@@ -3,7 +3,8 @@ kind: Certificate
 metadata:
   name: local-nishantlabs-cloud
 #  namespace: traefik
-  namespace: istio-system
+#  namespace: istio-system
+  namespace: nginx-gateway
 spec:
   secretName: local-nishantlabs-cloud-tls
   dnsNames:

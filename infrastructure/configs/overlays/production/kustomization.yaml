@@ -4,4 +4,4 @@ resources:
  - ./external-secrets
  - ./cloudnativepg
 
-#  - ../../base/cert-manager
+  - ../../base/cert-manager
