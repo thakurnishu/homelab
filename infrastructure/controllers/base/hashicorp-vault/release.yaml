@@ -6,7 +6,8 @@ spec:
   interval: 5m
   timeout: 60m
   releaseName: hashicorp-vault
-
+  dependsOn:
+    - name: longhorn
   chart:
     spec:
       chart: vault

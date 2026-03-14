@@ -5,6 +5,8 @@ metadata:
 spec:
   interval: 5m
   releaseName: istio-base
+  dependsOn:
+    - name: metallb
   chart:
     spec:
       chart: base

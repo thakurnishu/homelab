@@ -4,8 +4,10 @@ metadata:
   name: cloudnative-pg
 spec:
   interval: 5m
-  releaseName: cloudnative-pg
+  dependsOn:
+    - name: longhorn
 
+  releaseName: cloudnative-pg
   chart:
     spec:
       chart: cloudnative-pg
@@ -14,7 +16,6 @@ spec:
         kind: HelmRepository
         name: cnpg
         namespace: cnpg-system
-
   values:
     resources: 
       limits:

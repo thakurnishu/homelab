@@ -7,19 +7,19 @@ resources:
   - nginx-fabric-gateway.yaml
 
   - metrics-server.yaml
+  - cloudnativepg.yaml
+  - hashicorp-vault.yaml
+  - cert-manager.yaml
 
   - prod.yaml
 
 #  - arc-runners.yaml
-#  - cert-manager.yaml
 #  - cloudflared.yaml
-#  - cloudnativepg.yaml
 #  - csi-secret-store.yaml
 #  - dev.yaml
 #  - eck-operator.yaml
 #  - external-dns.yaml
 #  - external-secrets.yaml
-#  - hashicorp-vault.yaml
 #  - istio.yaml
 #  - kserve.yaml
 #  - kyverno.yaml

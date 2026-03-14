@@ -5,6 +5,8 @@ metadata:
 spec:
   interval: 5m
   releaseName: nginx-gateway
+  dependsOn:
+    - name: metallb
   chart:
     spec:
       chart: nginx-gateway-fabric
