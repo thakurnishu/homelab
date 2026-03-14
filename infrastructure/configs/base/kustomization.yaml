@@ -11,11 +11,6 @@ resources:
   - ./monitoring
   - ./istio
   - ./cloudnativepg
-  - ./external-dns
-
-
-
-
 
   - ./actions-runner-controller
   - ./pihole

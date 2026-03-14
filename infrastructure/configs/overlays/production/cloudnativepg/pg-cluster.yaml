@@ -1,0 +1,38 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: homelab-pg-cluster-v0
+spec:
+  storage:
+    size: 20Gi
+  bootstrap: 
+    initdb:
+      database: default
+      owner: homelab-postgres-admin
+      secret:
+        name: homelab-pg-cluster-vault
+#    recovery:
+#      source: clusterBackup
+
+#  externalClusters:
+#    - name: clusterBackup
+#      barmanObjectStore:
+#        destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
+#        serverName: minimaldo-pg-cluster-v0
+#        googleCredentials:
+#          applicationCredentials:
+#            name: backup-creds
+#            key: gcsCredentials
+
+#  backup:
+#    barmanObjectStore:
+#      destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
+#      googleCredentials:
+#        applicationCredentials:
+#          name: backup-creds
+#          key: gcsCredentials
+#      wal:
+#        compression: gzip
+#      data:
+#        compression: gzip
+#    retentionPolicy: 14d
