@@ -3,11 +3,6 @@ kind: HTTPRoute
 metadata:
   name: hashicorp-vault-httproute
 spec:
-  parentRefs:
-  - name: nginx-gateway
-    namespace: nginx-gateway
-  hostnames:
-  - vault.nishantlabs.cloud
   rules:
   - matches:
     - path:

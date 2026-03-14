@@ -11,3 +11,4 @@ resources:
   # HTTProute
   - ./longhorn
   - ./monitoring
+  - ./hashicorp-vault
