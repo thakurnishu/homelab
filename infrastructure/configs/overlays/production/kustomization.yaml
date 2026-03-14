@@ -5,3 +5,4 @@ resources:
  - ./cloudnativepg
 
   - ../../base/cert-manager
+  - ../../base/nginx-fabric-gateway

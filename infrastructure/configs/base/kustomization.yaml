@@ -10,6 +10,7 @@ resources:
   - ./cert-manager
   - ./monitoring
   - ./istio
+  - ./nginx-fabric-gateway
   - ./cloudnativepg
 
   - ./actions-runner-controller
