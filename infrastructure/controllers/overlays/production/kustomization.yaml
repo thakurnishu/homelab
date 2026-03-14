@@ -3,14 +3,14 @@ kind: Kustomization
 resources:
   # Required Infra 'Storage and networking'
   - ../../base/longhorn
-  - ../../base/metallb
+#  - ../../base/metallb
 
-  - ../../base/metrics-server
+#  - ../../base/metrics-server
 
-  - ../../base/nginx-fabric-gateway
-  - ../../base/cloudnativepg
-  - ../../base/hashicorp-vault
-  - ../../base/cert-manager
+#  - ../../base/nginx-fabric-gateway
+#  - ../../base/cloudnativepg
+#  - ../../base/hashicorp-vault
+#  - ../../base/cert-manager
 
 
 
