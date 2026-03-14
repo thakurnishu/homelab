@@ -8,17 +8,19 @@ resources:
   - ../../base/metallb
 
   - ../../base/metrics-server
-  - ../../base/external-secrets
   - ../../base/cert-manager
 
   - ../../base/nginx-fabric-gateway
   - ../../base/hashicorp-vault
 
   # Requires vault secrets.
+  - ../../base/external-secrets
+
+  # Requires vault secrets and clustersecretstore
   - ../../base/cloudnativepg
   - ./external-dns
 
   # Requires vault secrets and database configuration
-  - ./monitoring
+  #- ./monitoring
 
   # Add other production-specific controllers here as needed
