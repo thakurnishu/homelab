@@ -15,7 +15,6 @@ resources:
 #  - prod.yaml
 
 #  - arc-runners.yaml
-#  - cloudflared.yaml
 #  - csi-secret-store.yaml
 #  - dev.yaml
 #  - eck-operator.yaml
