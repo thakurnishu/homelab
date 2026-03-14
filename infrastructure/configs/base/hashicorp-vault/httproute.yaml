@@ -4,8 +4,8 @@ metadata:
   name: hashicorp-vault-httproute
 spec:
   parentRefs:
-  - name: istio-gateway
-    namespace: istio-system
+  - name: nginx-gateway
+    namespace: nginx-gateway
   hostnames:
   - vault.nishantlabs.cloud
   rules:
