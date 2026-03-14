@@ -3,9 +3,9 @@ kind: Cluster
 metadata:
   name: homelab-pg-cluster-v0
 spec:
-  instances: 3
-  minSyncReplicas: 1
-  maxSyncReplicas: 2
+  instances: 1
+#  minSyncReplicas: 1
+#  maxSyncReplicas: 2
   imageCatalogRef:
     apiGroup: postgresql.cnpg.io
     kind: ImageCatalog
