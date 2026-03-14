@@ -4,7 +4,7 @@ namespace: prod
 resources:
 #  - ../../base/secrets/database-backup-to-gcs.secret.sops.yaml
 #  - ../../base/secrets/image-pull.secret.sops.yaml
-  - namespace.yaml
+#  - namespace.yaml
 #  - ./mlflow
 #  - ./fastapi-app
 #  - ./minimaldo
