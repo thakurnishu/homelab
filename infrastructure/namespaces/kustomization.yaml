@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+#  - arc-runners.yaml
+#  - cert-manager.yaml
+#  - cloudflared.yaml
+#  - cloudnativepg.yaml
+#  - csi-secret-store.yaml
+#  - dev.yaml
+#  - eck-operator.yaml
+#  - external-dns.yaml
+#  - external-secrets.yaml
+#  - hashicorp-vault.yaml
+#  - istio.yaml
+#  - kserve.yaml
+#  - kyverno.yaml
+#  - longhorn.yaml
+#  - metallb.yaml
+#  - metrics-server.yaml
+#  - monitoring.yaml
+#  - nginx-fabric-gateway.yaml
+#  - opentelemetry.yaml
+#  - pihole.yaml
+#  - prod.yaml
+#  - traefik.yaml
