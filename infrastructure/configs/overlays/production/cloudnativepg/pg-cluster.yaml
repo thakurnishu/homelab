@@ -3,6 +3,12 @@ kind: Cluster
 metadata:
   name: homelab-pg-cluster-v0
 spec:
+  plugins: 
+  - name: barman-cloud.cloudnative-pg.io
+    isWALArchiver: true
+    parameters:
+      barmanObjectName: homelab-backupz-store
+
   storage:
     size: 20Gi
   bootstrap: 
@@ -15,14 +21,13 @@ spec:
 #      source: clusterBackup
 
 #  externalClusters:
-#    - name: clusterBackup
-#      barmanObjectStore:
-#        destinationPath: "gs://homelab-backupz/cloudnativepg/minimaldo"
-#        serverName: minimaldo-pg-cluster-v0
-#        googleCredentials:
-#          applicationCredentials:
-#            name: backup-creds
-#            key: gcsCredentials
+#  - name: clusterBackup
+#    plugin:
+#      name: barman-cloud.cloudnative-pg.io
+#      parameters:
+#        barmanObjectName: homelab-backupz-store
+#        serverName: homelab-pg-cluster-v0
+
 
 #  backup:
 #    barmanObjectStore:

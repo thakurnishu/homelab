@@ -1,0 +1,12 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: homelab-backupz-store
+spec:
+  retentionPolicy: "7d"
+  configuration:
+    destinationPath: "gs://homelab-backupz/cloudnativepg"
+    googleCredentials:
+      applicationCredentials:
+        name: homelab-pg-cluster-vault
+        key: gcsCredentials
