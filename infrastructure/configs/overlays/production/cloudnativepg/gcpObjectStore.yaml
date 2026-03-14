@@ -5,6 +5,10 @@ metadata:
 spec:
   retentionPolicy: "7d"
   configuration:
+    wal:
+      compression: gzip
+    data:
+      compression: gzip
     destinationPath: "gs://homelab-backupz/cloudnativepg"
     googleCredentials:
       applicationCredentials:
