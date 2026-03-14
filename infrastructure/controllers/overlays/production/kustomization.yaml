@@ -8,6 +8,7 @@ resources:
   - ../../base/metallb
 
   - ../../base/metrics-server
+  - ../../base/external-secrets
 
   - ../../base/nginx-fabric-gateway
   - ../../base/cloudnativepg

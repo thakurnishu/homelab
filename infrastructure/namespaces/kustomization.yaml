@@ -6,6 +6,7 @@ resources:
   - metallb.yaml
   - nginx-fabric-gateway.yaml
 
+  - external-secrets.yaml
   - metrics-server.yaml
   - cloudnativepg.yaml
   - hashicorp-vault.yaml
@@ -19,7 +20,6 @@ resources:
 #  - dev.yaml
 #  - eck-operator.yaml
 #  - external-dns.yaml
-#  - external-secrets.yaml
 #  - istio.yaml
 #  - kserve.yaml
 #  - kyverno.yaml
