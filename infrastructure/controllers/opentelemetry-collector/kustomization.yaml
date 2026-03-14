@@ -5,4 +5,4 @@ resources:
   - repositry.yaml
   - release.yaml
 
-namespace: open-telemetry
+namespace: opentelemetry

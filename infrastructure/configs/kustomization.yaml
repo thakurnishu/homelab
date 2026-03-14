@@ -7,11 +7,11 @@ resources:
   - ./hashicorp-vault
   - ./external-secrets
 
-  - ./cert-manager
-  - ./monitoring
-  - ./istio
-  - ./cloudnativepg
-  - ./external-dns
+#  - ./cert-manager
+#  - ./monitoring
+#  - ./istio
+#  - ./cloudnativepg
+#  - ./external-dns
 
 
 

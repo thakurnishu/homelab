@@ -14,7 +14,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: open-telemetry
-        namespace: open-telemetry
+        namespace: opentelemetry
   values:
     image:
       repository: otel/opentelemetry-collector-k8s

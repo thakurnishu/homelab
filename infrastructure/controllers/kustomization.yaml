@@ -8,14 +8,14 @@ resources:
   - ./hashicorp-vault
   - ./external-secrets
 
-  - ./cert-manager
-#  - ./monitoring
-  - ./istio
-  - ./cloudnativepg
-  - ./eck-operator
-  - ./external-dns
 
-  - ./kserve
+#  - ./istio
+#  - ./cert-manager
+#  - ./monitoring
+#  - ./external-dns
+#  - ./cloudnativepg
+#  - ./eck-operator
+#  - ./kserve
 
 #  - ./csi-secret-store
 
