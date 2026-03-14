@@ -4,4 +4,4 @@ resources:
   - gateway.yaml
   - certificates/nishantlabs.cloud.yaml
 
-namespace: istio-system
+namespace: nginx-gateway
