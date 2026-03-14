@@ -5,14 +5,14 @@ resources:
   
   # kubectl -n longhorn-system patch -p '{"value": "true"}' --type=merge lhs deleting-confirmation-flag
   - ../../base/longhorn
-#  - ../../base/metallb
+  - ../../base/metallb
 
-#  - ../../base/metrics-server
+  - ../../base/metrics-server
 
-#  - ../../base/nginx-fabric-gateway
-#  - ../../base/cloudnativepg
+  - ../../base/nginx-fabric-gateway
+  - ../../base/cloudnativepg
   - ../../base/hashicorp-vault
-#  - ../../base/cert-manager
+  - ../../base/cert-manager
 
 
 
