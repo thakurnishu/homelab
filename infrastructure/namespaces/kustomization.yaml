@@ -3,15 +3,15 @@ kind: Kustomization
 resources:
   # Required Infra 'Storage and networking'
   - longhorn.yaml
-  - metallb.yaml
-  - nginx-fabric-gateway.yaml
-
-  - metrics-server.yaml
-  - cloudnativepg.yaml
-  - hashicorp-vault.yaml
-  - cert-manager.yaml
-
-  - prod.yaml
+#  - metallb.yaml
+#  - nginx-fabric-gateway.yaml
+#
+#  - metrics-server.yaml
+#  - cloudnativepg.yaml
+#  - hashicorp-vault.yaml
+#  - cert-manager.yaml
+#
+#  - prod.yaml
 
 #  - arc-runners.yaml
 #  - cloudflared.yaml
