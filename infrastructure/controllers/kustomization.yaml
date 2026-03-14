@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - ./longhorn
   - ./metallb
-  - ./metrics-server
+#  - ./metrics-server
 
 #  - ./hashicorp-vault
 #  - ./external-secrets
