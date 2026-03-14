@@ -13,6 +13,7 @@ resources:
   - cert-manager.yaml
 
   - external-dns.yaml
+  - monitoring.yaml
 
 #  - prod.yaml
 
@@ -23,7 +24,6 @@ resources:
 #  - istio.yaml
 #  - kserve.yaml
 #  - kyverno.yaml
-#  - monitoring.yaml
 #  - opentelemetry.yaml
 #  - pihole.yaml
 #  - traefik.yaml
