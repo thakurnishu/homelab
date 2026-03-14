@@ -8,6 +8,8 @@ spec:
   releaseName: hashicorp-vault
   dependsOn:
     - name: longhorn
+      namespace: longhorn-system
+
   chart:
     spec:
       chart: vault

@@ -7,6 +7,7 @@ spec:
   releaseName: nginx-gateway
   dependsOn:
     - name: metallb
+      namespace: metallb-system
   chart:
     spec:
       chart: nginx-gateway-fabric
