@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - httproute.yaml
 
-namespace: hashicorp-vault
+namespace: vault
