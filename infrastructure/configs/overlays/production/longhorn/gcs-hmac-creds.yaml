@@ -20,7 +20,7 @@ spec:
       key: infra/gcp/serviceaccount/homelab-backupz/hmac
       property: ENDPOINTS
 
-  - secretKey: infra/gcp/serviceaccount/homelab-backupz/hmac
+  - secretKey: AWS_SECRET_ACCESS_KEY
     remoteRef:
       key: infra/gcp/serviceaccount/homelab-backupz/hmac
       property: SECRET_ACCESS_KEY
