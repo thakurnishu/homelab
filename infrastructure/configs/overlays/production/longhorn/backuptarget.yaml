@@ -3,5 +3,5 @@ kind: BackupTarget
 metadata:
   name: longhorn-backup-gcp
 spec:
-  backupTargetURL: s3://homelab-backupz@us/longhorn
+  backupTargetURL: s3://homelab-backupz@us/
   credentialSecret: longhorn-gcs-cred-vault
