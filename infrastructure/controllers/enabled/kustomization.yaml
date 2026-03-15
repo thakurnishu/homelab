@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # Required Infra 'Storage and networking'
+  
+  # kubectl -n longhorn-system patch -p '{"value": "true"}' --type=merge lhs deleting-confirmation-flag
+  - ../longhorn
+  - ../metallb
+
+  - ../metrics-server
+  - ../cert-manager
+
+  - ../nginx-fabric-gateway
+  - ../hashicorp-vault
+
+  # Requires vault secrets.
+  - ../external-secrets
+
+  # Requires vault secrets and clustersecretstore
+  - ../cloudnativepg
+  - ../external-dns
+
+  # Requires vault secrets and database configuration
+  - ../monitoring
+
+  # Add other production-specific controllers here as needed

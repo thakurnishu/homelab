@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../metallb
+
+  - ../external-secrets
+  - ../cloudnativepg
+  - ../cert-manager
+  - ../nginx-fabric-gateway
+
+  # HTTProute
+  - ../longhorn
+  - ../monitoring
+  - ../hashicorp-vault

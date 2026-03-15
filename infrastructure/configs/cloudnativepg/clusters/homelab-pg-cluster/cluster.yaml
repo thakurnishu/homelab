@@ -1,0 +1,39 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: homelab-pg-cluster-v0
+spec:
+  instances: 1
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ImageCatalog
+    name: postgresql-system-bookworm
+    major: 18
+
+  plugins: 
+  - name: barman-cloud.cloudnative-pg.io
+    isWALArchiver: true
+    enabled: true
+    parameters:
+      barmanObjectName: homelab-backupz-store
+
+  storage:
+    size: 20Gi
+  bootstrap: 
+    initdb:
+      database: default
+      owner: homelab-postgres-admin
+      secret:
+        name: homelab-pg-cluster-vault
+#    recovery:
+#      source: clusterBackup
+
+#  externalClusters:
+#  - name: clusterBackup
+#    plugin:
+#      name: barman-cloud.cloudnative-pg.io
+#      parameters:
+#        barmanObjectName: homelab-backupz-store
+#        serverName: homelab-pg-cluster-v0
+
+

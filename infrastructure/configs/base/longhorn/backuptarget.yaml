@@ -1,6 +1,0 @@
-apiVersion: longhorn.io/v1beta2
-kind: BackupTarget
-metadata:
-  name: longhorn-backup-gcp
-spec:
-  pollInterval: 5m0s

@@ -1,0 +1,111 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-stack
+spec:
+  interval: 30m
+  releaseName: kube-prometheus-stack
+  timeout: 30m
+
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: '81.4.2'
+      sourceRef:
+        kind: HelmRepository
+        name: kube-prometheus-stack
+        namespace: monitoring
+      interval: 5m
+
+  values:
+    grafana:
+      enabled: true
+      persistence:
+        enabled: true
+        size: 1Gi
+        annotations:
+          "helm.sh/resource-policy": keep
+      admin:
+        existingSecret: "grafana-user-secret"
+        userKey: user
+        passwordKey: password
+      envValueFrom: 
+        GF_DATABASE_TYPE:
+          secretKeyRef:
+            name: grafana-db-secret
+            key: type
+        GF_DATABASE_HOST:
+          secretKeyRef:
+            name: grafana-db-secret
+            key: host
+        GF_DATABASE_NAME:
+          secretKeyRef:
+            name: grafana-db-secret
+            key: dbName
+        GF_DATABASE_SSL_MODE:
+          secretKeyRef:
+            name: grafana-db-secret
+            key: sslMode # disable or require
+        GF_DATABASE_USER:
+          secretKeyRef:
+            name: grafana-db-secret
+            key: dbUser
+        GF_DATABASE_PASSWORD:
+          secretKeyRef:
+            name: grafana-db-secret
+            key: dbPassword
+#      grafana.ini:
+#        smtp:
+#          enabled: true
+#          host: email-smtp.ap-south-1.amazonaws.com:587
+#          from_address: "nishantsingh.work.503@gmail.com"
+#          from_name: "Homelab Grafana"
+#      smtp:
+#        existingSecret: "grafana-smtp-secret"
+#        userKey: "user"
+#        passwordKey: "password"
+
+
+    alertmanager:
+      alertmanagerSpec:
+        persistentVolumeClaimRetentionPolicy:
+          whenDeleted: Retain
+        storage:
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 1Gi
+    prometheus:
+      prometheusSpec:
+        persistentVolumeClaimRetentionPolicy:
+          whenDeleted: Retain
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 5Gi
+    kubeScheduler:
+      enabled: false
+    kubeProxy:
+      enabled: false
+    kubeControllerManager:
+      enabled: false
+#    thanosRuler:
+#      thanosRulerSpec:
+#        storage:
+#          volumeClaimTemplate:
+#            spec:
+#              accessModes: ["ReadWriteOnce"]
+#              resources:
+#                requests:
+#                  storage: 10Gi
+#    grafana:
+#      additionalDataSources:
+#        - name: loki
+#          type: loki
+#          url: http://loki-gateway.monitoring.svc.cluster.local
+#          access: proxy

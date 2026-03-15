@@ -1,7 +1,0 @@
-apiVersion: longhorn.io/v1beta2
-kind: BackupTarget
-metadata:
-  name: longhorn-backup-gcp
-spec:
-  backupTargetURL: s3://homelab-backupz@us/
-  credentialSecret: longhorn-gcs-cred-vault
