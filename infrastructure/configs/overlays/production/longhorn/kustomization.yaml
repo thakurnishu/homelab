@@ -6,6 +6,6 @@ resources:
 
 patches:
   - path: httproute.yaml
-  - path: backuptarget.yaml
+#  - path: backuptarget.yaml
 
 namespace: longhorn-system
