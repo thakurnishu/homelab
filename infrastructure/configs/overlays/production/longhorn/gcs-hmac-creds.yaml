@@ -9,6 +9,10 @@ spec:
     kind: ClusterSecretStore
   target:
     name: longhorn-gcs-cred-vault
+    template:
+      mergePolicy: Merge
+      data:
+        VIRTUAL_HOSTED_STYLE: "false"
   data:
   - secretKey: AWS_ACCESS_KEY_ID
     remoteRef:

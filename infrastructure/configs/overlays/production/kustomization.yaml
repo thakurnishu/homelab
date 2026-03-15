@@ -9,6 +9,6 @@ resources:
   - ../../base/nginx-fabric-gateway
 
   # HTTProute
-#  - ./longhorn
+  - ./longhorn
   - ./monitoring
   - ./hashicorp-vault
