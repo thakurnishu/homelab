@@ -1,13 +1,13 @@
-#apiVersion: postgresql.cnpg.io/v1
-#kind: ScheduledBackup
-#metadata:
-#  name: homelab-pg-cluster-backup
-#spec:
-#  method: plugin
-#  immediate: true
-#  pluginConfiguration:
-#    name: barman-cloud.cloudnative-pg.io
-#  schedule: "0 0 3 * * *"
-#  backupOwnerReference: cluster
-#  cluster:
-#    name: homelab-pg-cluster-v0
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: homelab-pg-cluster-backup
+spec:
+  method: plugin
+  immediate: true
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io
+  schedule: "0 0 3 * * *"
+  backupOwnerReference: cluster
+  cluster:
+    name: homelab-pg-cluster-v0
