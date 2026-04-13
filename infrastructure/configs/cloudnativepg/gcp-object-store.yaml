@@ -3,7 +3,7 @@ kind: ObjectStore
 metadata:
   name: homelab-backupz-store
 spec:
-  retentionPolicy: "7d"
+  retentionPolicy: "1d"
   configuration:
     wal:
       compression: gzip
