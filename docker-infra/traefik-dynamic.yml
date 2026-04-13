@@ -1,0 +1,39 @@
+http:
+  routers:
+    pgadmin:
+      entryPoints:
+        - web
+      rule: PathPrefix(`/pgadmin`)
+      middlewares:
+        - pgadmin-headers
+      service: pgadmin
+
+    hoppscotch:
+      entryPoints:
+        - web
+      rule: PathPrefix(`/api`)
+      middlewares:
+        - api-stripprefix
+      service: hoppscotch
+
+  services:
+    pgadmin:
+      loadBalancer:
+        servers:
+          - url: http://pgadmin:80
+
+    hoppscotch:
+      loadBalancer:
+        servers:
+          - url: http://hoppscotch:3000
+
+  middlewares:
+    pgadmin-headers:
+      headers:
+        customRequestHeaders:
+          X-Script-Name: /pgadmin
+
+    api-stripprefix:
+      stripPrefix:
+        prefixes:
+          - /api
