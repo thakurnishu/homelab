@@ -15,6 +15,18 @@
 # KEEP IN SYNC WITH REALITY. Creating a guest adds an entry here; destroying one
 # removes it (and needs `ssh-keygen -R <ip>` locally, which is machine state and
 # cannot live in git). See .claude/skills/proxmox-{vm,ct}/SKILL.md.
+#
+# ABSENT ON PURPOSE, NOT LOST: four kubernetes VMs -- dev-master, dev-worker,
+# cks-master, cks-worker, 192.168.1.203-.206. They were removed before this file
+# was first tracked, so nothing in this repo's history shows them leaving.
+# Verified at the time: all four fail to ping, their IdentityFile
+# ~/.ssh/remote_vm does not exist on this machine, and `qm list` / `pct list` on
+# the node show only template 9000 and CT 100. They are entries for guests that
+# exist nowhere reachable -- presumably they lived on the second cluster node,
+# which is powered off. Restoring them would give four Host blocks pointing at
+# nothing, with a missing key. This file is an inventory meant to match reality,
+# so they stay out rather than being commented back in: a commented block is a
+# claim about intent, and intent belongs in docs, not an ssh config.
 
 # --- hypervisor --------------------------------------------------------------
 # Proxmox VE node. `pve` is a synonym because the node calls itself that and the
