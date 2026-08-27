@@ -60,6 +60,19 @@ Creating or destroying a guest is expected to update this file; the skills below
 treat that as part of the operation rather than an afterthought. Host *keys* stay
 out of git — `ssh-keygen -R <ip>` after a destroy is machine-local state.
 
+**If this repo moves, the symlink dangles silently.** An out-of-store symlink is
+an absolute path, so moving, renaming, or checking this repo out elsewhere
+breaks `~/.ssh/config.homelab`. Tested: ssh **skips a dangling or missing
+`Include` without warning and exits 0**. So the failure mode is `ssh pihole`
+suddenly trying to resolve the literal hostname `pihole` — not ssh breaking.
+Nothing else is affected, and no error points at the cause. If homelab aliases
+stop resolving for no apparent reason, check the symlink first:
+
+```bash
+ls -l ~/.ssh/config.homelab      # dangling?
+ssh -G pihole | head -2          # HostName echoing the alias back = not matched
+```
+
 > Since this repo is public, entries here are public. They are RFC1918 and
 > unreachable from the internet. Anything with a routable address or an
 > organisation's name belongs in `~/.ssh/config.local`, which stays untracked.
