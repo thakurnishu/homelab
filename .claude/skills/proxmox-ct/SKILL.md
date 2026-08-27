@@ -43,7 +43,57 @@ Host pihole
 
 If an alias is missing, the explicit form is equivalent: `ssh -i ~/.ssh/proxmox root@<ip>`. **Scripts should keep the explicit form** so they work on machines without the aliases.
 
-**After creating a CT that will stick around, add a `Host` entry for it** — pass its key at create time with `--ssh-public-keys`, then append a block to `~/.ssh/config` so it's reachable by name rather than by address. Containers are also reachable without any key via `pct exec <ctid> -- <command>` from the node.
+Containers are also reachable without any key at all via `pct exec <ctid> -- <command>` from the node — useful when SSH isn't set up yet or has broken.
+
+### Keep `~/.ssh/config` in sync — part of every create and delete
+
+Creating or destroying a CT is not finished until `~/.ssh/config` matches reality. Stale entries are worse than missing ones: `ssh oldct` hangs on a dead address, and once an IP is recycled it silently points at a different machine.
+
+**Always back up first** — this file is not in git:
+
+```bash
+cp ~/.ssh/config ~/.ssh/config.bak.$(date +%Y%m%d-%H%M%S)
+```
+
+**After creating** a CT that will stick around, once it's verified reachable:
+
+```bash
+cat >> ~/.ssh/config <<'EOF'
+
+# CT <ctid> — created <date>
+Host <name>
+  HostName 192.168.1.<X>
+  User root
+  Port 22
+  IdentityFile ~/.ssh/proxmox
+EOF
+ssh -o BatchMode=yes -o ConnectTimeout=8 <name> 'hostname'   # confirm
+```
+
+Skip it for throwaway or test containers — only add entries for things that outlive the session.
+
+**After destroying** a CT, remove its entry and its host key:
+
+```bash
+# 1. drop the Host block (check by eye before and after — do not blind-delete)
+python3 - <<'PY'
+import re, pathlib
+p = pathlib.Path.home() / ".ssh/config"
+s = p.read_text()
+s2 = re.sub(r"(?m)^(?:#[^\n]*\n)?Host <name>\n(?:[ \t]+[^\n]*\n)*", "", s)
+p.write_text(s2)
+print("removed" if s2 != s else "no matching entry found")
+PY
+
+# 2. clear the host key — a recycled IP otherwise triggers a mismatch warning
+ssh-keygen -R 192.168.1.<X>
+```
+
+The pattern matches a single-name `Host` line. An entry declaring synonyms (`Host proxmox pve`) will report *no matching entry found* — edit those by hand.
+
+`ssh-keygen -R` matters here in particular: CTs are cheap to create and destroy, so addresses get recycled far more often than with VMs. Skipping it produces `REMOTE HOST IDENTIFICATION HAS CHANGED` later, which reads like an attack rather than a reused address.
+
+**When changing a CT's IP**, update `HostName` and run `ssh-keygen -R` on the *old* address.
 
 **Bash sandbox:** the node is on the LAN and the default Bash sandbox blocks outbound network. Every `ssh` call needs `dangerouslyDisableSandbox: true`, or it fails with a misleading connection error.
 
@@ -160,6 +210,8 @@ Notes:
 - Static IP goes directly on `--net0` — there is no cloud-init layer here, unlike VMs. It applies on first boot.
 - Unlike VM creation, `pct create` needs **no boot-order handling** — there is no BIOS and no PXE default to trip over.
 
+**Then add a `~/.ssh/config` entry** (see *Keep `~/.ssh/config` in sync* above) unless the CT is a throwaway. Creation isn't done until the host is reachable by name.
+
 ### Getting a template
 
 ```bash
@@ -235,6 +287,15 @@ ssh proxmox "
 
 A running CT cannot be destroyed. `--purge` also clears backup-job and HA references.
 
+**Then clean up local state** — the destroy is not complete until this is done (see *Keep `~/.ssh/config` in sync* above):
+
+```bash
+# remove the Host block from ~/.ssh/config, then:
+ssh-keygen -R <the CT's IP>
+```
+
+Otherwise `ssh <name>` later hangs on a dead address, or connects to whatever guest inherits that IP behind a host-key mismatch warning.
+
 ---
 
 ## Pi-hole notes
@@ -262,6 +323,7 @@ Planned use for this node — DNS + DHCP, replacing DHCP on the ISP router at `1
 - **Ping-check any static IP** before assigning it.
 - **Respect capacity** — 4 cores, 15.9 GB. CTs are light, but the total still counts.
 - **Never touch `pve-worker-01-lvm-thin`** — it belongs to the other node.
+- **Keep `~/.ssh/config` in sync.** Add a `Host` entry after creating a lasting CT; remove it and run `ssh-keygen -R <ip>` after destroying one. Back the file up first — it is not in git.
 - **Don't reuse an ID** — CTs and VMs share one namespace; check `pct list`, `qm list`, and `pvesh get /cluster/nextid`.
 - **Never start a second DHCP server on the LAN** without the router's DHCP being disabled in the same change.
 - Report what actually happened, including partial failures, rather than assuming success.
