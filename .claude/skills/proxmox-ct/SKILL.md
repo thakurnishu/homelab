@@ -21,8 +21,29 @@ CTs share the host kernel — that's the whole efficiency win and the whole secu
 ## Connection
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 '<command>'
+ssh proxmox '<command>'      # the node
+ssh pihole  '<command>'      # CT 100, directly
 ```
+
+These are aliases in `~/.ssh/config`, all using the same key:
+
+```
+Host proxmox pve
+  HostName 192.168.1.110
+  User root
+  Port 22
+  IdentityFile ~/.ssh/proxmox
+
+Host pihole
+  HostName 192.168.1.111
+  User root
+  Port 22
+  IdentityFile ~/.ssh/proxmox
+```
+
+If an alias is missing, the explicit form is equivalent: `ssh -i ~/.ssh/proxmox root@<ip>`. **Scripts should keep the explicit form** so they work on machines without the aliases.
+
+**After creating a CT that will stick around, add a `Host` entry for it** — pass its key at create time with `--ssh-public-keys`, then append a block to `~/.ssh/config` so it's reachable by name rather than by address. Containers are also reachable without any key via `pct exec <ctid> -- <command>` from the node.
 
 **Bash sandbox:** the node is on the LAN and the default Bash sandbox blocks outbound network. Every `ssh` call needs `dangerouslyDisableSandbox: true`, or it fails with a misleading connection error.
 
@@ -52,9 +73,9 @@ A CT rootfs on dir storage is a `.raw` file, and Proxmox cannot snapshot it. `lo
 Two-node cluster, second node usually powered off. Without quorum `/etc/pve` remounts read-only and every write fails with a confusing `Permission denied` that never mentions quorum.
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 'pvecm status | grep -E "Total votes|Quorum:|Activity"'
+ssh proxmox 'pvecm status | grep -E "Total votes|Quorum:|Activity"'
 # If "Activity blocked" appears:
-ssh -i ~/.ssh/proxmox root@192.168.1.110 'pvecm expected 1'
+ssh proxmox 'pvecm expected 1'
 ```
 
 Not persistent — reverts on reboot. Safe only while the other node is genuinely off; never on both nodes at once (split-brain).
@@ -105,8 +126,8 @@ Confirm the resolved plan (CTID, hostname, cores, RAM, disk, IP, storage, privil
 ## List
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 'pct list'
-ssh -i ~/.ssh/proxmox root@192.168.1.110 'pvesh get /nodes/pve/lxc --output-format json'
+ssh proxmox 'pct list'
+ssh proxmox 'pvesh get /nodes/pve/lxc --output-format json'
 ```
 
 Single CT: `pct config <ctid>`, `pct status <ctid>`.
@@ -119,7 +140,7 @@ CTs and VMs share one ID namespace — a CT cannot reuse a VM's ID. Get the next
 
 ```bash
 CTID=<next>
-ssh -i ~/.ssh/proxmox root@192.168.1.110 "
+ssh proxmox "
   pct create $CTID local:vztmpl/debian-12-standard_12.12-1_amd64.tar.zst \
     --hostname <name> --memory <MB> --cores <N> --swap <MB> \
     --rootfs local-lvm:<N> \
@@ -206,7 +227,7 @@ Destructive and irreversible — the rootfs goes with it.
 **Always confirm first**, naming the CTID, hostname, and what's on it. Never infer a delete from an ambiguous request.
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 "
+ssh proxmox "
   pct shutdown <ctid> || pct stop <ctid>
   pct destroy <ctid> --purge
 "

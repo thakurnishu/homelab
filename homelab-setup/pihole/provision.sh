@@ -38,7 +38,7 @@ fi
 if pve 'pvecm status 2>/dev/null | grep -q "Activity blocked"'; then
   echo "ERROR: cluster has no quorum — /etc/pve is read-only." >&2
   echo "  The second node is probably powered off. If so, run:" >&2
-  echo "    ssh -i ${PVE_KEY} root@${PVE_HOST} 'pvecm expected 1'" >&2
+  echo "    ssh proxmox 'pvecm expected 1'" >&2
   echo "  Do NOT do this if the other node is running but unreachable (split-brain)." >&2
   exit 1
 fi
@@ -47,7 +47,7 @@ echo "==> Checking CTID ${CTID} is free"
 if pve "pct status ${CTID}" >/dev/null 2>&1; then
   echo "ERROR: CT ${CTID} already exists. Refusing to overwrite." >&2
   echo "  To rebuild deliberately:" >&2
-  echo "    ssh -i ${PVE_KEY} root@${PVE_HOST} 'pct stop ${CTID}; pct destroy ${CTID} --purge'" >&2
+  echo "    ssh proxmox 'pct stop ${CTID}; pct destroy ${CTID} --purge'" >&2
   exit 1
 fi
 
@@ -124,6 +124,6 @@ Done. CT ${CTID} is running at http://${CT_IP}/admin
 Next:
   1. bash homelab-setup/pihole/apply-settings.sh
   2. Set an admin password:
-       ssh -i ${PVE_KEY} root@${CT_IP} 'pihole setpassword'
+       ssh pihole 'pihole setpassword'
   3. DHCP is OFF. See README before enabling it.
 EOF

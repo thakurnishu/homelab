@@ -12,10 +12,28 @@ Manage QEMU VMs on the homelab Proxmox node over SSH.
 All operations run over SSH as root using a dedicated key:
 
 ```bash
+ssh proxmox '<command>'
+```
+
+`proxmox` (and the synonym `pve`) is an alias in `~/.ssh/config`:
+
+```
+Host proxmox pve
+  HostName 192.168.1.110
+  User root
+  Port 22
+  IdentityFile ~/.ssh/proxmox
+```
+
+If the alias is missing — a fresh machine, or a rebuilt `~/.ssh/config` — either add the block above or fall back to the explicit form, which is equivalent:
+
+```bash
 ssh -i ~/.ssh/proxmox root@192.168.1.110 '<command>'
 ```
 
-There is a `Host proxmox` alias in `~/.ssh/config` **only if it was added** — do not rely on it; prefer the explicit `-i`/`root@IP` form above.
+**Scripts should keep the explicit `-i` form** so they run on machines without the alias; the alias is for interactive use and documentation.
+
+When adding a new long-lived VM, add a matching `Host` entry so it's reachable by name.
 
 **Bash sandbox:** this host is on the LAN, and the default Bash sandbox blocks outbound network. Every `ssh` call to the node needs `dangerouslyDisableSandbox: true`, or it fails with a misleading "closed/filtered" or connection error.
 
@@ -47,9 +65,9 @@ This is a 2-node cluster and the second node is usually powered off. Without quo
 Check and fix:
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 'pvecm status | grep -E "Total votes|Quorum:|Activity"'
+ssh proxmox 'pvecm status | grep -E "Total votes|Quorum:|Activity"'
 # If "Activity blocked" appears, or Quorum > Total votes:
-ssh -i ~/.ssh/proxmox root@192.168.1.110 'pvecm expected 1'
+ssh proxmox 'pvecm expected 1'
 ```
 
 `pvecm expected 1` is **not persistent** — it reverts on reboot. It is safe only while the other node is genuinely powered off; never run it on both nodes when they are isolated from each other, or `/etc/pve` will diverge (split-brain). If a VM operation fails for no obvious reason, check quorum *first*.
@@ -80,13 +98,13 @@ Always confirm the resolved plan (VMID, name, cores, RAM, disk, IP, storage) bef
 ## List
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 'qm list'
+ssh proxmox 'qm list'
 ```
 
 Richer output, including which entries are templates (`"template":1`):
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 'pvesh get /nodes/pve/qemu --output-format json'
+ssh proxmox 'pvesh get /nodes/pve/qemu --output-format json'
 ```
 
 Single VM detail: `qm config <vmid>` and `qm status <vmid>`.
@@ -104,7 +122,7 @@ Fast (~20 s to SSH-able), no console interaction. This is the default unless the
 ```bash
 VMID=<next>            # get with: pvesh get /cluster/nextid
 NAME=<name>
-ssh -i ~/.ssh/proxmox root@192.168.1.110 "
+ssh proxmox "
   qm clone 9000 $VMID --name $NAME --full
   qm set $VMID --ciuser <user> --sshkeys /root/authorized_pubkey \
     --ipconfig0 ip=<192.168.1.X/24,gw=192.168.1.1|ip=dhcp> \
@@ -123,8 +141,9 @@ Notes:
 Verify it came up:
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 "qm status $VMID"
+ssh proxmox "qm status $VMID"
 ssh -i ~/.ssh/proxmox <user>@<ip> 'cloud-init status'   # expect: status: done
+# ^ the new VM has no ~/.ssh/config alias yet — add one once it's confirmed working
 ```
 
 `cloud-init status` reports `running` for roughly 30–60 s after SSH first answers; wait for `done` before declaring success.
@@ -134,7 +153,7 @@ ssh -i ~/.ssh/proxmox <user>@<ip> 'cloud-init status'   # expect: status: done
 For a manual install; the user must click through the installer via the web console at `https://192.168.1.110:8006`.
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 "
+ssh proxmox "
   qm create $VMID --name $NAME --memory <MB> --cores <N> \
     --net0 virtio,bridge=vmbr0 --scsihw virtio-scsi-single --ostype l26 \
     --agent 1 --cpu host --machine q35 --bios seabios
@@ -188,7 +207,7 @@ Destructive and irreversible — the disk goes with it.
 **Always confirm with the user first**, showing the VMID, name, and disk that will be destroyed. Never infer a delete from an ambiguous request.
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 "
+ssh proxmox "
   qm shutdown <vmid> || qm stop <vmid>
   qm destroy <vmid> --purge
 "
@@ -220,7 +239,7 @@ Taking a snapshot before a risky update is cheap and worth suggesting.
 If template 9000 is lost or needs refreshing:
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.110 '
+ssh proxmox '
   IMG=/mnt/pve/pve-harddisk-filesystem/cloudimg/noble-server-cloudimg-amd64.img
   wget -q -O $IMG https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
   qm create 9000 --name ubuntu-24.04-cloud --memory 2048 --cores 2 \

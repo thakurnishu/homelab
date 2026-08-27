@@ -1147,7 +1147,7 @@
     #
     # Allowed values are:
     #     A valid Pi-hole password hash
-    pwhash = "" # REDACTED - set your own: ssh -i ~/.ssh/proxmox root@192.168.1.111 pihole setpassword
+    pwhash = "" # REDACTED - set your own: ssh pihole pihole setpassword
 
     # Pi-hole 2FA TOTP secret. When set to something different than an empty string, 2FA
     # authentication will be enforced for the API and the web interface. This setting is

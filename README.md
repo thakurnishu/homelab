@@ -14,11 +14,44 @@ A production-grade single-node Kubernetes homelab managed entirely through GitOp
 | **Machine** | Dell Optiplex 7th Gen Mini PC |
 | **CPU** | Intel i5-7500T (4 Cores) |
 | **RAM** | 16 GB |
-| **Storage** | 256 GB SSD |
-| **OS** | Ubuntu 24.04 |
+| **Storage** | 256 GB SSD + 480 GB HDD |
+| **Hypervisor** | Proxmox VE 9.0.3 (node `pve`, `192.168.1.110`) |
+| **Guest OS** | Ubuntu 24.04 |
 | **Kubernetes** | v1.31.0 (single-node, kubeadm) |
 | **Container Runtime** | containerd |
 | **CNI** | Calico |
+
+## Proxmox host
+
+The machine runs Proxmox VE; Kubernetes nodes and service appliances are guests
+on it. Managed over SSH — `~/.ssh/config` carries the aliases:
+
+| Alias | Target | What |
+|---|---|---|
+| `proxmox` / `pve` | `192.168.1.110` | Hypervisor node |
+| `pihole` | `192.168.1.111` | Pi-hole CT 100 |
+
+```bash
+ssh proxmox 'qm list; pct list'      # VMs and containers
+ssh pihole  'pihole status'
+```
+
+All aliases use `~/.ssh/config` → `IdentityFile ~/.ssh/proxmox`. Scripts under
+`homelab-setup/` use the explicit `ssh -i ~/.ssh/proxmox root@<ip>` form instead,
+so they run on machines without the aliases.
+
+| Guest | Purpose |
+|---|---|
+| CT `100` `pihole` | Network DNS + ad blocking — see `homelab-setup/pihole/` |
+| VM `9000` `ubuntu-24.04-cloud` | Cloud-init template; clone it to make new VMs |
+
+> **Two-node cluster caveat.** The second node is usually powered off, which
+> costs quorum and remounts `/etc/pve` read-only — every write then fails with a
+> confusing `Permission denied` that never mentions quorum. Fix with
+> `ssh proxmox 'pvecm expected 1'` (not persistent across reboots).
+
+Day-to-day VM and container operations are documented as Claude Code skills in
+`.claude/skills/proxmox-vm/` and `.claude/skills/proxmox-ct/`.
 
 ## Stack
 
@@ -34,7 +67,7 @@ A production-grade single-node Kubernetes homelab managed entirely through GitOp
 | **Policy** | Kyverno |
 | **TLS** | cert-manager |
 | **Load Balancer** | MetalLB |
-| **DNS** | Pi-hole + ExternalDNS |
+| **DNS** | Pi-hole (Proxmox CT, outside the cluster) + ExternalDNS |
 | **CI Runners** | Actions Runner Controller (GitHub Actions self-hosted) |
 
 ## Repository Structure
@@ -54,11 +87,15 @@ A production-grade single-node Kubernetes homelab managed entirely through GitOp
 │   └── configs/
 │       ├── enabled/        # Active CRD-level configs
 │       └── disabled/
-└── apps/
-    ├── base/               # Base manifests / HelmRelease templates
-    └── overlays/
-        ├── production/     # Active production overrides
-        └── development/
+├── apps/
+│   ├── base/               # Base manifests / HelmRelease templates
+│   └── overlays/
+│       ├── production/     # Active production overrides
+│       └── development/
+└── homelab-setup/          # Host-level setup, outside the cluster
+    ├── kubeadm/            # Node bootstrap scripts (master / worker)
+    ├── pihole/             # Pi-hole CT on Proxmox — config + provisioning
+    └── proxmox/            # Terraform skeleton (unused)
 ```
 
 ## Flux Dependency Hierarchy

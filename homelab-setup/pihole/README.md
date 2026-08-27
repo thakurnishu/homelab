@@ -44,7 +44,7 @@ The password is **not** stored here. `provision.sh` does not set one — the
 installer runs with an empty `WEBPASSWORD`, so set your own before first login:
 
 ```bash
-ssh -i ~/.ssh/proxmox root@192.168.1.111 'pihole setpassword'
+ssh pihole 'pihole setpassword'
 ```
 
 It prompts twice, then log in at <http://192.168.1.111/admin>. There is no email
@@ -52,7 +52,7 @@ recovery — the CLI is the only reset path.
 
 > On the container built 2026-08-27 a random password was set manually and left
 > at `/root/.pihole_pw`. Read it once if needed, then remove it:
-> `ssh -i ~/.ssh/proxmox root@192.168.1.111 'shred -u /root/.pihole_pw'`
+> `ssh pihole 'shred -u /root/.pihole_pw'`
 
 Tracking the password in git is **optional**. To do it, follow the repo's
 existing sops convention — write the plaintext to
