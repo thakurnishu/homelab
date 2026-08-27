@@ -24,7 +24,7 @@ A production-grade single-node Kubernetes homelab managed entirely through GitOp
 ## Proxmox host
 
 The machine runs Proxmox VE; Kubernetes nodes and service appliances are guests
-on it. Managed over SSH — `~/.ssh/config` carries the aliases:
+on it. Managed over SSH:
 
 | Alias | Target | What |
 |---|---|---|
@@ -36,9 +36,36 @@ ssh proxmox 'qm list; pct list'      # VMs and containers
 ssh pihole  'pihole status'
 ```
 
-All aliases use `~/.ssh/config` → `IdentityFile ~/.ssh/proxmox`. Scripts under
-`homelab-setup/` use the explicit `ssh -i ~/.ssh/proxmox root@<ip>` form instead,
-so they run on machines without the aliases.
+### SSH host inventory
+
+Those aliases are **tracked in this repo** and symlinked into place, so the guest
+inventory is versioned alongside the thing that creates the guests:
+
+```
+homelab-setup/ssh/config.homelab      <- edit and commit this
+  ^ symlinked from ~/.ssh/config.homelab
+    ^ pulled in by ~/.ssh/config via `Include ~/.ssh/config.homelab`
+```
+
+Set up the symlink on a new machine with:
+
+```bash
+ln -s "$PWD/homelab-setup/ssh/config.homelab" ~/.ssh/config.homelab
+```
+
+`~/.ssh/config` must include it **before** its `Host *` block — `ssh_config` is
+first-match-wins, so a catch-all placed earlier would answer first.
+
+Creating or destroying a guest is expected to update this file; the skills below
+treat that as part of the operation rather than an afterthought. Host *keys* stay
+out of git — `ssh-keygen -R <ip>` after a destroy is machine-local state.
+
+> Since this repo is public, entries here are public. They are RFC1918 and
+> unreachable from the internet. Anything with a routable address or an
+> organisation's name belongs in `~/.ssh/config.local`, which stays untracked.
+
+Scripts under `homelab-setup/` use the explicit `ssh -i ~/.ssh/proxmox root@<ip>`
+form instead of the aliases, so they run on machines where this isn't set up.
 
 | Guest | Purpose |
 |---|---|
@@ -95,6 +122,7 @@ Day-to-day VM and container operations are documented as Claude Code skills in
 └── homelab-setup/          # Host-level setup, outside the cluster
     ├── kubeadm/            # Node bootstrap scripts (master / worker)
     ├── pihole/             # Pi-hole CT on Proxmox — config + provisioning
+    ├── ssh/                # config.homelab — SSH host inventory (symlinked)
     └── proxmox/            # Terraform skeleton (unused)
 ```
 

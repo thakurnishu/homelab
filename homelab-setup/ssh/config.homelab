@@ -1,0 +1,36 @@
+# ssh hosts on the home network. TRACKED here and symlinked into place:
+#
+#   ~/.ssh/config.homelab -> homelab/homelab-setup/ssh/config.homelab
+#
+# ~/.ssh/config pulls it in with `Include ~/.ssh/config.homelab`, ahead of its
+# `Host *` block. ssh_config is FIRST-MATCH-WINS, so that ordering is what lets
+# these entries answer before the catch-all defaults do.
+#
+# NOTE: this repo is PUBLIC, so these addresses are public too. They are RFC1918
+# and unreachable from the internet, and the subnet was already exposed by
+# infrastructure/configs/metallb/ipaddresspool.yaml and the terraform provider.
+# ~/.ssh/config's own policy says network descriptions stay untracked; tracking
+# this file is a deliberate exception, not an oversight.
+#
+# KEEP IN SYNC WITH REALITY. Creating a guest adds an entry here; destroying one
+# removes it (and needs `ssh-keygen -R <ip>` locally, which is machine state and
+# cannot live in git). See .claude/skills/proxmox-{vm,ct}/SKILL.md.
+
+# --- hypervisor --------------------------------------------------------------
+# Proxmox VE node. `pve` is a synonym because the node calls itself that and the
+# docs use both. See .claude/skills/proxmox-{vm,ct}/SKILL.md.
+Host proxmox pve
+  HostName 192.168.1.110
+  User root
+  Port 22
+  IdentityFile ~/.ssh/proxmox
+
+# --- guests ------------------------------------------------------------------
+# CT 100 -- Pi-hole, network DNS + ad blocking. Static IP because it cannot get
+# its own address from the DHCP server it is meant to eventually replace.
+# See homelab-setup/pihole/.
+Host pihole
+  HostName 192.168.1.111
+  User root
+  Port 22
+  IdentityFile ~/.ssh/proxmox
