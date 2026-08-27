@@ -1,0 +1,2 @@
+# Local DNS records, one per line: <IP> <hostname>
+# e.g. 192.168.1.110 pve.local.nishantlabs.cloud
