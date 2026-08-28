@@ -77,10 +77,15 @@ Host <name>
 ENTRY
 ssh -o BatchMode=yes -o ConnectTimeout=8 <name> 'hostname'   # confirm
 git -C ~/.dotfiles add dotfiles/ssh/config.homelab
-git -C ~/.dotfiles commit -m "ssh: add <name>"
+git -C ~/.dotfiles commit -m "ssh: add <name>" -- dotfiles/ssh/config.homelab
 ```
 
-`git add` explicitly — that repo has previously held a stale staged copy of an ssh file, where a bare `git commit` would have published the staged version and silently dropped the working-tree edit.
+**Scope both verbs.** You are committing in a repo you do not own, which may have unrelated work already staged.
+
+- `add <path>` — that repo has previously held a *stale staged copy* of an ssh file, where committing without a fresh `add` would publish the stale version and silently drop the working-tree edit.
+- `commit -- <path>` — a bare `git commit` commits **the whole index**, not the path you just added, so anything else staged there gets swept into a commit labelled `ssh: add <name>`. Verified: with three files staged, a bare commit took all three; the path-scoped form took one.
+
+Both are needed. `commit -- <path>` ignores the rest of the index but still requires the path to be *known to git* — on a file git does not yet track it fails with `pathspec ... did not match any file(s)`, so the `add` remains load-bearing whenever the file is new.
 
 Skip all this for throwaway or test containers — only record things that outlive the session.
 
@@ -91,7 +96,9 @@ Skip all this for throwaway or test containers — only record things that outli
 ```
 
 ```bash
-git -C ~/.dotfiles diff dotfiles/ssh/config.homelab   # eyeball, then add + commit
+git -C ~/.dotfiles diff dotfiles/ssh/config.homelab   # eyeball, then:
+git -C ~/.dotfiles add dotfiles/ssh/config.homelab
+git -C ~/.dotfiles commit -m "ssh: drop <name>" -- dotfiles/ssh/config.homelab
 ssh-keygen -R 192.168.1.<X>                           # machine-local, NOT in git
 ```
 
