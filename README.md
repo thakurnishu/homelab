@@ -38,47 +38,34 @@ ssh pihole  'pihole status'
 
 ### SSH host inventory
 
-Those aliases are **tracked in this repo** and symlinked into place, so the guest
-inventory is versioned alongside the thing that creates the guests:
+The aliases are **not** defined in this repo. They live in the dotfiles repo:
 
 ```
-homelab-setup/ssh/config.homelab      <- edit and commit this
-  ^ symlinked from ~/.ssh/config.homelab
+~/.dotfiles/dotfiles/ssh/config.homelab
+  ^ home-manager out-of-store symlink from ~/.ssh/config.homelab
     ^ pulled in by ~/.ssh/config via `Include ~/.ssh/config.homelab`
 ```
 
-Set up the symlink on a new machine with:
+They were briefly tracked here, at `homelab-setup/ssh/config.homelab`. That
+arrangement needed an `Include` reaching into a second repo, and **ssh skips a
+dangling `Include` silently** (exit 0, nothing on stderr), so moving or
+re-checking-out this repo would have made the aliases quietly stop resolving with
+nothing pointing at the cause. One repo owning every file its own config Includes
+removes that failure class. See `homelab-setup/ssh/README.md`.
 
-```bash
-ln -s "$PWD/homelab-setup/ssh/config.homelab" ~/.ssh/config.homelab
-```
+Creating or destroying a guest is expected to update that file — the skills below
+treat it as part of the operation, and point at the dotfiles path. Host *keys*
+stay out of git entirely: `ssh-keygen -R <ip>` after a destroy is machine-local.
 
-`~/.ssh/config` must include it **before** its `Host *` block — `ssh_config` is
-first-match-wins, so a catch-all placed earlier would answer first.
-
-Creating or destroying a guest is expected to update this file; the skills below
-treat that as part of the operation rather than an afterthought. Host *keys* stay
-out of git — `ssh-keygen -R <ip>` after a destroy is machine-local state.
-
-**If this repo moves, the symlink dangles silently.** An out-of-store symlink is
-an absolute path, so moving, renaming, or checking this repo out elsewhere
-breaks `~/.ssh/config.homelab`. Tested: ssh **skips a dangling or missing
-`Include` without warning and exits 0**. So the failure mode is `ssh pihole`
-suddenly trying to resolve the literal hostname `pihole` — not ssh breaking.
-Nothing else is affected, and no error points at the cause. If homelab aliases
-stop resolving for no apparent reason, check the symlink first:
+If the homelab aliases ever stop resolving, check the symlink first:
 
 ```bash
 ls -l ~/.ssh/config.homelab      # dangling?
 ssh -G pihole | head -2          # HostName echoing the alias back = not matched
 ```
 
-> Since this repo is public, entries here are public. They are RFC1918 and
-> unreachable from the internet. Anything with a routable address or an
-> organisation's name belongs in `~/.ssh/config.local`, which stays untracked.
-
 Scripts under `homelab-setup/` use the explicit `ssh -i ~/.ssh/proxmox root@<ip>`
-form instead of the aliases, so they run on machines where this isn't set up.
+form rather than the aliases, so they run on machines without any of this set up.
 
 | Guest | Purpose |
 |---|---|
@@ -135,7 +122,7 @@ Day-to-day VM and container operations are documented as Claude Code skills in
 └── homelab-setup/          # Host-level setup, outside the cluster
     ├── kubeadm/            # Node bootstrap scripts (master / worker)
     ├── pihole/             # Pi-hole CT on Proxmox — config + provisioning
-    ├── ssh/                # config.homelab — SSH host inventory (symlinked)
+    ├── ssh/                # pointer: the SSH inventory moved to the dotfiles repo
     └── proxmox/            # Terraform skeleton (unused)
 ```
 

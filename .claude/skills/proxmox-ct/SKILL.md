@@ -47,24 +47,26 @@ Containers are also reachable without any key at all via `pct exec <ctid> -- <co
 
 ### Keep the SSH host inventory in sync — part of every create and delete
 
-Host entries live in a **git-tracked file in this repo**, symlinked into place:
+Host entries live in the **dotfiles repo**, not this one:
 
 ```
-homelab-setup/ssh/config.homelab      <- edit and commit this
-  ^ symlinked from ~/.ssh/config.homelab
+~/.dotfiles/dotfiles/ssh/config.homelab      <- edit and commit this
+  ^ home-manager out-of-store symlink from ~/.ssh/config.homelab
     ^ pulled in by ~/.ssh/config via `Include ~/.ssh/config.homelab`
 ```
 
-Editing `~/.ssh/config.homelab` therefore edits the repo's copy. **Edit it in the repo and commit** as part of the same piece of work — a create or destroy is not finished until the inventory matches reality.
+It used to live here at `homelab-setup/ssh/config.homelab`. It moved because an `Include` pointing into a second repo dangles if that repo is moved or re-checked-out, **and ssh skips a dangling Include silently** — exit 0, nothing on stderr. One repo owning every file its own config Includes removes that failure class. Do not recreate a copy here.
 
-Do **not** put homelab hosts in `~/.ssh/config` itself. That file belongs to a separate dotfiles repo whose stated policy sends all network detail here.
+Editing `~/.ssh/config.homelab` edits the dotfiles copy — it is deliberately out-of-store, therefore writable. **Edit it and commit in the dotfiles repo** as part of the same piece of work; a create or destroy is not finished until the inventory matches reality.
+
+Do **not** put homelab hosts in `~/.ssh/config` itself. That file's own policy sends network detail to `config.homelab`, and anything routable or naming an organisation to `~/.ssh/config.local`, which stays untracked.
 
 Stale entries are worse than missing ones: `ssh oldbox` hangs on a dead address, and once Proxmox recycles that IP the entry silently points at a different machine.
 
 **After creating** a CT that will stick around — once verified reachable, not before:
 
 ```bash
-cat >> homelab-setup/ssh/config.homelab <<'ENTRY'
+cat >> ~/.dotfiles/dotfiles/ssh/config.homelab <<'ENTRY'
 
 # CT <ctid> -- <what it is>
 Host <name>
@@ -74,27 +76,30 @@ Host <name>
   IdentityFile ~/.ssh/proxmox
 ENTRY
 ssh -o BatchMode=yes -o ConnectTimeout=8 <name> 'hostname'   # confirm
-git add homelab-setup/ssh/config.homelab && git commit -m "feat(ssh): add <name>"
+git -C ~/.dotfiles add dotfiles/ssh/config.homelab
+git -C ~/.dotfiles commit -m "ssh: add <name>"
 ```
 
-Skip this for throwaway or test containers — only add entries for things that outlive the session.
+`git add` explicitly — that repo has previously held a stale staged copy of an ssh file, where a bare `git commit` would have published the staged version and silently dropped the working-tree edit.
 
-**After destroying** a CT, remove its entry and clear its host key. The removal is a small `re.sub` over the tracked file — match an optional preceding comment line, the `Host <name>` line, and its indented body, then check `git diff` before committing:
+Skip all this for throwaway or test containers — only record things that outlive the session.
+
+**After destroying** a CT, remove its entry and clear its host key. The removal is a small `re.sub` over `~/.dotfiles/dotfiles/ssh/config.homelab` — match an optional preceding comment line, the `Host <name>` line, and its indented body:
 
 ```
 (?m)^(?:#[^\n]*\n)?Host <name>\n(?:[ \t]+[^\n]*\n)*
 ```
 
 ```bash
-git diff homelab-setup/ssh/config.homelab    # eyeball it, then commit
-ssh-keygen -R 192.168.1.<X>                  # machine-local, NOT in git
+git -C ~/.dotfiles diff dotfiles/ssh/config.homelab   # eyeball, then add + commit
+ssh-keygen -R 192.168.1.<X>                           # machine-local, NOT in git
 ```
 
 That pattern matches a single-name `Host` line. An entry declaring synonyms (`Host proxmox pve`) will not match — edit those by hand.
 
-`ssh-keygen -R` is the step most likely to be skipped. Reusing that IP for a different machine later produces `REMOTE HOST IDENTIFICATION HAS CHANGED`, which reads like an attack rather than a recycled address. It touches `~/.ssh/known_hosts`, which is machine state and deliberately untracked.
+`ssh-keygen -R` is the step most likely to be skipped. Reusing that IP for a different machine later produces `REMOTE HOST IDENTIFICATION HAS CHANGED`, which reads like an attack rather than a recycled address. It touches `~/.ssh/known_hosts`, machine state, deliberately untracked.
 
-**This repo is public**, so anything added to `config.homelab` is public. The addresses here are RFC1918 and unreachable from the internet. Anything with a routable address, or an organisation's name in it, belongs in `~/.ssh/config.local` instead — machine-local and untracked.
+**The dotfiles repo is public**, so entries there are public. The addresses are RFC1918 and unreachable from the internet. Anything with a routable address, or an organisation's name, belongs in `~/.ssh/config.local` — machine-local and untracked.
 
 **When changing a CT's IP**, update `HostName` in the tracked file and run `ssh-keygen -R` on the *old* address.
 
@@ -213,7 +218,7 @@ Notes:
 - Static IP goes directly on `--net0` — there is no cloud-init layer here, unlike VMs. It applies on first boot.
 - Unlike VM creation, `pct create` needs **no boot-order handling** — there is no BIOS and no PXE default to trip over.
 
-**Then add a `homelab-setup/ssh/config.homelab` entry** (see *Keep the SSH host inventory in sync* above) unless the CT is a throwaway. Creation isn't done until the host is reachable by name.
+**Then add a `~/.dotfiles/dotfiles/ssh/config.homelab` entry** (see *Keep the SSH host inventory in sync* above) unless the CT is a throwaway. Creation isn't done until the host is reachable by name.
 
 ### Getting a template
 
@@ -326,7 +331,7 @@ Planned use for this node — DNS + DHCP, replacing DHCP on the ISP router at `1
 - **Ping-check any static IP** before assigning it.
 - **Respect capacity** — 4 cores, 15.9 GB. CTs are light, but the total still counts.
 - **Never touch `pve-worker-01-lvm-thin`** — it belongs to the other node.
-- **Keep the SSH inventory in sync.** After creating a lasting CT, add a `Host` entry to the tracked `homelab-setup/ssh/config.homelab` and commit it. After destroying one, remove the entry and run `ssh-keygen -R <ip>`.
+- **Keep the SSH inventory in sync.** After creating a lasting CT, add a `Host` entry to `~/.dotfiles/dotfiles/ssh/config.homelab` and commit it there. After destroying one, remove the entry and run `ssh-keygen -R <ip>`.
 - **Don't reuse an ID** — CTs and VMs share one namespace; check `pct list`, `qm list`, and `pvesh get /cluster/nextid`.
 - **Never start a second DHCP server on the LAN** without the router's DHCP being disabled in the same change.
 - Report what actually happened, including partial failures, rather than assuming success.
